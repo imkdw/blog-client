@@ -1,6 +1,10 @@
 import type { Metadata } from 'next';
 import { Noto_Sans } from 'next/font/google';
+import './global.css';
 
+/**
+ * 글로벌 폰트로 Noto Sans를 사용
+ */
 const notoSans = Noto_Sans({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
