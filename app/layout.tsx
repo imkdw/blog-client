@@ -3,6 +3,7 @@ import { Noto_Sans } from 'next/font/google';
 import './global.css';
 import Header from '../components/Header/Header';
 import clsx from 'clsx';
+import Footer from '../components/Footer/Footer';
 
 /**
  * 글로벌 폰트로 Noto Sans를 사용
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: Props) {
 			<body className={clsx('w-full lg:w-full', notoSans.className)}>
 				<Header />
 				<div className="max-w-[1200px] pt-[120px] ">{children}</div>
+				<Footer />
 			</body>
 		</html>
 	);
