@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { GitHub } from '@mui/icons-material';
 
 export default function HeaderMenu() {
 	return (
@@ -12,13 +13,7 @@ export default function HeaderMenu() {
 				</li>
 				<li>
 					<Link href="https://github.com/imkdw/blog" target="_blank">
-						<Image
-							src="/images/icon/github-mark.png"
-							alt="github icon"
-							width="40"
-							height="40"
-							title="깃허브 저장소로 이동합니다"
-						/>
+						<GitHub sx={{ width: '40px', height: '40px' }} />
 					</Link>
 				</li>
 				<li className="cursor-pointer">
