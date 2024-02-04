@@ -3,16 +3,16 @@
 import { FormEvent } from 'react';
 
 interface Props {
-	children: React.ReactNode;
+  children: React.ReactNode;
 }
 export default function SignInForm({ children }: Props) {
-	const submitHandler = (event: FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-	};
+  const submitHandler = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+  };
 
-	return (
+  return (
 		<form onSubmit={submitHandler} className="flex w-full flex-col items-center justify-center gap-[30px]">
 			{children}
 		</form>
-	);
+  );
 }

@@ -3,7 +3,7 @@ import HeaderLogo from './Logo';
 import HeaderMenu from './Memu';
 
 export default function Header() {
-	return (
+  return (
 		<header className="fixed flex h-[120px] w-full max-w-[1200px] items-end bg-white">
 			<div className="flex h-[100px] w-full flex-row items-center justify-center">
 				<HeaderLogo />
@@ -11,5 +11,5 @@ export default function Header() {
 				<HeaderButtons />
 			</div>
 		</header>
-	);
+  );
 }
