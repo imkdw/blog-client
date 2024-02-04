@@ -23,7 +23,7 @@ interface Props {
 export default function RootLayout({ children }: Props) {
   return (
     <html lang="ko" className={clsx('flex items-start justify-center')}>
-      <body className={clsx('w-full lg:w-full', `${(notoSans.className, notoSansKr.className)}`)}>
+      <body className={clsx('w-full max-w-[1200px] lg:w-full', `${(notoSans.className, notoSansKr.className)}`)}>
         <Header />
         <div className="flex min-h-[1000px] max-w-[1200px] items-center justify-center pt-[120px]">{children}</div>
         <Footer />

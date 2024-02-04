@@ -1,3 +1,9 @@
+import LastArticles from './_components/LastArticles';
+
 export default function Home() {
-  return <div>Home</div>;
+  return (
+    <main className="w-full">
+      <LastArticles />
+    </main>
+  );
 }
