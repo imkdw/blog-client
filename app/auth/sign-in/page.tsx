@@ -23,7 +23,7 @@ export default function SignInPage() {
   };
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center gap-[50px] ">
+    <div className="flex h-full w-full flex-col items-center justify-center gap-[30px]">
       <SignInForm>
         <input
           className="border-grey-300 h-[60px] w-[50%] rounded-[10px] border pl-[15px] text-[16px] outline-none"
