@@ -8,7 +8,7 @@ export default function FooterContact() {
 	const EMAIL_ADDRESS = 'imkdw@kakao.com';
 
 	return (
-		<ul className="flex h-[25%] w-[30%] items-center justify-evenly">
+		<ul className="flex h-[40%] w-[30%] items-center justify-evenly">
 			<li>
 				<Link href={GITHUB_LINK} target="_blank">
 					<GitHub sx={{ width: '35px', height: '35px' }} />

@@ -25,7 +25,7 @@ export default function HeaderButtons() {
 			</li>
 			<li>
 				{/* TODO: 로그인 여부에 따라서 마이페이지 또는 로그인 페이지로 이동 분기처리 */}
-				<Link href="/login">
+				<Link href="/auth/sign-in">
 					<AccountCircle />
 				</Link>
 			</li>
