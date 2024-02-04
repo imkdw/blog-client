@@ -32,7 +32,7 @@ export default function LastArticles() {
     <Swiper
       spaceBetween={50}
       slidesPerView={1}
-      className="relative h-[500px] w-full"
+      className="relative mt-[20px] h-[450px] w-full rounded-[10px]"
       effect="fade"
       loop
       autoplay={{
@@ -48,7 +48,7 @@ export default function LastArticles() {
 
       {slideImages.map((slide) => (
         <SwiperSlide
-          className="relative flex h-[500px] w-full bg-cover opacity-30"
+          className="relative flex h-full w-full bg-cover opacity-30"
           style={{ backgroundImage: `url(${slide.image})` }}
           key={slide.id}
         >
