@@ -9,7 +9,7 @@ export default function ArticleList({ type }: Props) {
   const articleData: Article[] = [
     {
       id: 1,
-      sumbnail: 'http://via.placeholder.com/640x480',
+      thumbnail: 'http://via.placeholder.com/640x480',
       title: '제목입니다제목입니다제목입니다제목입니다제목입니다제목입니다제목입니다제목입니다제목입니다제목입니다 1',
       content:
         '내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다 1',
@@ -18,7 +18,7 @@ export default function ArticleList({ type }: Props) {
     },
     {
       id: 1,
-      sumbnail: 'http://via.placeholder.com/640x480',
+      thumbnail: 'http://via.placeholder.com/640x480',
       title: '제목입니다 2',
       content:
         '내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다 2',
@@ -27,7 +27,7 @@ export default function ArticleList({ type }: Props) {
     },
     {
       id: 1,
-      sumbnail: 'http://via.placeholder.com/640x480',
+      thumbnail: 'http://via.placeholder.com/640x480',
       title: '제목입니다 3',
       content:
         '내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다내용입니다 3',

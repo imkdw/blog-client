@@ -11,7 +11,7 @@ export default function ArticleItem({ article }: Props) {
   return (
     <li className="w-[30%]">
       <Link href={`/article/${article.id}`} className="flex flex-col gap-[10px]">
-        <Image src={article.sumbnail} alt={`${article.title}의 썸네일`} width={500} height={200} />
+        <Image src={article.thumbnail} alt={`${article.title}의 썸네일`} width={500} height={200} />
         <h3 className="line-clamp-2 text-[24px] font-bold">{article.title}</h3>
         <p className="line-clamp-3 max-h-[100px] text-[18px]">{article.content}</p>
         <div className="flex flex-row justify-between">
