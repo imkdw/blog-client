@@ -6,7 +6,7 @@ export default function HeaderMenu() {
   return (
     <nav className="w-full">
       <ul className="flex flex-row items-center justify-center gap-[100px]">
-        <li className="flex cursor-pointer flex-row items-center justify-center gap-[10px]">
+        <li className="flex cursor-pointer flex-row items-center justify-center gap-[10px] text-[24px]">
           Category
           <KeyboardArrowDownIcon />
         </li>
@@ -16,7 +16,9 @@ export default function HeaderMenu() {
           </Link>
         </li>
         <li className="cursor-pointer">
-          <Link href="/about">About me</Link>
+          <Link href="/about" className="text-[24px]">
+            About me
+          </Link>
         </li>
       </ul>
     </nav>
