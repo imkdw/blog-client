@@ -7,7 +7,7 @@ import { Autoplay, Navigation } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/effect-fade';
-import SwiperButton from './Swiper/swiper-button';
+import SwiperButton from '../../app/_components/Swiper/swiper-button';
 
 export default function LastArticles() {
   const slideImages = [

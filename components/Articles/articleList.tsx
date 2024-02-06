@@ -1,4 +1,4 @@
-import { Article } from '../../../@types/article/Article';
+import { Article } from '../../@types/article/Article';
 import ArticleItem from './articleItem';
 
 interface Props {

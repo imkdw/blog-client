@@ -1,5 +1,5 @@
-import ArticleList from './_components/Articles/articleList';
-import LastArticles from './_components/lastArticles';
+import ArticleList from '../components/Articles/articleList';
+import LastArticles from '../components/Articles/lastArticles';
 
 export default function Home() {
   return (

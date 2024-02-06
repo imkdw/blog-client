@@ -6,3 +6,13 @@ export interface Article {
   commentCount: number;
   likeCount: number;
 }
+
+export interface ArticleCategories {
+  id: string;
+  title: string;
+  subCategory: ArticleSubCategories[];
+}
+export interface ArticleSubCategories {
+  id: string;
+  title: string;
+}
