@@ -93,7 +93,7 @@ export default function ArticleCategory({ text = '전체' }: Props) {
 
   return (
     <div
-      className="relative flex h-[40px] max-w-[300px] cursor-pointer text-[24px]"
+      className="relative flex h-[40px] cursor-pointer text-[24px]"
       onMouseEnter={spreadCategoryHandler}
       onMouseLeave={spreadCategoryHandler}
     >
@@ -107,13 +107,8 @@ export default function ArticleCategory({ text = '전체' }: Props) {
       )}
 
       {/* 카테고리 오픈시 스프레드 */}
-      <div
-        className={clsx(
-          'absolute -left-[1px] top-[100%] flex h-auto w-full min-w-[300px] flex-row',
-          isSpreadCategory && '',
-        )}
-      >
-        <ul className={clsx('mt-[20px] h-full w-[50%] ', isSpreadCategory && 'border border-gray-300 bg-white')}>
+      <div className={clsx('absolute top-[100%] flex h-auto flex-row', isSpreadCategory && 'min-w-[300px]')}>
+        <ul className={clsx('mt-[20px] h-full w-[50%]', isSpreadCategory && 'border border-gray-300 bg-white')}>
           {isSpreadCategory &&
             categories.map((category) => (
               <li
