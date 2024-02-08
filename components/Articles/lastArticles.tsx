@@ -7,7 +7,7 @@ import { Autoplay, Navigation } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/effect-fade';
-import SwiperButton from './Swiper/swiper-button';
+import SwiperButton from '../../app/_components/Swiper/swiper-button';
 
 export default function LastArticles() {
   const slideImages = [
@@ -48,7 +48,7 @@ export default function LastArticles() {
 
       {slideImages.map((slide) => (
         <SwiperSlide
-          className="relative flex h-full w-full bg-cover opacity-30"
+          className="relative flex h-full w-full bg-cover"
           style={{ backgroundImage: `url(${slide.image})` }}
           key={slide.id}
         >

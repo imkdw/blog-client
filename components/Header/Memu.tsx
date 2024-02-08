@@ -1,22 +1,24 @@
 import Link from 'next/link';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { GitHub } from '@mui/icons-material';
+import ArticleCategory from '../Articles/category';
 
 export default function HeaderMenu() {
   return (
     <nav className="w-full">
       <ul className="flex flex-row items-center justify-center gap-[100px]">
-        <li className="flex cursor-pointer flex-row items-center justify-center gap-[10px] text-[24px]">
-          Category
-          <KeyboardArrowDownIcon />
+        <li className="h-[40px] cursor-pointer">
+          <ArticleCategory text="Category" link="/articles" />
         </li>
-        <li>
-          <Link href="https://github.com/imkdw/blog" target="_blank">
-            <GitHub sx={{ width: '40px', height: '40px' }} />
+        <li className="h-[40px] cursor-pointer">
+          <Link
+            href="https://github.com/imkdw/blog"
+            target="_blank"
+            className="flex h-full items-center text-[24px]  hover:font-bold"
+          >
+            Github
           </Link>
         </li>
-        <li className="cursor-pointer">
-          <Link href="/about" className="text-[24px]">
+        <li className="h-[40px] cursor-pointer">
+          <Link href="/about" className="flex h-full items-center text-[24px]  hover:font-bold">
             About me
           </Link>
         </li>
