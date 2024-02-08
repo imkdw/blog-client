@@ -3,13 +3,15 @@
 import React, { useEffect, useState } from 'react';
 import { KeyboardArrowDown, KeyboardArrowUp } from '@mui/icons-material';
 import clsx from 'clsx';
+import Link from 'next/link';
 import { ArticleCategories, ArticleSubCategories } from '../../@types/article/Article';
 
 interface Props {
   text?: string;
+  link?: string;
 }
 
-export default function ArticleCategory({ text = '전체' }: Props) {
+export default function ArticleCategory({ text = '전체', link = '' }: Props) {
   const [isSpreadCategory, setIsSpreadCategory] = useState(false);
   const [subCategoryData, setSubCategoryData] = useState<ArticleSubCategories[]>([]);
 
@@ -93,11 +95,17 @@ export default function ArticleCategory({ text = '전체' }: Props) {
 
   return (
     <div
-      className="relative flex h-[40px] cursor-pointer text-[24px]"
+      className="relative flex h-[40px] cursor-pointer"
       onMouseEnter={spreadCategoryHandler}
       onMouseLeave={spreadCategoryHandler}
     >
-      {text}
+      {link ? (
+        <Link href={link} className="text-[24px] hover:font-bold">
+          {text}
+        </Link>
+      ) : (
+        <span className="text-[24px] hover:font-bold">{text}</span>
+      )}
 
       {/* 카테고리 오픈 여부에 따른 화살표 방향전환 */}
       {isSpreadCategory ? (

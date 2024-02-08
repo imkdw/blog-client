@@ -30,7 +30,7 @@ export default function RootLayout({ children }: Props) {
         )}
       >
         <Header />
-        <div className="flex h-auto w-full max-w-[1200px] items-center justify-center">{children}</div>
+        <div className="flex h-auto min-h-[1000px] w-full max-w-[1200px] items-center justify-center">{children}</div>
         <Footer />
       </body>
     </html>

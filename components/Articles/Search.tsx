@@ -11,7 +11,7 @@ export default function ArticleSearch() {
   };
 
   return (
-    <div className="flex h-[50px] w-[40%] flex-row items-center rounded-[10px] border border-gray-300">
+    <div className="flex h-[45px] w-[40%] flex-row items-center rounded-[10px] border border-gray-300">
       <input
         type="text"
         name=""
@@ -20,7 +20,7 @@ export default function ArticleSearch() {
         value={searchData}
         onChange={changeHandler}
       />
-      <Search />
+      <Search color="action" />
     </div>
   );
 }

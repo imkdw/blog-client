@@ -48,7 +48,7 @@ export default function LastArticles() {
 
       {slideImages.map((slide) => (
         <SwiperSlide
-          className="relative flex h-full w-full bg-cover opacity-30"
+          className="relative flex h-full w-full bg-cover"
           style={{ backgroundImage: `url(${slide.image})` }}
           key={slide.id}
         >
