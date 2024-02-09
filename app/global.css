@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  box-sizing: border-box;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+input {
+  outline: none;
+}
+
+/* 메인페이지 최근게시글 텍스트 쉐도우 */
+.text-shadow {
+  color: white;
+  text-shadow:
+    3px 3px 20px #000000,
+    -2px 1px 30px #000000;
+}
+
+/* 스크롤바 디자인 */
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: gray;
+  border-radius: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  background: darkgray;
+}
