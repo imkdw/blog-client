@@ -14,6 +14,11 @@ li {
   list-style: none;
 }
 
+input {
+  outline: none;
+}
+
+/* 메인페이지 최근게시글 텍스트 쉐도우 */
 .text-shadow {
   color: white;
   text-shadow:
@@ -21,10 +26,7 @@ li {
     -2px 1px 30px #000000;
 }
 
-.category-shadow {
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-}
-
+/* 스크롤바 디자인 */
 body::-webkit-scrollbar {
   width: 10px;
 }

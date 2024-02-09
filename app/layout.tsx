@@ -4,6 +4,7 @@ import './global.css';
 import clsx from 'clsx';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
+import SideUtils from '../components/Common/sideUtils';
 
 const notoSans = Noto_Sans({ subsets: ['latin'] });
 const notoSansKr = Noto_Sans_KR({ subsets: ['latin'] });
@@ -25,7 +26,10 @@ export default function RootLayout({ children }: Props) {
     >
       <body className={clsx('flex h-auto w-full max-w-[1400px] flex-col items-center lg:w-full')}>
         <Header />
-        <div className="flex h-auto min-h-[1000px] w-full max-w-[1200px] items-center justify-center">{children}</div>
+        <div className="relative flex h-auto min-h-[1000px] w-full max-w-[1200px] items-center justify-center">
+          {children}
+          <SideUtils />
+        </div>
         <Footer />
       </body>
     </html>

@@ -10,6 +10,7 @@ import ArticleList from '../../../components/Articles/articleList';
 import ArticleComments from './_components/comments';
 import { IArticle } from '../../../@types/article/Article';
 import ArticleCommentForm from './_components/commentForm';
+import { useArticle } from '../../../store/use-article';
 
 interface Props {
   params: {
@@ -21,6 +22,7 @@ export default function ArticleDetailPage({ params: { slug } }: Props) {
   const articleId = slug;
   const articleDetail = getArticleDetail(articleId);
   const article: IArticle = { ...articleDetail };
+  const { setCurrentArticleId } = useArticle((state) => state);
 
   const recommendArticles = Array(3)
     .fill(0)
@@ -31,7 +33,13 @@ export default function ArticleDetailPage({ params: { slug } }: Props) {
   // 게시글 상세페이지 접속시 스크롤을 맨 위로 올림
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+    setCurrentArticleId(articleId);
+
+    return () => {
+      // 페이지를 이탈할때 null로 초기화
+      setCurrentArticleId(null);
+    };
+  }, [articleId, setCurrentArticleId]);
 
   return (
     <main className="flex flex-col gap-10 pt-10">
