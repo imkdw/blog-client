@@ -8,7 +8,7 @@ interface Props {
 
 export default function ArticleList({ type, articles }: Props) {
   return (
-    <div className="flex flex-col">
+    <section className="flex flex-col">
       {type !== 'all' && (
         <h2 className="flex h-[60px] items-center text-[24px] font-bold">
           {type === 'popular' ? '인기 게시글' : '최근 게시글'}
@@ -19,6 +19,6 @@ export default function ArticleList({ type, articles }: Props) {
           <ArticleItem key={article.id} article={article} />
         ))}
       </ul>
-    </div>
+    </section>
   );
 }

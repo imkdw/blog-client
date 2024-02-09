@@ -5,9 +5,6 @@ import clsx from 'clsx';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 
-/**
- * 글로벌 폰트로 Noto Sans를 사용
- */
 const notoSans = Noto_Sans({ subsets: ['latin'] });
 const notoSansKr = Noto_Sans_KR({ subsets: ['latin'] });
 
@@ -22,13 +19,11 @@ interface Props {
 
 export default function RootLayout({ children }: Props) {
   return (
-    <html lang="ko" className={clsx('flex items-start justify-center')}>
-      <body
-        className={clsx(
-          'flex h-auto w-full max-w-[1400px] flex-col items-center lg:w-full',
-          `${(notoSans.className, notoSansKr.className)}`,
-        )}
-      >
+    <html
+      lang="ko"
+      className={clsx('flex items-start justify-center', `${(notoSans.className, notoSansKr.className)}`)}
+    >
+      <body className={clsx('flex h-auto w-full max-w-[1400px] flex-col items-center lg:w-full')}>
         <Header />
         <div className="flex h-auto min-h-[1000px] w-full max-w-[1200px] items-center justify-center">{children}</div>
         <Footer />

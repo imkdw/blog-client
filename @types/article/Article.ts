@@ -5,6 +5,9 @@ export interface Article {
   content: string;
   commentCount: number;
   likeCount: number;
+  summary: string;
+  tags: string[];
+  createdAt: string;
 }
 
 export interface ArticleCategories {
