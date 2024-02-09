@@ -30,7 +30,6 @@ export function getArticleDetail(articleId: string): IArticle {
     );
 
   comments[1].replies = [];
-  console.log(comments);
 
   return {
     id: articleId,

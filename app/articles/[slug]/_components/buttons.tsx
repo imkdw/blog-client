@@ -12,7 +12,7 @@ export default function ArticleButtons({ likeCount, commentCount, isLike }: Prop
   return (
     <div className="flex h-[60px] w-full flex-row justify-between border-y border-gray-300">
       <button type="button" className="flex w-1/3 flex-row items-center justify-center gap-[20px]">
-        <div>{isLike ? <FavoriteBorder /> : <Favorite />}</div>
+        <div>{isLike ? <Favorite /> : <FavoriteBorder />}</div>
         <p className="text-[18px] text-gray-500">좋아요 · {likeCount}개</p>
       </button>
       <button type="button" className="flex w-1/3 flex-row items-center justify-center gap-[20px]">

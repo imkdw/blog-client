@@ -44,7 +44,7 @@ export default function ArticleComments({ comments }: Props) {
                       <div className="flex flex-row gap-[10px]">
                         <div>
                           <Image
-                            src={comment.user.profile}
+                            src={reply.user.profile}
                             alt="profile"
                             width={50}
                             height={50}
@@ -52,19 +52,19 @@ export default function ArticleComments({ comments }: Props) {
                           />
                         </div>
                         <div className="flex flex-col">
-                          <p>{comment.user.nickname}</p>
+                          <p>{reply.user.nickname}</p>
                           <p className="text-[16px] text-gray-500">{comment.createdAt}</p>
                         </div>
                       </div>
                       <div>
-                        {comment.user.isOwner && (
+                        {reply.user.isOwner && (
                           <button type="button" aria-label="comment menu button">
                             <MoreHoriz />
                           </button>
                         )}
                       </div>
                     </div>
-                    <p className="p-1">{comment.content}</p>
+                    <p className="p-1">{reply.content}</p>
                   </div>
                 </li>
               ))}

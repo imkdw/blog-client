@@ -25,7 +25,7 @@ export default function ArticleCommentForm() {
           placeholder="댓글을 작성해주세요"
         />
       </div>
-      <button type="button" className="h-[50px] w-[130px] rounded bg-[#111926] text-[17px] font-bold text-white">
+      <button type="submit" className="h-[50px] w-[130px] rounded bg-[#111926] text-[17px] font-bold text-white">
         작성하기
       </button>
     </form>
