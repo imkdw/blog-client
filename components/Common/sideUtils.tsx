@@ -8,7 +8,7 @@ export default function SideUtils() {
   const isOwner = true;
 
   // 전역 상태로 관리하는 게시글 ID를 받아올 수 있도록 수정
-  const { currentArticleId } = useArticle((state) => state);
+  const { currentArticleId, isWriting } = useArticle((state) => state);
 
   const scrollToTopHandler = () => {
     window.scrollTo({
@@ -33,7 +33,7 @@ export default function SideUtils() {
           </Link>
         </div>
       )}
-      {isOwner && (
+      {isOwner && !isWriting && (
         <div className="flex h-[50px] w-[50px] items-center justify-center rounded-full border border-gray-300 bg-white hover:bg-gray-300">
           <Link href="/articles/new" className="flex h-full w-full items-center justify-center">
             <PostAdd />
