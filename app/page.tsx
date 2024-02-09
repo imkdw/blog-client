@@ -1,29 +1,23 @@
 import Link from 'next/link';
 import ArticleList from '../components/Articles/articleList';
 import LastArticles from '../components/Articles/lastArticles';
+import { Article } from '../@types/article/Article';
+import { getArticleDetail } from '../actions/article';
 
 export default function Home() {
   const popularArticles = Array(3)
     .fill(0)
     .map((_, i) => ({
-      id: i,
-      thumbnail: 'http://via.placeholder.com/640x480',
-      title: `인기게시글 - 제목 ${i}`,
-      content: `인기게시글 -  내용 ${i}`,
-      commentCount: 1,
-      likeCount: 2,
+      ...getArticleDetail(i.toString()),
     }));
 
   const recentArticles = Array(3)
     .fill(0)
-    .map((_, i) => ({
-      id: i,
-      thumbnail: 'http://via.placeholder.com/640x480',
-      title: `최근게시글 - 제목 ${i}`,
-      content: `최근게시글 - 제목내용 ${i}`,
-      commentCount: 1,
-      likeCount: 2,
-    }));
+    .map(
+      (_, i): Article => ({
+        ...getArticleDetail(i.toString()),
+      }),
+    );
 
   return (
     <main className="flex w-full flex-col items-center gap-[30px]">

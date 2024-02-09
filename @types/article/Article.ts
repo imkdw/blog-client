@@ -1,5 +1,5 @@
-export interface Article {
-  id: number;
+export interface IArticle {
+  id: string;
   thumbnail: string;
   title: string;
   content: string;
@@ -8,7 +8,22 @@ export interface Article {
   summary: string;
   tags: string[];
   createdAt: string;
+  comments: IArticleComments[];
 }
+
+export interface IArticleComments {
+  id: number;
+  createdAt: string;
+  content: string;
+  user: {
+    profile: string;
+    nickname: string;
+    isOwner: boolean;
+  };
+  replies: IArticleCommentReplies[];
+}
+
+export interface IArticleCommentReplies extends Omit<IArticleComments, 'replies'> {}
 
 export interface ArticleCategories {
   id: string;
