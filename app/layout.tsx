@@ -26,7 +26,7 @@ export default function RootLayout({ children }: Props) {
     >
       <body className={clsx('flex h-auto w-full max-w-[1400px] flex-col items-center lg:w-full')}>
         <Header />
-        <div className="relative flex h-auto min-h-[1000px] w-full max-w-[1200px] items-center justify-center">
+        <div className="relative flex h-auto w-full max-w-[1200px] items-center justify-center">
           {children}
           <SideUtils />
         </div>

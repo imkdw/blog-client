@@ -5,7 +5,7 @@ interface Props {
 }
 export default function AuthLayout({ children }: Props) {
   return (
-    <div className="flex h-full w-full flex-col gap-[50px]">
+    <div className="flex h-full w-full flex-col gap-[50px] pb-10 pt-10">
       <AuthLogo />
       {children}
     </div>
