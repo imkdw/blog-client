@@ -5,6 +5,7 @@ import { get, post } from '../../../../api/api';
 import { OAuthResponse } from '../../../../api/@types/auth/oauth/oauth.interface';
 import { OAuthSignUpRequestBody, OAuthSignUpResponseBody } from '../../@types/sign-up.interface';
 import { OAuthProvider } from '../../../../api/@types/auth/enums/oauth-provider.enum';
+import { OAuthSignInRequestBody, OAuthSignInResponseBody } from '../../@types/sign-in.interface';
 
 export default function GoogleOAuthPage() {
   const fetchOAuth = useCallback(async (token: string) => {
@@ -20,15 +21,19 @@ export default function GoogleOAuthPage() {
 
     // 이미 가입된 유저는 로그인처리
     if (response.isExist) {
-      // eslint-disable-next-line no-console
-      console.log(response);
+      const signInResponse = await post<OAuthSignInRequestBody, OAuthSignInResponseBody>('/v1/auth/oauth/sign-in', {
+        email: response.email,
+        provider: OAuthProvider.GOOGLE,
+        token: response.token,
+      });
+      console.log(signInResponse);
     } else {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const signUpResponse = await post<OAuthSignUpRequestBody, OAuthSignUpResponseBody>('/v1/auth/oauth/sign-up', {
         email: response.email,
         provider: OAuthProvider.GOOGLE,
         token: response.token,
       });
+      console.log(signUpResponse);
     }
   }, []);
 
