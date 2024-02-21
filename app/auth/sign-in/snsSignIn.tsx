@@ -26,6 +26,15 @@ export default function SnsSignIn() {
     window.location.href = oAuthEndpoint + parameter;
   };
 
+  const githubHandler = () => {
+    const oAuthEndpoint = 'https://github.com/login/oauth/authorize';
+    const { clientId } = publicConfig.oauth.github;
+    const redirectUrl = `${CLIENT_URL}/auth/oauth/github`;
+    const parameter = `?client_id=${clientId}&redirect_uri=${redirectUrl}&scope=user`;
+
+    window.location.href = oAuthEndpoint + parameter;
+  };
+
   return (
     <ul className="relative flex h-[90px] w-[50%] flex-row items-end justify-center gap-[30px] border-t border-gray-300">
       <p className="absolute top-[-13px] w-[40%] bg-white text-center text-[15px] text-gray-400">SNS 계정으로 로그인</p>
@@ -35,7 +44,7 @@ export default function SnsSignIn() {
         </button>
       </li>
       <li className="flex h-[50px] w-[50px] items-center justify-center rounded-[10px] border border-gray-300">
-        <button onClick={kakaoHandler} type="button" aria-label="google login button">
+        <button onClick={githubHandler} type="button" aria-label="google login button">
           <GitHub sx={{ width: '35px', height: '35px' }} />
         </button>
       </li>
