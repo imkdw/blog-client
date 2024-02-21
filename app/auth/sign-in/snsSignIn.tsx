@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { GitHub } from '@mui/icons-material';
 import Image from 'next/image';
 import publicConfig from '../../../config/public/public.config';
@@ -11,11 +10,20 @@ export default function SnsSignIn() {
   const googleHandler = () => {
     const oAuthEndpoint = 'https://accounts.google.com/o/oauth2/auth';
     const { clientId } = publicConfig.oauth.google;
-    const redirectUrl = `${CLIENT_URL}/auth/oauth/google`;
+    const redirectUrl = `${CLIENT_URL}/auth/oauth/kakao`;
     const responseType = 'token';
     const scope = 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile';
 
     window.location.href = `${oAuthEndpoint}?client_id=${clientId}&redirect_uri=${redirectUrl}&response_type=${responseType}&scope=${scope}`;
+  };
+
+  const kakaoHandler = () => {
+    const oAuthEndpoint = 'https://kauth.kakao.com/oauth/authorize';
+    const { clientId } = publicConfig.oauth.kakao;
+    const redirectUrl = `${CLIENT_URL}/auth/oauth/kakao`;
+    const parameter = `?client_id=${clientId}&redirect_uri=${redirectUrl}&response_type=code`;
+
+    window.location.href = oAuthEndpoint + parameter;
   };
 
   return (
@@ -27,12 +35,12 @@ export default function SnsSignIn() {
         </button>
       </li>
       <li className="flex h-[50px] w-[50px] items-center justify-center rounded-[10px] border border-gray-300">
-        <Link href="https://github.com/">
+        <button onClick={kakaoHandler} type="button" aria-label="google login button">
           <GitHub sx={{ width: '35px', height: '35px' }} />
-        </Link>
+        </button>
       </li>
       <li className="flex h-[50px] w-[50px] items-center justify-center rounded-[10px] border border-gray-300">
-        <Link href="https://www.kakaocorp.com/page/">
+        <button onClick={kakaoHandler} type="button" aria-label="google login button">
           <Image
             src="/images/icon/kakaotalk.png"
             alt="facebook"
@@ -40,7 +48,7 @@ export default function SnsSignIn() {
             height="35"
             style={{ borderRadius: '5px' }}
           />
-        </Link>
+        </button>
       </li>
     </ul>
   );

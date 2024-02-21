@@ -3,6 +3,9 @@ const publicConfig = {
     google: {
       clientId: process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID,
     },
+    kakao: {
+      clientId: process.env.NEXT_PUBLIC_KAKAO_OAUTH_CLIENT_ID,
+    },
   },
   url: {
     client: process.env.NEXT_PUBLIC_CLIENT_URL,
