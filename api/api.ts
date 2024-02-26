@@ -6,8 +6,8 @@ const serverUrl = publicConfig.url.server;
 export const API_URL = {
   category: {
     getList: {
-      parent: `${serverUrl}/v1/category?filter=parent&parentId=null`,
-      children: (parentId: number) => `${serverUrl}/v1/category?filter=children&parentId=${parentId}`,
+      parent: `${serverUrl}/v1/category/parent`,
+      children: (param: string) => `${serverUrl}/v1/category/child?parentParam=${param}`,
     },
   },
 };

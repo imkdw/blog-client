@@ -3,7 +3,7 @@
 import { FormEvent, useEffect } from 'react';
 import { Close } from '@mui/icons-material';
 
-import ArticleCategory from '../../../features/category/components/category';
+import ParentCategory from '../../../features/category/components/ParentCategory';
 import { useArticle } from '../../../store/use-article';
 
 export default function NewArticlePage() {
@@ -30,7 +30,7 @@ export default function NewArticlePage() {
 
   return (
     <form onSubmit={submitHandler} className="flex h-full w-full flex-col gap-10 pt-10">
-      <ArticleCategory />
+      <ParentCategory />
       <div className="h-[40px] w-full border-b border-gray-300">
         <input type="text" placeholder="제목을 입력해주세요" className="w-full pl-2" />
       </div>

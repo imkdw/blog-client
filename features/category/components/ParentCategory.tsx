@@ -11,7 +11,7 @@ interface Props {
   text?: string;
 }
 
-export default function ArticleCategory({ text = '전체' }: Props) {
+export default function ParentCategory({ text = '전체' }: Props) {
   const [isSpreadCategory, setIsSpreadCategory] = useState(false);
   const [categories, setCategories] = useState<ICategory[]>([]);
   const { setParent } = useCategory((state) => state);
@@ -29,9 +29,13 @@ export default function ArticleCategory({ text = '전체' }: Props) {
     setIsSpreadCategory((prev) => !prev);
   };
 
+  const changeParentHandler = (parent: string) => {
+    setParent(parent);
+  };
+
   return (
     <div
-      className="relative flex h-[40px] w-auto cursor-pointer justify-center"
+      className="relative flex h-full w-[200px] cursor-pointer items-center "
       onMouseEnter={spreadCategoryHandler}
       onMouseLeave={spreadCategoryHandler}
     >
@@ -50,7 +54,14 @@ export default function ArticleCategory({ text = '전체' }: Props) {
         <ul className="absolute border bg-white" style={{ top: '100%' }}>
           {categories.map((category) => (
             <li key={category.id} className="w-auto p-2">
-              <Link href={`/articles?parent=${category.param}`} className="whitespace-nowrap hover:font-bold">
+              <Link
+                href={`/articles?parent=${category.param}`}
+                className="whitespace-nowrap hover:font-bold"
+                onClick={() => {
+                  changeParentHandler(category.param);
+                  setIsSpreadCategory(false);
+                }}
+              >
                 {category.name}
               </Link>
             </li>
