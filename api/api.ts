@@ -1,8 +1,19 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import publicConfig from '../config/public/public.config';
 
+const serverUrl = publicConfig.url.server;
+
+export const API_URL = {
+  category: {
+    getList: {
+      parent: `${serverUrl}/v1/category?filter=parent&parentId=null`,
+      children: (parentId: number) => `${serverUrl}/v1/category?filter=children&parentId=${parentId}`,
+    },
+  },
+};
+
 const api = axios.create({
-  baseURL: publicConfig.url.server,
+  baseURL: serverUrl,
 });
 
 export async function get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {

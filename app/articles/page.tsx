@@ -1,7 +1,7 @@
 import { getArticleDetail } from '../../actions/article';
 import ArticleSearch from '../../components/Articles/Search';
 import ArticleList from '../../components/Articles/articleList';
-import ArticleCategory from '../../components/Articles/category';
+import ArticleCategory from '../../features/category/components/category';
 
 export default function ArticlesPage() {
   const articleData = Array(20)

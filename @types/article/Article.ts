@@ -24,13 +24,3 @@ export interface IArticleComments {
 }
 
 export interface IArticleCommentReplies extends Omit<IArticleComments, 'replies'> {}
-
-export interface ArticleCategories {
-  id: string;
-  title: string;
-  subCategory: ArticleSubCategories[];
-}
-export interface ArticleSubCategories {
-  id: string;
-  title: string;
-}

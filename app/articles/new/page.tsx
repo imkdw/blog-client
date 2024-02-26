@@ -3,7 +3,7 @@
 import { FormEvent, useEffect } from 'react';
 import { Close } from '@mui/icons-material';
 
-import ArticleCategory from '../../../components/Articles/category';
+import ArticleCategory from '../../../features/category/components/category';
 import { useArticle } from '../../../store/use-article';
 
 export default function NewArticlePage() {

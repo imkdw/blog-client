@@ -1,11 +1,11 @@
 import Link from 'next/link';
-import ArticleCategory from '../Articles/category';
+import ArticleCategory from '../../features/category/components/category';
 
 export default function HeaderMenu() {
   return (
     <nav className="w-full">
       <ul className="flex flex-row items-center justify-center gap-[100px]">
-        <li className="h-[40px] cursor-pointer">
+        <li className="h-[40px] min-w-[200px]">
           <ArticleCategory text="Category" link="/articles" />
         </li>
         <li className="h-[40px] cursor-pointer">
