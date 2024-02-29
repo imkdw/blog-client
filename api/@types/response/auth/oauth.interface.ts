@@ -1,4 +1,4 @@
-import { IOAuthProvider } from '../enums/oauth-provider.enum';
+import { IOAuthProvider } from '../../auth/enums/oauth-provider.enum';
 
 export interface OAuthResponse {
   isExist: boolean;

@@ -15,10 +15,10 @@ export default function ArticlesPage() {
     <main className="flex w-full flex-col items-start pt-[30px]">
       <div className="flex w-full flex-col justify-between gap-[30px]">
         <div className="flex flex-row justify-between">
-          <ParentCategory />
+          <ParentCategory enableLink />
           <ArticleSearch />
         </div>
-        <ChildCategory />
+        <ChildCategory enableLink />
         <ArticleList type="all" articles={articleData} />
       </div>
     </main>

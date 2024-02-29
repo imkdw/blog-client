@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect } from 'react';
 import { get, post } from '../../../../api/api';
-import { OAuthResponse } from '../../../../api/@types/auth/oauth/oauth.interface';
+import { OAuthResponse } from '../../../../api/@types/response/auth/oauth.interface';
 import { OAuthSignUpRequestBody, OAuthSignUpResponseBody } from '../../@types/sign-up.interface';
 import { OAuthProvider } from '../../../../api/@types/auth/enums/oauth-provider.enum';
 import { OAuthSignInRequestBody, OAuthSignInResponseBody } from '../../@types/sign-in.interface';
