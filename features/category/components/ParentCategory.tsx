@@ -8,18 +8,18 @@ import { ICategory, ResponseGetCategories } from '../types/category';
 import useCategory from '../../../store/use-category';
 
 interface Props {
-  text?: string;
+  enableLink: boolean;
+  onChangeCategory?: (category: ICategory) => void;
 }
 
-export default function ParentCategory({ text = '전체' }: Props) {
+export default function ParentCategory({ enableLink, onChangeCategory }: Props) {
   const [isSpreadCategory, setIsSpreadCategory] = useState(false);
-  const [categories, setCategories] = useState<ICategory[]>([]);
-  const { setParent } = useCategory((state) => state);
+  const { setAllParent, setCurrentParent, allParent, currentParent } = useCategory((state) => state);
 
   useEffect(() => {
     const fetchCategories = async () => {
       const res = await get<ResponseGetCategories>(API_URL.category.getList.parent);
-      setCategories(res.data.categories);
+      setAllParent(res.data.categories);
     };
 
     fetchCategories();
@@ -29,8 +29,12 @@ export default function ParentCategory({ text = '전체' }: Props) {
     setIsSpreadCategory((prev) => !prev);
   };
 
-  const changeParentHandler = (parent: string) => {
-    setParent(parent);
+  const changeParentHandler = (parent: ICategory) => {
+    setCurrentParent(parent);
+
+    if (onChangeCategory) {
+      onChangeCategory(parent);
+    }
   };
 
   return (
@@ -39,7 +43,7 @@ export default function ParentCategory({ text = '전체' }: Props) {
       onMouseEnter={spreadCategoryHandler}
       onMouseLeave={spreadCategoryHandler}
     >
-      <span className="text-[24px] hover:font-bold">{text}</span>
+      <span className="text-[24px] hover:font-bold">{currentParent?.name || '전체'}</span>
 
       {/* 카테고리 오픈 여부에 따른 화살표 방향전환 */}
       {isSpreadCategory ? (
@@ -52,18 +56,31 @@ export default function ParentCategory({ text = '전체' }: Props) {
       {/* TODO: tailwind에서 top-2 안되는 이슈 해결 */}
       {isSpreadCategory && (
         <ul className="absolute border bg-white" style={{ top: '100%' }}>
-          {categories.map((category) => (
-            <li key={category.id} className="w-auto p-2">
-              <Link
-                href={`/articles?parent=${category.param}`}
-                className="whitespace-nowrap hover:font-bold"
-                onClick={() => {
-                  changeParentHandler(category.param);
-                  setIsSpreadCategory(false);
-                }}
-              >
-                {category.name}
-              </Link>
+          {allParent.map((parentCategory) => (
+            <li key={parentCategory.id} className="w-auto p-2">
+              {enableLink ? (
+                <Link
+                  href={`/articles?parent=${parentCategory.param}`}
+                  className="whitespace-nowrap hover:font-bold"
+                  onClick={() => {
+                    changeParentHandler(parentCategory);
+                    setIsSpreadCategory(false);
+                  }}
+                >
+                  {parentCategory.name}
+                </Link>
+              ) : (
+                <button
+                  type="button"
+                  className="whitespace-nowrap hover:font-bold"
+                  onClick={() => {
+                    changeParentHandler(parentCategory);
+                    setIsSpreadCategory(false);
+                  }}
+                >
+                  {parentCategory.name}
+                </button>
+              )}
             </li>
           ))}
         </ul>

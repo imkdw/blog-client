@@ -1,17 +1,26 @@
 import { create } from 'zustand';
+import { ICategory } from '../features/category/types/category';
 
 interface CategoryStore {
-  parent: string;
-  child: string;
-  setParent(parent: string): void;
-  setChild(child: string): void;
+  allParent: ICategory[];
+  allChild: ICategory[];
+  currentParent: ICategory | null;
+  currentChild: ICategory | null;
+  setAllParent: (parents: ICategory[]) => void;
+  setAllChild: (children: ICategory[]) => void;
+  setCurrentParent: (parent: ICategory) => void;
+  setCurrentChild: (child: ICategory) => void;
 }
 
 const useCategory = create<CategoryStore>((set) => ({
-  parent: '',
-  child: '',
-  setParent: (parent) => set({ parent }),
-  setChild: (child) => set({ child }),
+  allParent: [],
+  allChild: [],
+  currentParent: null,
+  currentChild: null,
+  setAllParent: (parents: ICategory[]) => set({ allParent: parents }),
+  setAllChild: (children: ICategory[]) => set({ allChild: children }),
+  setCurrentParent: (parent: ICategory) => set({ currentParent: parent }),
+  setCurrentChild: (child: ICategory) => set({ currentChild: child }),
 }));
 
 export default useCategory;
