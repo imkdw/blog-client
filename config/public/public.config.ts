@@ -14,6 +14,9 @@ const publicConfig = {
     client: process.env.NEXT_PUBLIC_CLIENT_URL,
     server: process.env.NEXT_PUBLIC_SERVER_URL,
   },
+  article: {
+    create: '/v1/articles',
+  },
 };
 
 export default publicConfig;

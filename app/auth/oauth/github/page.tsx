@@ -5,7 +5,7 @@ import { useCallback, useEffect } from 'react';
 import { OAuthProvider } from '../../../../api/@types/auth/enums/oauth-provider.enum';
 import { OAuthSignInRequestBody, OAuthSignInResponseBody } from '../../@types/sign-in.interface';
 import { OAuthSignUpRequestBody, OAuthSignUpResponseBody } from '../../@types/sign-up.interface';
-import { OAuthResponse } from '../../../../api/@types/auth/oauth/oauth.interface';
+import { OAuthResponse } from '../../../../api/@types/response/auth/oauth.interface';
 import { post } from '../../../../api/api';
 import { GithubOAuthRequestBody } from '../../@types/github.interface';
 
