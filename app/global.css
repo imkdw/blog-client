@@ -9,6 +9,11 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  min-height: 100%;
+}
+
 ul,
 li {
   list-style: none;

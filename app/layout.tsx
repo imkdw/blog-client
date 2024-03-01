@@ -20,17 +20,14 @@ interface Props {
 
 export default function RootLayout({ children }: Props) {
   return (
-    <html
-      lang="ko"
-      className={clsx('flex items-start justify-center', `${(notoSans.className, notoSansKr.className)}`)}
-    >
-      <body className={clsx('flex h-auto w-full max-w-[1400px] flex-col items-center lg:w-full')}>
+    <html lang="ko" className={(notoSans.className, notoSansKr.className)}>
+      <body className={clsx('flex w-full flex-col items-center lg:w-full')}>
         <Header />
-        <div className="relative flex h-auto w-full max-w-[1200px] items-center justify-center">
+        <main className="relative flex h-auto w-full max-w-[1200px] flex-col">
           {children}
           <SideUtils />
-        </div>
-        <Footer />
+          <Footer />
+        </main>
       </body>
     </html>
   );

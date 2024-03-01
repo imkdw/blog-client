@@ -14,6 +14,9 @@ export const API_URL = {
 
 const api = axios.create({
   baseURL: serverUrl,
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+  },
 });
 
 export async function get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
