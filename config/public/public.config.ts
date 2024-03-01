@@ -1,4 +1,8 @@
 const publicConfig = {
+  auth: {
+    signIn: '/v1/auth/common/sign-in',
+    signUp: '/v1/auth/common/sign-up',
+  },
   oauth: {
     google: {
       clientId: process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID,

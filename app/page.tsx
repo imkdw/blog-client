@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import ArticleList from '../components/Articles/articleList';
 import LastArticles from '../components/Articles/lastArticles';
-import { Article } from '../@types/article/Article';
+import { IArticle } from '../@types/article/Article';
 import { getArticleDetail } from '../actions/article';
 
 export default function Home() {
@@ -14,13 +14,13 @@ export default function Home() {
   const recentArticles = Array(3)
     .fill(0)
     .map(
-      (_, i): Article => ({
+      (_, i): IArticle => ({
         ...getArticleDetail(i.toString()),
       }),
     );
 
   return (
-    <main className="flex w-full flex-col items-center gap-[30px]">
+    <div className="flex h-auto w-full flex-col items-center gap-[30px]">
       <LastArticles />
       <div className="flex flex-col gap-[50px]">
         <ArticleList type="popular" articles={popularArticles} />
@@ -31,6 +31,6 @@ export default function Home() {
           Show More...
         </button>
       </Link>
-    </main>
+    </div>
   );
 }
