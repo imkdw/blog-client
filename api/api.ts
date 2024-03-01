@@ -14,14 +14,16 @@ export const API_URL = {
 
 const api = axios.create({
   baseURL: serverUrl,
-  headers: {
-    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-  },
 });
 
 export async function get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
   try {
-    const res = await api.get<T>(url, config);
+    const res = await api.get<T>(url, {
+      ...config,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+    });
     return res.data;
   } catch (err) {
     throw new Error((err as AxiosError).message);
@@ -30,7 +32,12 @@ export async function get<T>(url: string, config?: AxiosRequestConfig): Promise<
 
 export async function post<T, V>(url: string, body: T, config?: AxiosRequestConfig): Promise<V> {
   try {
-    const res = await api.post<V>(url, body, config);
+    const res = await api.post<V>(url, body, {
+      ...config,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+    });
     return res.data;
   } catch (err) {
     throw new Error((err as AxiosError).message);

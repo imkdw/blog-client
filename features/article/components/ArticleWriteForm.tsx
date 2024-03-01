@@ -2,6 +2,7 @@
 
 import { ChangeEvent, FormEvent, useEffect, useState, KeyboardEvent } from 'react';
 import { Close } from '@mui/icons-material';
+import { useRouter } from 'next/navigation';
 
 import { ICategory } from '../../category/types/category';
 import { useArticle } from '../../../store/use-article';
@@ -10,10 +11,12 @@ import ChildCategory from '../../category/components/ChildCategory';
 import { post } from '../../../api/api';
 import { CraeteArticleBody } from '../../../api/@types/request/article/article.interface';
 import publicConfig from '../../../config/public/public.config';
+import { CreateArticleResponse } from '../../../api/@types/response/article/article.interface';
 
 export default function ArticleWriteForm() {
   const [parentCategory, setParentCategory] = useState<ICategory>();
   const [childCategory, setChildCategory] = useState<ICategory>();
+  const router = useRouter();
 
   const [articleData, setArticleData] = useState<{
     id: string;
@@ -49,7 +52,7 @@ export default function ArticleWriteForm() {
       sort: index,
     }));
 
-    await post<CraeteArticleBody, CraeteArticleBody>(publicConfig.article.create, {
+    const response = await post<CraeteArticleBody, CreateArticleResponse>(publicConfig.article.create, {
       id,
       title,
       summary,
@@ -58,6 +61,8 @@ export default function ArticleWriteForm() {
       childCategoryId: childCategory?.id!,
       tags: tagWithSort,
     });
+
+    router.push(response.data.id);
   };
 
   const changeHandler = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
