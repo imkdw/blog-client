@@ -1,6 +1,13 @@
 import Link from 'next/link';
+import { MouseEvent } from 'react';
 
 export default function SignInLinks() {
+  const clickHanlder = (event: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    // eslint-disable-next-line no-alert
+    window.alert('준비중인 기능입니다. 소셜로그인을 사용해주세요');
+  };
+
   return (
     <ul className="flex h-[50px] w-[50%] flex-row items-center justify-center">
       <li className="border-grey-300 flex w-[30%] items-center justify-center border-r text-[#505454]">
@@ -14,7 +21,7 @@ export default function SignInLinks() {
         </Link>
       </li>
       <li className="flex w-[30%] items-center justify-center text-[#505454]">
-        <Link href="/auth/sign-up" className="text-[16px]">
+        <Link href="/auth/sign-up" className="text-[16px]" onClick={clickHanlder}>
           회원가입
         </Link>
       </li>

@@ -11,7 +11,7 @@ import useUser from '../../../store/use-user';
 import { SignInResponse } from '../../../api/@types/response/auth/auth.interface';
 
 export default function SignInForm() {
-  const { setEmail, setNickname, setProfile, setIsLoggedIn } = useUser((state) => state);
+  const { setEmail, setNickname, setProfile, setRole, setIsLoggedIn } = useUser((state) => state);
 
   // TOOD: 기본값 제거
   const [account, setAccount] = useState({
@@ -35,6 +35,7 @@ export default function SignInForm() {
       setEmail(response.data.email);
       setNickname(response.data.nickname);
       setProfile(response.data.profile);
+      setRole(response.data.role);
       setIsLoggedIn(true);
       localStorage.setItem('accessToken', response.data.accessToken);
       router.back();
