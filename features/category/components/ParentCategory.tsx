@@ -14,7 +14,7 @@ interface Props {
 
 export default function ParentCategory({ enableLink, onChangeCategory }: Props) {
   const [isSpreadCategory, setIsSpreadCategory] = useState(false);
-  const { setAllParent, setCurrentParent, allParent, currentParent } = useCategory((state) => state);
+  const { setAllParent, setCurrentParent, allParent, currentParent, setCurrentChild } = useCategory((state) => state);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -31,6 +31,7 @@ export default function ParentCategory({ enableLink, onChangeCategory }: Props) 
 
   const changeParentHandler = (parent: ICategory) => {
     setCurrentParent(parent);
+    setCurrentChild(null);
 
     if (onChangeCategory) {
       onChangeCategory(parent);

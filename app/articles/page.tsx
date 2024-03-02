@@ -1,15 +1,30 @@
-import { getArticleDetail } from '../../actions/article';
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+
 import ArticleSearch from '../../components/Articles/Search';
 import ArticleList from '../../components/Articles/articleList';
 import ChildCategory from '../../features/category/components/ChildCategory';
 import ParentCategory from '../../features/category/components/ParentCategory';
+import { get } from '../../api/api';
+import { GetArticlesResponse, GetArticlesResponseData } from '../../api/@types/response/article/article.interface';
 
 export default function ArticlesPage() {
-  const articleData = Array(20)
-    .fill(0)
-    .map((_, i) => ({
-      ...getArticleDetail(i.toString()),
-    }));
+  const [articles, setArticles] = useState<GetArticlesResponseData[]>();
+
+  const searchParams = useSearchParams();
+  const [parent, child] = [searchParams.get('parent'), searchParams.get('child')];
+
+  useEffect(() => {
+    const fetchArticles = async (categoryParam: string | null) => {
+      const response = await get<GetArticlesResponse>(`/v1/articles?categoryParam=${categoryParam || ''}`);
+      setArticles(response.data.articles);
+    };
+
+    const criteriaCategory = child || parent;
+    fetchArticles(criteriaCategory);
+  }, [child, parent]);
 
   return (
     <main className="flex w-full flex-col items-start pt-[30px]">
@@ -19,7 +34,7 @@ export default function ArticlesPage() {
           <ArticleSearch />
         </div>
         <ChildCategory enableLink />
-        <ArticleList type="all" articles={articleData} />
+        <ArticleList type="all" articles={articles || []} />
       </div>
     </main>
   );

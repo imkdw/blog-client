@@ -15,8 +15,8 @@ import { CreateArticleResponse } from '../../../api/@types/response/article/arti
 import ArticleContentEditor from './ArticleContentEditor';
 
 export default function ArticleWriteForm() {
-  const [parentCategory, setParentCategory] = useState<ICategory>();
-  const [childCategory, setChildCategory] = useState<ICategory>();
+  const [parentCategory, setParentCategory] = useState<ICategory | null>();
+  const [childCategory, setChildCategory] = useState<ICategory | null>();
   const [content, setContent] = useState('');
   const router = useRouter();
 
@@ -41,6 +41,8 @@ export default function ArticleWriteForm() {
 
     return () => {
       setIsWriting(false);
+      setChildCategory(null);
+      setParentCategory(null);
     };
   }, [setIsWriting]);
 

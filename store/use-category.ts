@@ -8,8 +8,8 @@ interface CategoryStore {
   currentChild: ICategory | null;
   setAllParent: (parents: ICategory[]) => void;
   setAllChild: (children: ICategory[]) => void;
-  setCurrentParent: (parent: ICategory) => void;
-  setCurrentChild: (child: ICategory) => void;
+  setCurrentParent: (parent: ICategory | null) => void;
+  setCurrentChild: (child: ICategory | null) => void;
 }
 
 const useCategory = create<CategoryStore>((set) => ({
@@ -19,8 +19,8 @@ const useCategory = create<CategoryStore>((set) => ({
   currentChild: null,
   setAllParent: (parents: ICategory[]) => set({ allParent: parents }),
   setAllChild: (children: ICategory[]) => set({ allChild: children }),
-  setCurrentParent: (parent: ICategory) => set({ currentParent: parent }),
-  setCurrentChild: (child: ICategory) => set({ currentChild: child }),
+  setCurrentParent: (parent: ICategory | null) => set({ currentParent: parent }),
+  setCurrentChild: (child: ICategory | null) => set({ currentChild: child }),
 }));
 
 export default useCategory;
