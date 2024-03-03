@@ -1,0 +1,38 @@
+{
+  "id": "1",
+  "title": "The Great Gatsby",
+  "summary": "The Great Gatsby is a novel by American author F. Scott Fitzgerald. The book takes place from spring to autumn 1922, during a prosperous time in the United States known as the Roaring Twenties, which lasted from 1920 until the Wall Street Crash of 1929.",
+  "content": "asdasdsadj21io9p3j2qoidsadklasdmdi2o3j12o",
+  "createAt": "2021-07-01T00:00:00Z",
+  "like": {
+    "count": 0,
+    "isLike": false
+  },
+  "commentCount": 0
+}
+
+{
+  "tags": {
+    [
+      {
+        id: "1",
+        name: "Fiction"
+      }
+    ]
+  }  
+}
+
+{
+  comments: {
+    [
+      {
+        "id": "1",
+        "content": "This is a great book",
+        "createAt": "2021-07-01T00:00:00Z",
+        "user": {
+          isOwner: false,
+        }
+      }
+    ]
+  }
+}

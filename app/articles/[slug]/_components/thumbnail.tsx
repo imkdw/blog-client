@@ -1,9 +1,13 @@
 import Image from 'next/image';
 
-export default function ArticleDetailThumbnail() {
+interface Props {
+  thumbnail: string;
+}
+export default function ArticleDetailThumbnail({ thumbnail }: Props) {
+  console.log('thumbnail', thumbnail);
   return (
     <div className="flex h-[450px] w-full items-center justify-center">
-      <Image src="http://via.placeholder.com/800x450" alt="thumbnail" width="800" height="450" />
+      <Image src={thumbnail} alt="thumbnail" width="800" height="450" />
     </div>
   );
 }

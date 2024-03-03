@@ -30,7 +30,7 @@ export async function get<T>(url: string, config?: AxiosRequestConfig): Promise<
   }
 }
 
-export async function post<T, V>(url: string, body: T, config?: AxiosRequestConfig): Promise<V> {
+export async function post<T, V = undefined>(url: string, body: T, config?: AxiosRequestConfig): Promise<V> {
   try {
     const res = await api.post<V>(url, body, {
       ...config,
