@@ -2,6 +2,7 @@
 
 import { ChangeEvent, FormEvent, useEffect, useState, KeyboardEvent } from 'react';
 import { Close } from '@mui/icons-material';
+import { useRouter } from 'next/navigation';
 
 import { ICategory } from '../../category/types/category';
 import { useArticle } from '../../../store/use-article';
@@ -10,27 +11,29 @@ import ChildCategory from '../../category/components/ChildCategory';
 import { post } from '../../../api/api';
 import { CraeteArticleBody } from '../../../api/@types/request/article/article.interface';
 import publicConfig from '../../../config/public/public.config';
+import { CreateArticleResponse } from '../../../api/@types/response/article/article.interface';
+import ArticleContentEditor from './ArticleContentEditor';
 
 export default function ArticleWriteForm() {
-  const [parentCategory, setParentCategory] = useState<ICategory>();
-  const [childCategory, setChildCategory] = useState<ICategory>();
+  const [parentCategory, setParentCategory] = useState<ICategory | null>();
+  const [childCategory, setChildCategory] = useState<ICategory | null>();
+  const [content, setContent] = useState('');
+  const router = useRouter();
 
   const [articleData, setArticleData] = useState<{
     id: string;
     title: string;
     summary: string;
-    content: string;
     tag: string;
     tags: string[];
   }>({
     id: '',
     title: '',
     summary: '',
-    content: '',
     tag: '',
     tags: [],
   });
-  const { content, summary, tags, tag, title, id } = articleData;
+  const { summary, tags, tag, title, id } = articleData;
   const { setIsWriting } = useArticle((state) => state);
 
   useEffect(() => {
@@ -38,6 +41,8 @@ export default function ArticleWriteForm() {
 
     return () => {
       setIsWriting(false);
+      setChildCategory(null);
+      setParentCategory(null);
     };
   }, [setIsWriting]);
 
@@ -49,7 +54,7 @@ export default function ArticleWriteForm() {
       sort: index,
     }));
 
-    await post<CraeteArticleBody, CraeteArticleBody>(publicConfig.article.create, {
+    const response = await post<CraeteArticleBody, CreateArticleResponse>(publicConfig.article.create, {
       id,
       title,
       summary,
@@ -58,6 +63,8 @@ export default function ArticleWriteForm() {
       childCategoryId: childCategory?.id!,
       tags: tagWithSort,
     });
+
+    router.push(response.data.id);
   };
 
   const changeHandler = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -146,7 +153,7 @@ export default function ArticleWriteForm() {
         />
       </div>
       <div className="h-[500px] w-full border border-gray-300">
-        <textarea onChange={changeHandler} name="content" />
+        <ArticleContentEditor content={content} setContent={setContent} />
       </div>
       <div className="flex flex-col gap-4 border-b border-gray-300 p-2">
         <input

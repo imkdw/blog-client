@@ -38,7 +38,7 @@ export default function ChildCategory({ enableLink = false, onChangeCategory }: 
         <li
           key={childCategory.id}
           className={clsx(
-            'flex items-center justify-center rounded-[10px] border',
+            'flex items-center justify-center rounded-[10px] border p-2',
             currentChild?.name === childCategory.name && 'bg-slate-300',
           )}
         >
@@ -51,11 +51,7 @@ export default function ChildCategory({ enableLink = false, onChangeCategory }: 
               {childCategory.name}
             </Link>
           ) : (
-            <button
-              onClick={() => changeChildHandler(childCategory)}
-              className={clsx('p-2  text-[18px]')}
-              type="button"
-            >
+            <button onClick={() => changeChildHandler(childCategory)} className={clsx('text-[18px]')} type="button">
               {childCategory.name}
             </button>
           )}

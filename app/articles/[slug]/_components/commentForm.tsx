@@ -1,16 +1,32 @@
 'use client';
 
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { post } from '../../../../api/api';
+import { CreateArticleCommentBody } from '../../../../api/@types/request/article/article-comment.interface';
+import useUser from '../../../../store/use-user';
 
-export default function ArticleCommentForm() {
+interface Props {
+  articleId: string;
+}
+
+export default function ArticleCommentForm({ articleId }: Props) {
   const [comment, setComment] = useState('');
+  const { isLoggedIn } = useUser((state) => state);
 
   const changeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setComment(event.target.value);
   };
 
-  const submitHandler = (event: FormEvent<HTMLFormElement>) => {
+  const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (!isLoggedIn) {
+      // TODO: 모달로 변경
+      // eslint-disable-next-line no-alert
+      window.alert('로그인이 필요한 서비스입니다');
+      return;
+    }
+
+    await post<CreateArticleCommentBody>(`/v1/articles/${articleId}/comments`, { content: comment });
   };
 
   return (
