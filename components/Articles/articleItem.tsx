@@ -1,10 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { Article } from '../../@types/article/Article';
-
 interface Props {
-  article: Article;
+  article: any;
 }
 
 export default function ArticleItem({ article }: Props) {
@@ -18,7 +16,7 @@ export default function ArticleItem({ article }: Props) {
           <div className="justify-between text-[16px] text-gray-400">
             댓글 {article.commentCount}개 · 좋아요 {article.likeCount}개
           </div>
-          <div className="text-[16px] text-gray-400">2024.01.03 10:34</div>
+          <div className="text-[16px] text-gray-400">{article.createdAt}</div>
         </div>
       </Link>
     </li>

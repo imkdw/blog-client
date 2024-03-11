@@ -1,14 +1,14 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 'use client';
 
-import { useEffect } from 'react';
-import { getArticleDetail } from '../../../actions/article';
+import { useEffect, useState } from 'react';
 import ArticleDetailContent from './_components/content';
 import ArticleDetailThumbnail from './_components/thumbnail';
 import ArticleTags from './_components/tags';
 import ArticleButtons from './_components/buttons';
 import ArticleList from '../../../components/Articles/articleList';
 import ArticleComments from './_components/comments';
-import { IArticle } from '../../../@types/article/Article';
 import ArticleCommentForm from './_components/commentForm';
 import { useArticle } from '../../../store/use-article';
 
@@ -20,20 +20,27 @@ interface Props {
 
 export default function ArticleDetailPage({ params: { slug } }: Props) {
   const articleId = slug;
-  const articleDetail = getArticleDetail(articleId);
-  const article: IArticle = { ...articleDetail };
   const { setCurrentArticleId } = useArticle((state) => state);
 
-  const recommendArticles = Array(3)
-    .fill(0)
-    .map((_, i) => ({
-      ...getArticleDetail(i.toString()),
-    }));
+  // const [articleDetail, setArticleDetail] = useState<GetArticleDetailResponseData | null>(null);
+  // const [articleTags, setArticleTags] = useState<GetArticleTagsResponseData[] | null>(null);
+  // const [articleComments, setArticleComments] = useState<GetArticleCommentsResponseData[] | null>(null);
 
   // 게시글 상세페이지 접속시 스크롤을 맨 위로 올림
   useEffect(() => {
+    const fetchArticleDetail = async () => {
+      // const responseArticleDetail = await get<GetArticleDetailResponse>(`/v1/articles/${articleId}`);
+      // const responseArticleTags = await get<GetArticleTagsResponse>(`/v1/tags?key=articleId&value=${articleId}`);
+      // const responseArticleComments = await get<GetArticleCommentsResponse>(`/v1/articles/${articleId}/comments`);
+      // setArticleDetail(responseArticleDetail.data);
+      // setArticleTags(responseArticleTags.data.tags);
+      // setArticleComments(responseArticleComments.data.comments);
+    };
+
     window.scrollTo(0, 0);
     setCurrentArticleId(articleId);
+
+    fetchArticleDetail();
 
     return () => {
       // 페이지를 이탈할때 null로 초기화
@@ -43,13 +50,21 @@ export default function ArticleDetailPage({ params: { slug } }: Props) {
 
   return (
     <main className="flex flex-col gap-10 pt-10">
-      <ArticleDetailThumbnail />
-      <ArticleDetailContent title={article.title} summary={article.summary} content={article.content} />
-      <ArticleTags createdAt={article.createdAt} tags={article.tags} />
-      <ArticleButtons commentCount={article.commentCount} likeCount={article.likeCount} isLike />
-      <ArticleComments comments={article.comments} />
-      <ArticleCommentForm />
-      <ArticleList articles={recommendArticles} type="recommend" />
+      {/* {articleDetail && articleTags && articleComments && (
+        <>
+          <ArticleDetailThumbnail thumbnail={articleDetail.thumbnail} />
+          <ArticleDetailContent
+            title={articleDetail.title}
+            summary={articleDetail.summary}
+            content={articleDetail.content}
+          />
+          <ArticleTags createAt={articleDetail.createAt} tags={articleTags} />
+          <ArticleButtons commentCount={articleDetail.commentCount} likeCount={0} isLike />
+          <ArticleComments comments={articleComments} />
+          <ArticleCommentForm articleId={articleId} />
+          <ArticleList articles={[]} type="recommend" />
+        </>
+      )} */}
     </main>
   );
 }

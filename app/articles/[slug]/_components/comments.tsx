@@ -1,10 +1,8 @@
 import Image from 'next/image';
 import { MoreHoriz, Reply } from '@mui/icons-material';
 
-import { IArticleComments } from '../../../../@types/article/Article';
-
 interface Props {
-  comments: IArticleComments[];
+  comments: any[];
 }
 
 export default function ArticleComments({ comments }: Props) {
@@ -20,11 +18,11 @@ export default function ArticleComments({ comments }: Props) {
               </div>
               <div className="flex flex-col">
                 <p>{comment.user.nickname}</p>
-                <p className="text-[16px] text-gray-500">{comment.createdAt}</p>
+                <p className="text-[16px] text-gray-500">{comment.createAt}</p>
               </div>
             </div>
             <div>
-              {comment.user.isOwner && (
+              {comment.user.isWriter && (
                 <button type="button" aria-label="comment menu button">
                   <MoreHoriz />
                 </button>
@@ -35,7 +33,7 @@ export default function ArticleComments({ comments }: Props) {
             </div>
           </div>
           <p className="w-full border-b border-gray-300 p-1 pb-3">{comment.content}</p>
-          {comment.replies.length ? (
+          {/* {comment.replies.length ? (
             <ul className="flex w-[95%] flex-col gap-6 pt-6">
               {comment.replies.map((reply) => (
                 <li key={reply.id} className="w-full border-l-4 p-4">
@@ -69,7 +67,7 @@ export default function ArticleComments({ comments }: Props) {
                 </li>
               ))}
             </ul>
-          ) : null}
+          ) : null} */}
         </li>
       ))}
     </ul>

@@ -11,7 +11,22 @@ const notoSansKr = Noto_Sans_KR({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'IMKDW Dev - Tech Blog',
-  description: '오픈소스로 운영되는 IMKDW의 기술블로그입니다. 다양한 기술과 경험을 공유합니다',
+  description: '오픈소스로 운영되는 IMKDW의 기술블로그입니다',
+  openGraph: {
+    title: 'IMKDW Dev - Tech Blog',
+    description: '오픈소스로 운영되는 IMKDW의 기술블로그입니다',
+    url: 'https://imkdw.dev',
+    siteName: 'IMKDW_DEV',
+    images: [
+      {
+        url: 'https://static.imkdw.dev/images/open-graph.png',
+        width: 800,
+        height: 600,
+      },
+    ],
+    locale: 'ko_KR',
+    type: 'website',
+  },
 };
 
 interface Props {
@@ -20,17 +35,14 @@ interface Props {
 
 export default function RootLayout({ children }: Props) {
   return (
-    <html
-      lang="ko"
-      className={clsx('flex items-start justify-center', `${(notoSans.className, notoSansKr.className)}`)}
-    >
-      <body className={clsx('flex h-auto w-full max-w-[1400px] flex-col items-center lg:w-full')}>
+    <html lang="ko" className={(notoSans.className, notoSansKr.className)}>
+      <body className={clsx('flex w-full flex-col items-center lg:w-full')}>
         <Header />
-        <div className="relative flex h-auto min-h-[1000px] w-full max-w-[1200px] items-center justify-center">
+        <main className="relative flex h-auto w-full max-w-[1200px] flex-col">
           {children}
           <SideUtils />
-        </div>
-        <Footer />
+          <Footer />
+        </main>
       </body>
     </html>
   );

@@ -1,15 +1,43 @@
 'use client';
 
 import Link from 'next/link';
-import { AccountCircle, Language, LightMode, DarkMode } from '@mui/icons-material';
+import { AccountCircle, Language, LightMode, DarkMode, Logout } from '@mui/icons-material';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import useUser from '../../store/use-user';
+import { UserRoles } from '../../types/enum/user';
 
 export default function HeaderButtons() {
+  const { isLoggedIn, setIsLoggedIn, setLoggedInUser } = useUser((state) => state);
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [themeMode, setThemeMode] = useState('LIGHT');
 
+  const router = useRouter();
+
   const themeChangeHandler = () => {
-    const willChangeThemeMode = themeMode === 'LIGHT' ? 'DARK' : 'LIGHT';
-    setThemeMode(willChangeThemeMode);
+    // eslint-disable-next-line no-alert
+    window.alert('준비중인 기능입니다');
+    // const willChangeThemeMode = themeMode === 'LIGHT' ? 'DARK' : 'LIGHT';
+    // setThemeMode(willChangeThemeMode);
+  };
+
+  const languageChangeHandler = () => {
+    // eslint-disable-next-line no-alert
+    window.alert('준비중인 기능입니다');
+  };
+
+  const logoutHandler = async () => {
+    localStorage.removeItem('accessToken');
+
+    setIsLoggedIn(false);
+    setLoggedInUser({
+      email: '',
+      nickname: '',
+      profile: '',
+      role: UserRoles.NORMAL,
+    });
+    router.push('/');
   };
 
   return (
@@ -21,15 +49,21 @@ export default function HeaderButtons() {
         </button>
       </li>
       <li>
-        <button aria-label="언어 변경" type="button">
+        <button aria-label="언어 변경" type="button" onClick={languageChangeHandler}>
           <Language />
         </button>
       </li>
       <li>
         {/* TODO: 로그인 여부에 따라서 마이페이지 또는 로그인 페이지로 이동 분기처리 */}
-        <Link href="/auth/sign-in">
-          <AccountCircle />
-        </Link>
+        {isLoggedIn ? (
+          <button onClick={logoutHandler} aria-label="logout button" type="button">
+            <Logout />
+          </button>
+        ) : (
+          <Link href="/auth/sign-in">
+            <AccountCircle />
+          </Link>
+        )}
       </li>
     </ul>
   );
