@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     siteName: 'IMKDW_DEV',
     images: [
       {
-        url: 'http://localhost:3000/api/og?title=Next.js', // Dynamic og route
+        url: 'https://static.imkdw.dev/images/open-graph.png',
         width: 800,
         height: 600,
       },
