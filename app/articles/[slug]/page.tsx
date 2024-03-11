@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -9,15 +11,6 @@ import ArticleList from '../../../components/Articles/articleList';
 import ArticleComments from './_components/comments';
 import ArticleCommentForm from './_components/commentForm';
 import { useArticle } from '../../../store/use-article';
-import { get } from '../../../api/api';
-import {
-  GetArticleCommentsResponse,
-  GetArticleCommentsResponseData,
-  GetArticleDetailResponse,
-  GetArticleDetailResponseData,
-  GetArticleTagsResponse,
-  GetArticleTagsResponseData,
-} from '../../../api/@types/response/article/article.interface';
 
 interface Props {
   params: {
@@ -29,20 +22,19 @@ export default function ArticleDetailPage({ params: { slug } }: Props) {
   const articleId = slug;
   const { setCurrentArticleId } = useArticle((state) => state);
 
-  const [articleDetail, setArticleDetail] = useState<GetArticleDetailResponseData | null>(null);
-  const [articleTags, setArticleTags] = useState<GetArticleTagsResponseData[] | null>(null);
-  const [articleComments, setArticleComments] = useState<GetArticleCommentsResponseData[] | null>(null);
+  // const [articleDetail, setArticleDetail] = useState<GetArticleDetailResponseData | null>(null);
+  // const [articleTags, setArticleTags] = useState<GetArticleTagsResponseData[] | null>(null);
+  // const [articleComments, setArticleComments] = useState<GetArticleCommentsResponseData[] | null>(null);
 
   // 게시글 상세페이지 접속시 스크롤을 맨 위로 올림
   useEffect(() => {
     const fetchArticleDetail = async () => {
-      const responseArticleDetail = await get<GetArticleDetailResponse>(`/v1/articles/${articleId}`);
-      const responseArticleTags = await get<GetArticleTagsResponse>(`/v1/tags?key=articleId&value=${articleId}`);
-      const responseArticleComments = await get<GetArticleCommentsResponse>(`/v1/articles/${articleId}/comments`);
-
-      setArticleDetail(responseArticleDetail.data);
-      setArticleTags(responseArticleTags.data.tags);
-      setArticleComments(responseArticleComments.data.comments);
+      // const responseArticleDetail = await get<GetArticleDetailResponse>(`/v1/articles/${articleId}`);
+      // const responseArticleTags = await get<GetArticleTagsResponse>(`/v1/tags?key=articleId&value=${articleId}`);
+      // const responseArticleComments = await get<GetArticleCommentsResponse>(`/v1/articles/${articleId}/comments`);
+      // setArticleDetail(responseArticleDetail.data);
+      // setArticleTags(responseArticleTags.data.tags);
+      // setArticleComments(responseArticleComments.data.comments);
     };
 
     window.scrollTo(0, 0);
@@ -58,7 +50,7 @@ export default function ArticleDetailPage({ params: { slug } }: Props) {
 
   return (
     <main className="flex flex-col gap-10 pt-10">
-      {articleDetail && articleTags && articleComments && (
+      {/* {articleDetail && articleTags && articleComments && (
         <>
           <ArticleDetailThumbnail thumbnail={articleDetail.thumbnail} />
           <ArticleDetailContent
@@ -72,7 +64,7 @@ export default function ArticleDetailPage({ params: { slug } }: Props) {
           <ArticleCommentForm articleId={articleId} />
           <ArticleList articles={[]} type="recommend" />
         </>
-      )}
+      )} */}
     </main>
   );
 }

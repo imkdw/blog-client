@@ -33,15 +33,13 @@ export function getArticleDetail(articleId: string): IArticle {
 
   return {
     id: articleId,
-    title: '타입스크립트에서 SOLID 원칙에 의거한 OOP 설계하기',
+    title: '테스트용 게시글 입니다.',
     thumbnail: 'http://via.placeholder.com/640x480',
-    content:
-      '타입스크립트 OOP 설계 내용입니다.타입스크립트 OOP 설계 내용입니다.타입스크립트 OOP 설계 내용입니다.타입스크립트 OOP 설계 내용입니다.타입스크립트 OOP 설계 내용입니다.타입스크립트 OOP 설계 내용입니다.타입스크립트 OOP 설계 내용입니다.타입스크립트 OOP 설계 내용입니다.타입스크립트 OOP 설계 내용입니다.타입스크립트 OOP 설계 내용입니다.타입스크립트 OOP 설계 내용입니다.타입스크립트 OOP 설계 내용입니다.타입스크립트 OOP 설계 내용입니다.타입스크립트 OOP 설계 내용입니다.',
+    content: '테스트용 게시글 입니다.',
     commentCount: 1,
     likeCount: 2,
-    summary:
-      '타입스크립트에서 SOLID 원칙에 의거한 객체지향 설계에 대한 글 입니다. 반복하지 않고 클린한 코드를 만드는 방법에 대해 소개합니다.',
-    tags: ['타입스크립트', '객체지향', 'SOLID'],
+    summary: '테스트용 게시글 입니다.',
+    tags: ['테스트1', '테스트2', '테스트3'],
     createdAt: new Intl.DateTimeFormat('ko', { dateStyle: 'short' }).format(new Date()),
     comments,
   };

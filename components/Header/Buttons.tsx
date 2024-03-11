@@ -5,10 +5,10 @@ import { AccountCircle, Language, LightMode, DarkMode, Logout } from '@mui/icons
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import useUser from '../../store/use-user';
-import { UserRole } from '../../api/@types/auth/enums/oauth-provider.enum';
+import { UserRoles } from '../../types/enum/user';
 
 export default function HeaderButtons() {
-  const { isLoggedIn, setIsLoggedIn, setEmail, setNickname, setProfile, setRole } = useUser((state) => state);
+  const { isLoggedIn, setIsLoggedIn, setLoggedInUser } = useUser((state) => state);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [themeMode, setThemeMode] = useState('LIGHT');
@@ -29,11 +29,14 @@ export default function HeaderButtons() {
 
   const logoutHandler = async () => {
     localStorage.removeItem('accessToken');
-    setEmail('');
-    setNickname('');
-    setProfile('');
-    setRole(UserRole.COMMON);
+
     setIsLoggedIn(false);
+    setLoggedInUser({
+      email: '',
+      nickname: '',
+      profile: '',
+      role: UserRoles.NORMAL,
+    });
     router.push('/');
   };
 

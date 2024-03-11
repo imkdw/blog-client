@@ -1,10 +1,8 @@
 import Image from 'next/image';
 import { MoreHoriz, Reply } from '@mui/icons-material';
 
-import { GetArticleCommentsResponseData } from '../../../../api/@types/response/article/article.interface';
-
 interface Props {
-  comments: GetArticleCommentsResponseData[];
+  comments: any[];
 }
 
 export default function ArticleComments({ comments }: Props) {

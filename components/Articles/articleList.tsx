@@ -1,9 +1,8 @@
-import { GetArticlesResponseData } from '../../api/@types/response/article/article.interface';
 import ArticleItem from './articleItem';
 
 interface Props {
   type: 'popular' | 'recent' | 'all' | 'recommend';
-  articles: GetArticlesResponseData[];
+  articles: any[];
 }
 
 const createArticleListHeader = (type: Props['type']) => {

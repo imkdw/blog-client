@@ -13,6 +13,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.15.11",
     "@mui/material": "^5.15.11",
+    "@tanstack/react-query-next-experimental": "^5.24.8",
     "@uiw/react-md-editor": "^4.0.3",
     "axios": "^1.6.7",
     "clsx": "^2.1.0",

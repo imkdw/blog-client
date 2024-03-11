@@ -2,10 +2,10 @@
 
 import React, { useEffect } from 'react';
 import Link from 'next/link';
-import { API_URL, get } from '../../../api/api';
-import { ICategory, ResponseGetCategories } from '../types/category';
-import useCategory from '../../../store/use-category';
 import clsx from 'clsx';
+
+import { ICategory } from '../types/category';
+import useCategory from '../../../store/use-category';
 
 interface Props {
   enableLink: boolean;
@@ -14,16 +14,7 @@ interface Props {
 export default function ChildCategory({ enableLink = false, onChangeCategory }: Props) {
   const { setAllChild, currentParent, setCurrentChild, allChild, currentChild } = useCategory((state) => state);
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      const res = await get<ResponseGetCategories>(API_URL.category.getList.children(currentParent?.param!));
-      setAllChild(res.data.categories);
-    };
-
-    if (currentParent) {
-      fetchCategories();
-    }
-  }, [currentParent, setAllChild]);
+  useEffect(() => {}, [currentParent, setAllChild]);
 
   const changeChildHandler = (_child: ICategory) => {
     setCurrentChild(_child);

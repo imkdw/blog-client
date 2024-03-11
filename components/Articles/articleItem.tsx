@@ -1,10 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { GetArticlesResponseData } from '../../api/@types/response/article/article.interface';
-
 interface Props {
-  article: GetArticlesResponseData;
+  article: any;
 }
 
 export default function ArticleItem({ article }: Props) {

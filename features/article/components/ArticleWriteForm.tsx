@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 'use client';
 
 import { ChangeEvent, FormEvent, useEffect, useState, KeyboardEvent } from 'react';
@@ -8,10 +10,6 @@ import { ICategory } from '../../category/types/category';
 import { useArticle } from '../../../store/use-article';
 import ParentCategory from '../../category/components/ParentCategory';
 import ChildCategory from '../../category/components/ChildCategory';
-import { post } from '../../../api/api';
-import { CraeteArticleBody } from '../../../api/@types/request/article/article.interface';
-import publicConfig from '../../../config/public/public.config';
-import { CreateArticleResponse } from '../../../api/@types/response/article/article.interface';
 import ArticleContentEditor from './ArticleContentEditor';
 
 export default function ArticleWriteForm() {
@@ -49,22 +47,12 @@ export default function ArticleWriteForm() {
   const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const tagWithSort = tags.map((_tag, index) => ({
-      tagName: _tag,
-      sort: index,
-    }));
+    // const tagWithSort = tags.map((_tag, index) => ({
+    //   tagName: _tag,
+    //   sort: index,
+    // }));
 
-    const response = await post<CraeteArticleBody, CreateArticleResponse>(publicConfig.article.create, {
-      id,
-      title,
-      summary,
-      content,
-      parentCategoryId: parentCategory?.id!,
-      childCategoryId: childCategory?.id!,
-      tags: tagWithSort,
-    });
-
-    router.push(response.data.id);
+    // router.push(response.data.id);
   };
 
   const changeHandler = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

@@ -1,12 +1,13 @@
-import { IOAuthProvider } from '../../../api/@types/auth/enums/oauth-provider.enum';
-
 export interface OAuthSignInRequestBody {
   email: string;
-  provider: IOAuthProvider;
+  provider: any;
   token: string;
 }
 
 export interface OAuthSignInResponseBody {
   email: string;
+  nickname: string;
+  profile: string;
+  role: any;
   accessToken: string;
 }

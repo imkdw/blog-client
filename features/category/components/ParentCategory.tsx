@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 'use client';
 
 import React, { useEffect, useState } from 'react';
 import { KeyboardArrowDown, KeyboardArrowUp } from '@mui/icons-material';
 import Link from 'next/link';
-import { API_URL, get } from '../../../api/api';
 import { ICategory, ResponseGetCategories } from '../types/category';
 import useCategory from '../../../store/use-category';
 
@@ -16,14 +17,7 @@ export default function ParentCategory({ enableLink, onChangeCategory }: Props) 
   const [isSpreadCategory, setIsSpreadCategory] = useState(false);
   const { setAllParent, setCurrentParent, allParent, currentParent, setCurrentChild } = useCategory((state) => state);
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      const res = await get<ResponseGetCategories>(API_URL.category.getList.parent);
-      setAllParent(res.data.categories);
-    };
-
-    fetchCategories();
-  }, []);
+  useEffect(() => {}, []);
 
   const spreadCategoryHandler = () => {
     setIsSpreadCategory((prev) => !prev);

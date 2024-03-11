@@ -1,8 +1,6 @@
-import { GetArticleTagsResponseData } from '../../../../api/@types/response/article/article.interface';
-
 interface Props {
   createAt: string;
-  tags: GetArticleTagsResponseData[];
+  tags: any[];
 }
 
 export default function ArticleTags({ createAt, tags }: Props) {
