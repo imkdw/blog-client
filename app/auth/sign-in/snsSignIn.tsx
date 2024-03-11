@@ -10,7 +10,7 @@ export default function SnsSignIn() {
   const googleHandler = () => {
     const oAuthEndpoint = 'https://accounts.google.com/o/oauth2/auth';
     const { clientId } = publicConfig.oauth.google;
-    const redirectUrl = `${CLIENT_URL}/auth/oauth/kakao`;
+    const redirectUrl = `${CLIENT_URL}/auth/oauth/google`;
     const responseType = 'token';
     const scope = 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile';
 

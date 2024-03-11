@@ -5,39 +5,41 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 import useUser from '../../../store/use-user';
-import { post } from '../../../api/api';
-import { SignUpBody } from '../../../api/@types/request/auth/auth.interface';
-import { SignInResponse } from '../../../api/@types/response/auth/auth.interface';
-import publicConfig from '../../../config/public/public.config';
+import { postSendEmailVerificationCode, postSignUp, postVerifyCodeValidate } from '../../../services/auth';
+import { getCheckDuplicate } from '../../../services/user';
+import { CheckDuplicateType } from '../../../types/enum/user';
 
 export default function SignUpForm() {
-  const { setEmail, setNickname, setProfile, setIsLoggedIn } = useUser((state) => state);
+  const router = useRouter();
 
+  const { setLoggedInUser, setIsLoggedIn } = useUser((state) => state);
+  const [isSendVerifyCode, setIsSendVerifyCode] = useState(false);
+  const [emailVerificationId, setEmailVerificationId] = useState(0);
+  const [verificationCode, setVerificationCode] = useState('');
+
+  // TODO: 기본값 제거
   const [account, setAccount] = useState({
-    email: '',
-    password: '',
-    rePassword: '',
-    nickname: '',
+    email: 'admin@imkdw.dev',
+    password: 'Test121212!@',
+    rePassword: 'Test121212!@',
+    nickname: 'testName',
   });
   const { email, nickname, password, rePassword } = account;
-
-  const router = useRouter();
 
   const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const response = await post<SignUpBody, SignInResponse>(publicConfig.auth.signUp, {
-      email,
-      password,
-      nickname,
-    });
+    const response = await postSignUp({ email, password, nickname });
 
-    if (response.data.accessToken) {
-      setEmail(response.data.email);
-      setNickname(response.data.nickname);
-      setProfile(response.data.profile);
+    if (response.accessToken) {
+      setLoggedInUser({
+        email: response.email,
+        nickname: response.nickname,
+        profile: response.profile,
+        role: response.role,
+      });
       setIsLoggedIn(true);
-      localStorage.setItem('accessToken', response.data.accessToken);
+      localStorage.setItem('accessToken', response.accessToken);
       router.back();
     }
   };
@@ -47,6 +49,56 @@ export default function SignUpForm() {
       ...account,
       [event.target.name]: event.target.value,
     });
+  };
+
+  const changeVerificationCodeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setVerificationCode(event.target.value);
+  };
+
+  // 이메일 인증코드 발송
+  const sendVerifyCodeHandler = async () => {
+    const duplicateCheckResponse = await getCheckDuplicate(CheckDuplicateType.EMAIL, email);
+    if (duplicateCheckResponse.isDuplicate) {
+      // eslint-disable-next-line no-alert
+      window.alert('이미 사용중인 이메일입니다.');
+      return;
+    }
+
+    const sendEmailVerificationCodeResponse = await postSendEmailVerificationCode({ email });
+    if (sendEmailVerificationCodeResponse.verificationId) {
+      // eslint-disable-next-line no-alert
+      window.alert('인증코드가 발송되었습니다.');
+      setEmailVerificationId(sendEmailVerificationCodeResponse.verificationId);
+      setIsSendVerifyCode(true);
+    }
+  };
+
+  // 이메일 인증코드 검증
+  const verifyCodeValidateHandler = async () => {
+    const response = await postVerifyCodeValidate({ verificationId: emailVerificationId, code: verificationCode });
+
+    if (response.isVerified) {
+      // TODO: 모달로 변경
+      // eslint-disable-next-line no-alert
+      window.alert('인증성공');
+      setIsSendVerifyCode(false);
+    } else {
+      // TODO: 모달로 변경
+      // eslint-disable-next-line no-alert
+      window.alert('인증번호가 일치하지 않습니다');
+    }
+  };
+
+  // 닉네임 중복체크
+  const checkDuplicateNickname = async () => {
+    const response = await getCheckDuplicate(CheckDuplicateType.NICKNAME, nickname);
+    if (response.isDuplicate) {
+      // eslint-disable-next-line no-alert
+      window.alert('이미 사용중인 닉네임입니다.');
+    } else {
+      // eslint-disable-next-line no-alert
+      window.alert('사용가능한 닉네임입니다.');
+    }
   };
 
   return (
@@ -63,10 +115,29 @@ export default function SignUpForm() {
         <button
           type="button"
           className="mr-[10px] h-[40px] w-[15%] rounded-[10px] bg-[#26282b] text-[14px] text-[#e8ebed]"
+          onClick={sendVerifyCodeHandler}
         >
-          인증하기
+          {isSendVerifyCode ? '재발송' : '인증하기'}
         </button>
       </div>
+      {isSendVerifyCode && (
+        <div className="border-grey-300 flex h-[60px] w-[50%] items-center rounded-[10px] border pl-[15px] text-[16px]">
+          <input
+            type="text"
+            placeholder="인증코드"
+            onChange={changeVerificationCodeHandler}
+            className="w-[85%] outline-none"
+            value={verificationCode}
+          />
+          <button
+            type="button"
+            className="mr-[10px] h-[40px] w-[15%] rounded-[10px] bg-[#26282b] text-[14px] text-[#e8ebed]"
+            onClick={verifyCodeValidateHandler}
+          >
+            확인하기
+          </button>
+        </div>
+      )}
       <div className="border-grey-300 flex h-[60px] w-[50%] items-center rounded-[10px] border pl-[15px] text-[16px]">
         <input
           type="password"
@@ -99,6 +170,7 @@ export default function SignUpForm() {
         <button
           type="button"
           className="mr-[10px] h-[40px] w-[15%] rounded-[10px] bg-[#26282b] text-[14px] text-[#e8ebed]"
+          onClick={checkDuplicateNickname}
         >
           중복확인
         </button>

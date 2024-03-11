@@ -4,44 +4,37 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
 
-import { post } from '../../../api/api';
-import { SignInBody } from '../../../api/@types/request/auth/auth.interface';
-import publicConfig from '../../../config/public/public.config';
 import useUser from '../../../store/use-user';
-import { SignInResponse } from '../../../api/@types/response/auth/auth.interface';
+import { postSignIn } from '../../../services/auth';
 
 export default function SignInForm() {
-  const { setEmail, setNickname, setProfile, setRole, setIsLoggedIn } = useUser((state) => state);
+  const { setIsLoggedIn, setLoggedInUser } = useUser((state) => state);
 
   // TOOD: 기본값 제거
   const [account, setAccount] = useState({
     email: 'imkdw@kakao.com',
     password: 'Test121212!@',
   });
+
   const { email, password } = account;
   const router = useRouter();
 
   const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // TODO: 유효성검증 추가
+    const response = await postSignIn({ email, password });
 
-    const response = await post<SignInBody, SignInResponse>(publicConfig.auth.signIn, {
-      email,
-      password,
+    setIsLoggedIn(true);
+    setLoggedInUser({
+      email: response.email,
+      nickname: response.nickname,
+      profile: response.profile,
+      role: response.role,
     });
 
-    if (response.data.accessToken) {
-      setEmail(response.data.email);
-      setNickname(response.data.nickname);
-      setProfile(response.data.profile);
-      setRole(response.data.role);
-      setIsLoggedIn(true);
-      localStorage.setItem('accessToken', response.data.accessToken);
-      router.back();
-    }
+    localStorage.setItem('accessToken', response.accessToken);
+    router.back();
   };
-
   const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setAccount({

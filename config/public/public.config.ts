@@ -1,8 +1,4 @@
-const publicConfig = {
-  auth: {
-    signIn: '/v1/auth/common/sign-in',
-    signUp: '/v1/auth/common/sign-up',
-  },
+const PUBLIC_CONFIG = {
   oauth: {
     google: {
       clientId: process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID,
@@ -18,9 +14,6 @@ const publicConfig = {
     client: process.env.NEXT_PUBLIC_CLIENT_URL,
     server: process.env.NEXT_PUBLIC_SERVER_URL,
   },
-  article: {
-    create: '/v1/articles',
-  },
 };
 
-export default publicConfig;
+export default PUBLIC_CONFIG;

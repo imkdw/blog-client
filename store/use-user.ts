@@ -1,30 +1,29 @@
 import { create } from 'zustand';
-import { IUserRole, UserRole } from '../api/@types/auth/enums/oauth-provider.enum';
+import { IUserRoles, UserRoles } from '../types/enum/user';
 
-interface UserStore {
-  isLoggedIn: boolean;
+interface LoggedInUser {
   email: string;
   nickname: string;
   profile: string;
-  role: IUserRole;
+  role: IUserRoles;
+}
+interface UserStore {
+  isLoggedIn: boolean;
+  loggedInUser: LoggedInUser;
   setIsLoggedIn: (isLoggedIn: boolean) => void;
-  setEmail: (email: string) => void;
-  setNickname: (nickname: string) => void;
-  setProfile: (profile: string) => void;
-  setRole: (role: IUserRole) => void;
+  setLoggedInUser: (loggedInUser: LoggedInUser) => void;
 }
 
 const useUser = create<UserStore>((set) => ({
   isLoggedIn: false,
-  email: '',
-  nickname: '',
-  profile: '',
-  role: UserRole.COMMON,
+  loggedInUser: {
+    email: '',
+    nickname: '',
+    profile: '',
+    role: UserRoles.NORMAL,
+  },
   setIsLoggedIn: (isLoggedIn) => set({ isLoggedIn }),
-  setEmail: (email) => set({ email }),
-  setNickname: (nickname) => set({ nickname }),
-  setProfile: (profile) => set({ profile }),
-  setRole: (role) => set({ role }),
+  setLoggedInUser: (loggedInUser) => set({ loggedInUser }),
 }));
 
 export default useUser;

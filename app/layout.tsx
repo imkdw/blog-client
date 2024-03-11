@@ -11,7 +11,22 @@ const notoSansKr = Noto_Sans_KR({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'IMKDW Dev - Tech Blog',
-  description: '오픈소스로 운영되는 IMKDW의 기술블로그입니다. 다양한 기술과 경험을 공유합니다',
+  description: '오픈소스로 운영되는 IMKDW의 기술블로그입니다',
+  openGraph: {
+    title: 'IMKDW Dev - Tech Blog',
+    description: '오픈소스로 운영되는 IMKDW의 기술블로그입니다',
+    url: 'https://imkdw.dev',
+    siteName: 'IMKDW_DEV',
+    images: [
+      {
+        url: 'http://localhost:3000/api/og?title=Next.js', // Dynamic og route
+        width: 800,
+        height: 600,
+      },
+    ],
+    locale: 'ko_KR',
+    type: 'website',
+  },
 };
 
 interface Props {
