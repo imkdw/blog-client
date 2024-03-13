@@ -2,6 +2,7 @@
 
 import {
   GetGoogleOAuthResponse,
+  OAuthResponse,
   PostGithubOAuthBody,
   PostGithubOAuthResponse,
   PostKakaoOAuthBody,
@@ -50,17 +51,35 @@ export const postVerifyCodeValidate = async (
   return callApi<PostVerifyEmailVerificationCodeResponse>(url, HttpMethod.POST, body);
 };
 
-// // oauth 로그인
-// export const postOAuthSignIn = async (body: PostOAuthSignInBody): Promise<PostOAuthSignInResponse> => {};
+// oauth 로그인
+export const postOAuthSignIn = async (body: PostOAuthSignInBody): Promise<PostOAuthSignInResponse> => {
+  const url = '/v1/auth/oauth/signin';
+  return callApi<PostOAuthSignInResponse>(url, HttpMethod.POST, body);
+};
 
-// // oauth 회원가입
-// export const postOAuthSignUp = async (body: PostOAuthSignUpBody): Promise<PostOAuthSignUpResponse> => {};
+// oauth 회원가입
+export const postOAuthSignUp = async (body: PostOAuthSignUpBody): Promise<PostOAuthSignUpResponse> => {
+  const url = '/v1/auth/oauth/signup';
+  return callApi<PostOAuthSignUpResponse>(url, HttpMethod.POST, body);
+};
 
-// // 구글
-// export const getGoogleOAuth = async (accessToken: string): Promise<GetGoogleOAuthResponse> => {};
+export const getGoogleOAuth = async (accessToken: string): Promise<OAuthResponse> => {
+  const url = '/v1/auth/oauth/google';
+  return callApi<GetGoogleOAuthResponse>(url, HttpMethod.GET, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
 
-// // 카카오
-// export const postKakaoOAuth = async (body: PostKakaoOAuthBody): Promise<PostKakaoOAuthResponse> => {};
+// 카카오 OAuth
+export const postKakaoOAuth = async (body: PostKakaoOAuthBody): Promise<PostKakaoOAuthResponse> => {
+  const url = '/v1/auth/oauth/kakao';
+  return callApi<PostKakaoOAuthResponse>(url, HttpMethod.POST, body);
+};
 
-// // 깃허브
-// export const postGithubOAuth = async (body: PostGithubOAuthBody): Promise<PostGithubOAuthResponse> => {};
+// 깃허브 OAuth
+export const postGithubOAuth = async (body: PostGithubOAuthBody): Promise<PostGithubOAuthResponse> => {
+  const url = '/v1/auth/oauth/github';
+  return callApi<PostGithubOAuthResponse>(url, HttpMethod.POST, body);
+};

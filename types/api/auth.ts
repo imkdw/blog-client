@@ -1,3 +1,4 @@
+import { IOAuthProviders } from '../enum/auth';
 import { IUserRoles } from '../enum/user';
 
 export interface PostSignInBody {
@@ -41,16 +42,65 @@ export interface PostVerifyEmailVerificationCodeResponse {
   isVerified: boolean;
 }
 
-export interface PostOAuthSignInBody {}
-export interface PostOAuthSignInResponse {}
+export interface PostOAuthSignInBody {
+  email: string;
+  provider: IOAuthProviders;
+  token: string;
+}
+export interface PostOAuthSignInResponse {
+  email: string;
+  nickname: string;
+  profile: string;
+  role: IUserRoles;
+  accessToken: string;
+}
 
-export interface PostOAuthSignUpBody {}
-export interface PostOAuthSignUpResponse {}
+export interface PostOAuthSignUpBody {
+  email: string;
+  provider: IOAuthProviders;
+  token: string;
+}
+export interface PostOAuthSignUpResponse {
+  email: string;
+  nickname: string;
+  profile: string;
+  role: IUserRoles;
+  accessToken: string;
+}
 
-export interface GetGoogleOAuthResponse {}
+export interface PostKakaoOAuthBody {
+  code: string;
+  redirectUri: string;
+}
+export interface PostKakaoOAuthResponse {
+  isExist: boolean;
+  email: string;
+  provider: IOAuthProviders;
+  token: string;
+}
 
-export interface PostKakaoOAuthBody {}
-export interface PostKakaoOAuthResponse {}
+export interface PostGithubOAuthBody {
+  code: string;
+  redirectUri: string;
+}
 
-export interface PostGithubOAuthBody {}
-export interface PostGithubOAuthResponse {}
+export interface PostGithubOAuthResponse {
+  isExist: boolean;
+  email: string;
+  provider: IOAuthProviders;
+  token: string;
+}
+
+export interface GetGoogleOAuthResponse {
+  isExist: boolean;
+  email: string;
+  provider: IOAuthProviders;
+  token: string;
+}
+
+export interface OAuthResponse {
+  isExist: boolean;
+  email: string;
+  provider: IOAuthProviders;
+  token: string;
+}

@@ -1,58 +1,63 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 'use client';
 
 import { useCallback, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
-import { OAuthSignUpRequestBody, OAuthSignUpResponseBody } from '../../@types/sign-up.interface';
-import { OAuthSignInRequestBody, OAuthSignInResponseBody } from '../../@types/sign-in.interface';
-import { KakaoOAuthRequestBody } from '../../@types/kakao.interface';
-import publicConfig from '../../../../config/public/public.config';
+import { postKakaoOAuth, postOAuthSignIn, postOAuthSignUp } from '../../../../services/auth';
+import PUBLIC_CONFIG from '../../../../config/public/public.config';
+import { OAuthProviders } from '../../../../types/enum/auth';
+import { PostOAuthSignInResponse } from '../../../../types/api/auth';
+import useUser from '../../../../store/use-user';
 
 export default function KakaoOAuthPage() {
-  // const searchParams = useSearchParams();
-  // const code = searchParams.get('code');
+  const searchParams = useSearchParams();
+  const code = searchParams.get('code');
 
-  // const fetchOAuth = useCallback(async (token: string) => {
-  //   const response = await post<KakaoOAuthRequestBody, OAuthResponse>('/v1/auth/oauth/kakao', {
-  //     code: token,
-  //     redirectUri: `${publicConfig.url.client}/auth/oauth/kakao`,
-  //   });
+  const { setLoggedInUser, setIsLoggedIn } = useUser((state) => state);
+  const router = useRouter();
 
-  //   if (!response) {
-  //     return;
-  //   }
+  const updateUserAndLogin = useCallback(
+    (response: PostOAuthSignInResponse | PostOAuthSignInResponse) => {
+      setLoggedInUser({
+        email: response.email,
+        nickname: response.nickname,
+        profile: response.profile,
+        role: response.role,
+      });
+      setIsLoggedIn(true);
+      router.push('/');
+    },
+    [router, setIsLoggedIn, setLoggedInUser],
+  );
 
-  //   // 이미 가입된 유저는 로그인처리
-  //   if (response.isExist) {
-  //     const signInResponse = await post<OAuthSignInRequestBody, OAuthSignInResponseBody>('/v1/auth/oauth/sign-in', {
-  //       email: response.email,
-  //       provider: OAuthProvider.KAKAO,
-  //       token: response.token,
-  //     });
-  //     // eslint-disable-next-line no-console
-  //     console.log(signInResponse);
-  //   } else {
-  //     const signUpResponse = await post<OAuthSignUpRequestBody, OAuthSignUpResponseBody>('/v1/auth/oauth/sign-up', {
-  //       email: response.email,
-  //       provider: OAuthProvider.KAKAO,
-  //       token: response.token,
-  //     });
-  //     // eslint-disable-next-line no-console
-  //     console.log(signUpResponse);
-  //   }
-  // }, []);
+  useEffect(() => {
+    const verifyToken = async (token: string) => {
+      const githubVerifyResponse = await postKakaoOAuth({
+        code: token,
+        redirectUri: PUBLIC_CONFIG.oauth.kakao.redirectUri,
+      });
 
-  // useEffect(() => {
-  //   /**
-  //    * 카카오 로그인 이후 code 쿼리스트링이 포함되서 리다이렉트 된다
-  //    * url : http://localhost:3000/auth/oauth/kakao?code=a0a3TLa8B4zHqE8NGVgzBClx4ODO7Kvl82sSG9R8yBzu0nD7GYgzJ07Ztr4KPXKXAAABjcnRbqVPBWDH3LuH7A
-  //    */
-  //   if (code) {
-  //     fetchOAuth(code);
-  //   }
-  // }, [fetchOAuth, code]);
+      if (githubVerifyResponse.isExist) {
+        const oAuthSigninResponse = await postOAuthSignIn({
+          email: githubVerifyResponse.email,
+          provider: OAuthProviders.KAKAO,
+          token: githubVerifyResponse.token,
+        });
+        updateUserAndLogin(oAuthSigninResponse);
+      } else {
+        const oAuthSignupResponse = await postOAuthSignUp({
+          email: githubVerifyResponse.email,
+          provider: OAuthProviders.KAKAO,
+          token: githubVerifyResponse.token,
+        });
+        updateUserAndLogin(oAuthSignupResponse);
+      }
+    };
 
-  return <div>Kakao</div>;
+    if (code) {
+      verifyToken(code);
+    }
+  }, [setIsLoggedIn, updateUserAndLogin, code]);
+
+  return null;
 }
