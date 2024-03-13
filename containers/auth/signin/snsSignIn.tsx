@@ -2,14 +2,15 @@
 
 import { GitHub } from '@mui/icons-material';
 import Image from 'next/image';
-import publicConfig from '../../../config/public/public.config';
+
+import PUBLIC_CONFIG from '../../../config/public/public.config';
 
 export default function SnsSignIn() {
-  const CLIENT_URL = publicConfig.url.client;
+  const CLIENT_URL = PUBLIC_CONFIG.url.client;
 
   const googleHandler = () => {
     const oAuthEndpoint = 'https://accounts.google.com/o/oauth2/auth';
-    const { clientId } = publicConfig.oauth.google;
+    const { clientId } = PUBLIC_CONFIG.oauth.google;
     const redirectUrl = `${CLIENT_URL}/auth/oauth/google`;
     const responseType = 'token';
     const scope = 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile';
@@ -19,7 +20,7 @@ export default function SnsSignIn() {
 
   const kakaoHandler = () => {
     const oAuthEndpoint = 'https://kauth.kakao.com/oauth/authorize';
-    const { clientId } = publicConfig.oauth.kakao;
+    const { clientId } = PUBLIC_CONFIG.oauth.kakao;
     const redirectUrl = `${CLIENT_URL}/auth/oauth/kakao`;
     const parameter = `?client_id=${clientId}&redirect_uri=${redirectUrl}&response_type=code`;
 
@@ -28,7 +29,7 @@ export default function SnsSignIn() {
 
   const githubHandler = () => {
     const oAuthEndpoint = 'https://github.com/login/oauth/authorize';
-    const { clientId } = publicConfig.oauth.github;
+    const { clientId } = PUBLIC_CONFIG.oauth.github;
     const redirectUrl = `${CLIENT_URL}/auth/oauth/github`;
     const parameter = `?client_id=${clientId}&redirect_uri=${redirectUrl}&scope=user`;
 
