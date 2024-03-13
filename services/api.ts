@@ -1,9 +1,8 @@
 import axios from 'axios';
-import PUBLIC_CONFIG from '../config/public/public.config';
 import { IHttpMethod } from '../types/api/common';
 
 const api = axios.create({
-  baseURL: PUBLIC_CONFIG.url.server,
+  baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
 });
 
 export const callApi = async <T>(url: string, method: IHttpMethod, body?: any): Promise<T> => {
