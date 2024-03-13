@@ -10,28 +10,28 @@ export default function SnsSignIn() {
 
   const googleHandler = () => {
     const oAuthEndpoint = 'https://accounts.google.com/o/oauth2/auth';
-    const { clientId } = PUBLIC_CONFIG.oauth.google.clientId;
+    const googleClientId = PUBLIC_CONFIG.oauth.google.clientId;
     const redirectUrl = `${CLIENT_URL}/auth/oauth/google`;
     const responseType = 'token';
     const scope = 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile';
 
-    window.location.href = `${oAuthEndpoint}?client_id=${clientId}&redirect_uri=${redirectUrl}&response_type=${responseType}&scope=${scope}`;
+    window.location.href = `${oAuthEndpoint}?client_id=${googleClientId}&redirect_uri=${redirectUrl}&response_type=${responseType}&scope=${scope}`;
   };
 
   const kakaoHandler = () => {
     const oAuthEndpoint = 'https://kauth.kakao.com/oauth/authorize';
-    const { clientId } = PUBLIC_CONFIG.oauth.kakao.clientId;
+    const kakaoClientId = PUBLIC_CONFIG.oauth.kakao.clientId;
     const redirectUrl = `${CLIENT_URL}/auth/oauth/kakao`;
-    const parameter = `?client_id=${clientId}&redirect_uri=${redirectUrl}&response_type=code`;
+    const parameter = `?client_id=${kakaoClientId}&redirect_uri=${redirectUrl}&response_type=code`;
 
     window.location.href = oAuthEndpoint + parameter;
   };
 
   const githubHandler = () => {
     const oAuthEndpoint = 'https://github.com/login/oauth/authorize';
-    const { clientId } = PUBLIC_CONFIG.oauth.github.clientId;
+    const githubClientId = PUBLIC_CONFIG.oauth.github.clientId;
     const redirectUrl = `${CLIENT_URL}/auth/oauth/github`;
-    const parameter = `?client_id=${clientId}&redirect_uri=${redirectUrl}&scope=user`;
+    const parameter = `?client_id=${githubClientId}&redirect_uri=${redirectUrl}&scope=user`;
 
     window.location.href = oAuthEndpoint + parameter;
   };
