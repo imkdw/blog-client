@@ -10,6 +10,7 @@ const notoSans = Noto_Sans({ subsets: ['latin'] });
 const notoSansKr = Noto_Sans_KR({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://imkdw.dev'),
   title: 'IMKDW Dev - Tech Blog',
   description: '오픈소스로 운영되는 IMKDW의 기술블로그입니다',
   openGraph: {
