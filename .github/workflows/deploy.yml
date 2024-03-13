@@ -55,9 +55,7 @@ jobs:
           --build-arg NEXT_PUBLIC_KAKAO_OAUTH_REDIRECT_URI=${{ secrets.NEXT_PUBLIC_KAKAO_OAUTH_REDIRECT_URI }} \
           --build-arg NEXT_PUBLIC_GOOGLE_OAUTH_REDIRECT_URI=${{ secrets.NEXT_PUBLIC_GOOGLE_OAUTH_REDIRECT_URI }} \
           --build-arg NEXT_PUBLIC_GITHUB_OAUTH_REDIRECT_URI=${{ secrets.NEXT_PUBLIC_GITHUB_OAUTH_REDIRECT_URI }} \
-
           . -t ${{ secrets.AWS_ECR_URI }}:latest
-
           docker push ${{ secrets.AWS_ECR_URI }}:latest
 
       - name: Github Actions IP 확인
