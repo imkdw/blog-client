@@ -4,7 +4,6 @@ import { useCallback, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import { postKakaoOAuth, postOAuthSignIn, postOAuthSignUp } from '../../../../services/auth';
-import PUBLIC_CONFIG from '../../../../config/public/public.config';
 import { OAuthProviders } from '../../../../types/enum/auth';
 import { PostOAuthSignInResponse } from '../../../../types/api/auth';
 import useUser from '../../../../store/use-user';
@@ -34,7 +33,7 @@ export default function KakaoOAuthPage() {
     const verifyToken = async (token: string) => {
       const githubVerifyResponse = await postKakaoOAuth({
         code: token,
-        redirectUri: PUBLIC_CONFIG.oauth.kakao.redirectUri,
+        redirectUri: process.env.NEXT_PUBLIC_KAKAO_OAUTH_REDIRECT_URI ?? '',
       });
 
       if (githubVerifyResponse.isExist) {

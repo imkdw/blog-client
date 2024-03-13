@@ -6,7 +6,6 @@ import { postGithubOAuth, postOAuthSignIn, postOAuthSignUp } from '../../../../s
 import { OAuthProviders } from '../../../../types/enum/auth';
 import useUser from '../../../../store/use-user';
 import { PostOAuthSignInResponse } from '../../../../types/api/auth';
-import PUBLIC_CONFIG from '../../../../config/public/public.config';
 
 export default function GithubOAuthPage() {
   const searchParams = useSearchParams();
@@ -33,7 +32,7 @@ export default function GithubOAuthPage() {
     const verifyToken = async (token: string) => {
       const githubVerifyResponse = await postGithubOAuth({
         code: token,
-        redirectUri: PUBLIC_CONFIG.oauth.github.redirectUri,
+        redirectUri: process.env.NEXT_PUBLIC_GITHUB_OAUTH_REDIRECT_URI ?? '',
       });
 
       if (githubVerifyResponse.isExist) {
