@@ -1,48 +1,62 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 'use client';
 
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useCallback, useEffect } from 'react';
+import { postGithubOAuth, postOAuthSignIn, postOAuthSignUp } from '../../../../services/auth';
+import { OAuthProviders } from '../../../../types/enum/auth';
+import useUser from '../../../../store/use-user';
+import { PostOAuthSignInResponse } from '../../../../types/api/auth';
+import PUBLIC_CONFIG from '../../../../config/public/public.config';
 
 export default function GithubOAuthPage() {
-  // const searchParams = useSearchParams();
-  // const code = searchParams.get('code');
+  const searchParams = useSearchParams();
+  const code = searchParams.get('code');
 
-  // const fetchOAuth = useCallback(async (token: string) => {
-  //   const response = await post<GithubOAuthRequestBody, OAuthResponse>('/v1/auth/oauth/github', {
-  //     code: token,
-  //     redirectUri: 'http://localhost:3000/auth/oauth/github',
-  //   });
+  const { setLoggedInUser, setIsLoggedIn } = useUser((state) => state);
+  const router = useRouter();
 
-  //   if (!response) {
-  //     return;
-  //   }
+  const updateUserAndLogin = useCallback(
+    (response: PostOAuthSignInResponse | PostOAuthSignInResponse) => {
+      setLoggedInUser({
+        email: response.email,
+        nickname: response.nickname,
+        profile: response.profile,
+        role: response.role,
+      });
+      setIsLoggedIn(true);
+      router.push('/');
+    },
+    [router, setIsLoggedIn, setLoggedInUser],
+  );
 
-  //   // 이미 가입된 유저는 로그인처리
-  //   if (response.isExist) {
-  //     const signInResponse = await post<OAuthSignInRequestBody, OAuthSignInResponseBody>('/v1/auth/oauth/sign-in', {
-  //       email: response.email,
-  //       provider: OAuthProvider.GITHUB,
-  //       token: response.token,
-  //     });
-  //     // eslint-disable-next-line no-console
-  //     console.log(signInResponse);
-  //   } else {
-  //     const signUpResponse = await post<OAuthSignUpRequestBody, OAuthSignUpResponseBody>('/v1/auth/oauth/sign-up', {
-  //       email: response.email,
-  //       provider: OAuthProvider.GITHUB,
-  //       token: response.token,
-  //     });
-  //     // eslint-disable-next-line no-console
-  //     console.log(signUpResponse);
-  //   }
-  // }, []);
+  useEffect(() => {
+    const verifyToken = async (token: string) => {
+      const githubVerifyResponse = await postGithubOAuth({
+        code: token,
+        redirectUri: PUBLIC_CONFIG.oauth.github.redirectUri,
+      });
 
-  // useEffect(() => {
-  //   if (code) {
-  //     fetchOAuth(code);
-  //   }
-  // }, [code, fetchOAuth]);
+      if (githubVerifyResponse.isExist) {
+        const oAuthSigninResponse = await postOAuthSignIn({
+          email: githubVerifyResponse.email,
+          provider: OAuthProviders.GITHUB,
+          token: githubVerifyResponse.token,
+        });
+        updateUserAndLogin(oAuthSigninResponse);
+      } else {
+        const oAuthSignupResponse = await postOAuthSignUp({
+          email: githubVerifyResponse.email,
+          provider: OAuthProviders.GITHUB,
+          token: githubVerifyResponse.token,
+        });
+        updateUserAndLogin(oAuthSignupResponse);
+      }
+    };
+
+    if (code) {
+      verifyToken(code);
+    }
+  }, [setIsLoggedIn, updateUserAndLogin, code]);
 
   return <div>Github</div>;
 }

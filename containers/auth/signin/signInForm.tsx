@@ -12,7 +12,7 @@ export default function SignInForm() {
 
   // TOOD: 기본값 제거
   const [account, setAccount] = useState({
-    email: 'imkdw@kakao.com',
+    email: 'test@test.com',
     password: 'Test121212!@',
   });
 
