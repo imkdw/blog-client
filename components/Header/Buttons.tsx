@@ -37,6 +37,7 @@ export default function HeaderButtons() {
       profile: '',
       role: UserRoles.NORMAL,
     });
+    useUser.persist.clearStorage();
     router.push('/');
   };
 

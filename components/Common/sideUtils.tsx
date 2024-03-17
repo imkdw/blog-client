@@ -1,6 +1,6 @@
 'use client';
 
-import { Edit, ExpandLess, KeyboardArrowDown, PostAdd } from '@mui/icons-material';
+import { Edit, ExpandLess, KeyboardArrowDown, PostAdd, Settings } from '@mui/icons-material';
 import Link from 'next/link';
 import { useArticle } from '../../store/use-article';
 import useUser from '../../store/use-user';
@@ -28,6 +28,13 @@ export default function SideUtils() {
 
   return (
     <div className="fixed bottom-20 right-10 flex flex-col gap-5">
+      {loggedInUser.role === UserRoles.ADMIN && (
+        <div className="flex h-[50px] w-[50px] items-center justify-center rounded-full border border-gray-300 bg-white hover:bg-gray-300">
+          <Link href="/manage" className="flex h-full w-full items-center justify-center">
+            <Settings />
+          </Link>
+        </div>
+      )}
       {loggedInUser.role === UserRoles.ADMIN && currentArticleId && (
         <div className="flex h-[50px] w-[50px] items-center justify-center rounded-full border border-gray-300 bg-white hover:bg-gray-300">
           <Link href={`/articles/${currentArticleId}/edit`} className="flex h-full w-full items-center justify-center">
