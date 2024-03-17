@@ -4,6 +4,7 @@ import { KeyboardArrowDown, KeyboardArrowUp, Menu } from '@mui/icons-material';
 import clsx from 'clsx';
 import { useState, MouseEvent } from 'react';
 import AddingCategoryItem from './addingCategoryItem';
+import { deleteCategory } from '../../../services/category';
 
 interface Props {
   id: number;
@@ -34,20 +35,16 @@ export default function ManageCategoryItem({ id, name, childCategories }: Props)
     setIsSpreadCategory((prev) => !prev);
   };
 
-  const handleParentMouseEnter = () => {
-    setIsParentHover(true);
-  };
+  const handleParentMouseEnter = () => setIsParentHover(true);
 
-  const handleParentMouseLeave = () => {
-    setIsParentHover(false);
-  };
+  const handleParentMouseLeave = () => setIsParentHover(false);
 
-  // const submitHandler = (event: FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  // };
+  const onAddingChildCategoryHandler = () => setIsAddingChildCategory((prev) => !prev);
 
-  const onAddingChildCategoryHandler = () => {
-    setIsAddingChildCategory((prev) => !prev);
+  const deleteHandler = async (categoryId: number) => {
+    await deleteCategory(categoryId);
+    // TODO: 갱신 방법 변경
+    window.location.reload();
   };
 
   return (
@@ -83,7 +80,11 @@ export default function ManageCategoryItem({ id, name, childCategories }: Props)
             <button type="button" className="border border-gray-300 p-1 pl-4 pr-4 text-[16px] hover:bg-gray-200">
               수정
             </button>
-            <button type="submit" className="border border-gray-300 p-1 pl-4 pr-4 text-[16px] hover:bg-gray-200">
+            <button
+              type="submit"
+              className="border border-gray-300 p-1 pl-4 pr-4 text-[16px] hover:bg-gray-200"
+              onClick={() => deleteHandler(id)}
+            >
               삭제
             </button>
           </div>
@@ -91,26 +92,30 @@ export default function ManageCategoryItem({ id, name, childCategories }: Props)
       </div>
 
       {/* 카테고리 오픈 상태일때 자식 카테고리 렌더링 */}
-      {isSpreadCategory && childCategories?.length && (
+      {isSpreadCategory && (
         <ul className="w-[90%]">
-          {childCategories.map((category) => (
+          {childCategories?.map((childCategory) => (
             <li
               className="flex h-[60px] flex-row items-center border-b border-l border-gray-200 last:border-b-0"
-              key={category.id}
-              onMouseEnter={() => childHoverHandler(category.id)}
-              onMouseLeave={() => childHoverHandler(category.id)}
+              key={childCategory.id}
+              onMouseEnter={() => childHoverHandler(childCategory.id)}
+              onMouseLeave={() => childHoverHandler(childCategory.id)}
             >
               <div className="flex h-full w-[80px] cursor-grab items-center justify-center active:cursor-grabbing">
                 <Menu className="text-gray-300" />
               </div>
-              <p className="flex flex-1 items-center">{category.name}</p>
+              <p className="flex flex-1 items-center">{childCategory.name}</p>
 
-              {childHoverStates[category.id] && (
+              {childHoverStates[childCategory.id] && (
                 <div className="flex flex-1 flex-row justify-end gap-2 pr-3">
                   <button type="button" className="border border-gray-300 p-1 pl-4 pr-4 text-[16px] hover:bg-gray-200">
                     수정
                   </button>
-                  <button type="submit" className="border border-gray-300 p-1 pl-4 pr-4 text-[16px] hover:bg-gray-200">
+                  <button
+                    type="submit"
+                    className="border border-gray-300 p-1 pl-4 pr-4 text-[16px] hover:bg-gray-200"
+                    onClick={() => deleteHandler(childCategory.id)}
+                  >
                     삭제
                   </button>
                 </div>
@@ -119,7 +124,7 @@ export default function ManageCategoryItem({ id, name, childCategories }: Props)
           ))}
           {isAddingChildCategory && (
             <li>
-              <AddingCategoryItem type="child" onClick={onAddingChildCategoryHandler} />
+              <AddingCategoryItem type="child" cancelAddingCategory={onAddingChildCategoryHandler} parentId={id} />
             </li>
           )}
         </ul>

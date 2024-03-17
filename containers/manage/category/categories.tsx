@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import ManageCategoryItem from './categoryItem';
 import ManageCategoryAddButton from './categoryAddButton';
@@ -12,9 +12,9 @@ export default function ManangeCategories() {
   const [categories, setCategories] = useState<ICategory[]>([]);
   const [isAddingCategory, setIsAddingCategory] = useState(false);
 
-  const changeIsAddingHanlder = () => {
+  const changeIsAddingHanlder = useCallback(() => {
     setIsAddingCategory((prev) => !prev);
-  };
+  }, []);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -29,10 +29,15 @@ export default function ManangeCategories() {
     <>
       <ul className="border border-gray-300">
         {categories.map((category) => (
-          <ManageCategoryItem id={category.id} name={category.name} childCategories={category.children} />
+          <ManageCategoryItem
+            key={category.id}
+            id={category.id}
+            name={category.name}
+            childCategories={category.children}
+          />
         ))}
       </ul>
-      {isAddingCategory && <AddingCategoryItem onClick={changeIsAddingHanlder} type="parent" />}
+      {isAddingCategory && <AddingCategoryItem type="parent" cancelAddingCategory={changeIsAddingHanlder} />}
       <ManageCategoryAddButton onClick={changeIsAddingHanlder} />
     </>
   );
