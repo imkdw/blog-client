@@ -7,7 +7,7 @@ export type ICheckDuplicateType = (typeof CheckDuplicateType)[keyof typeof Check
 
 // 유저 권한 목록
 export const UserRoles = {
-  NORMAL: 'NORMAL',
-  ADMIN: 'ADMIN',
+  NORMAL: 'normal',
+  ADMIN: 'admin',
 } as const;
 export type IUserRoles = (typeof UserRoles)[keyof typeof UserRoles];

@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 import { IUserRoles, UserRoles } from '../types/enum/user';
 
 interface LoggedInUser {
@@ -14,16 +15,23 @@ interface UserStore {
   setLoggedInUser: (loggedInUser: LoggedInUser) => void;
 }
 
-const useUser = create<UserStore>((set) => ({
-  isLoggedIn: false,
-  loggedInUser: {
-    email: '',
-    nickname: '',
-    profile: '',
-    role: UserRoles.NORMAL,
-  },
-  setIsLoggedIn: (isLoggedIn) => set({ isLoggedIn }),
-  setLoggedInUser: (loggedInUser) => set({ loggedInUser }),
-}));
+const useUser = create(
+  persist<UserStore>(
+    (set) => ({
+      isLoggedIn: false,
+      loggedInUser: {
+        email: '',
+        nickname: '',
+        profile: '',
+        role: UserRoles.NORMAL,
+      },
+      setIsLoggedIn: (isLoggedIn) => set({ isLoggedIn }),
+      setLoggedInUser: (loggedInUser) => set({ loggedInUser }),
+    }),
+    {
+      name: 'userStorage',
+    },
+  ),
+);
 
 export default useUser;
