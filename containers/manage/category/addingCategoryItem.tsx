@@ -30,7 +30,7 @@ export default function AddingCategoryItem({ cancelAddingCategory, type, parentI
   return (
     <form
       className={clsx(
-        'flex h-[60px] w-full flex-row items-center gap-1 border border-t-0 border-gray-200',
+        'flex h-[60px] w-full flex-row items-center gap-1 border border-t-0 border-gray-300',
         type === 'child' && 'border-b-0 border-r-0',
       )}
       onSubmit={submitHandler}

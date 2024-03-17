@@ -54,21 +54,15 @@ export default function LastArticles() {
         >
           {/* 사진 텍스트 */}
           <div className="flex h-full flex-col justify-end gap-[20px] pb-[20px] pl-[20px]">
-            <h2 className="text-shadow text-[40px] font-bold text-[#e4e9f2]">
-              타입스크립트에서 SOLID 원칙에 의거한 OOP 설계하기
-            </h2>
+            <h2 className="text-shadow text-[40px] font-bold text-[#e4e9f2]">테스트 게시글 입니다</h2>
             <div>
-              <p className="text-shadow font-bold text-[#e4e9f2]">
-                타입스크립트에서 SOLID 원칙에 의거한 객체지향 설계에 대한 글 입니다.
-              </p>
+              <p className="text-shadow font-bold text-[#e4e9f2]">테스트 게시글 입니다</p>
               <div className="flex flex-row justify-between">
-                <p className="text-shadow font-bold text-[#e4e9f2]">
-                  반복하지 않고 클린한 코드를 만드는 방법에 대해 소개합니다.
-                </p>
+                <p className="text-shadow font-bold text-[#e4e9f2]">테스트 게시글 입니다</p>
                 <p className="text-shadow mr-[20px] flex items-center justify-center text-[18px] font-bold text-[#e4e9f2]">
-                  프로그래밍
+                  테스트
                   <NavigateNext />
-                  타입스크립트
+                  게시글
                 </p>
               </div>
             </div>

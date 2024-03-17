@@ -96,7 +96,7 @@ export default function ManageCategoryItem({ id, name, childCategories }: Props)
         <ul className="w-[90%]">
           {childCategories?.map((childCategory) => (
             <li
-              className="flex h-[60px] flex-row items-center border-b border-l border-gray-200 last:border-b-0"
+              className="flex h-[60px] flex-row items-center border-b border-l border-gray-300 last:border-b-0"
               key={childCategory.id}
               onMouseEnter={() => childHoverHandler(childCategory.id)}
               onMouseLeave={() => childHoverHandler(childCategory.id)}
