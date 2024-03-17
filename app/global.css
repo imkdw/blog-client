@@ -23,6 +23,10 @@ input {
   outline: none;
 }
 
+button {
+  outline: none;
+}
+
 /* 메인페이지 최근게시글 텍스트 쉐도우 */
 .text-shadow {
   color: white;

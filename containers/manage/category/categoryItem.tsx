@@ -5,21 +5,27 @@ import clsx from 'clsx';
 import { useState, MouseEvent } from 'react';
 import AddingCategoryItem from './addingCategoryItem';
 import { deleteCategory } from '../../../services/category';
+import CategoryChangeForm from './categoryChangeForm';
 
 interface Props {
   id: number;
   name: string;
+  param: string;
   childCategories?: {
     id: number;
     name: string;
+    param: string;
   }[];
 }
 
-export default function ManageCategoryItem({ id, name, childCategories }: Props) {
+export default function ManageCategoryItem({ id, name, param, childCategories }: Props) {
   const [isSpreadCategory, setIsSpreadCategory] = useState(false);
 
   const [isParentHover, setIsParentHover] = useState(false);
   const [childHoverStates, setChildHoverStates] = useState<{ [key: number]: boolean }>({});
+
+  const [isEditParent, setIsEditParent] = useState(false);
+  const [childEditStates, setChildEditStates] = useState<{ [key: number]: boolean }>({});
 
   const [isAddingChildCategory, setIsAddingChildCategory] = useState(false);
 
@@ -36,10 +42,17 @@ export default function ManageCategoryItem({ id, name, childCategories }: Props)
   };
 
   const handleParentMouseEnter = () => setIsParentHover(true);
-
   const handleParentMouseLeave = () => setIsParentHover(false);
-
   const onAddingChildCategoryHandler = () => setIsAddingChildCategory((prev) => !prev);
+
+  const editParentHandler = () => setIsEditParent((prev) => !prev);
+
+  const editChildHandler = (childId: number) => {
+    setChildEditStates((prev) => ({
+      ...prev,
+      [childId]: !prev[childId],
+    }));
+  };
 
   const deleteHandler = async (categoryId: number) => {
     await deleteCategory(categoryId);
@@ -65,30 +78,42 @@ export default function ManageCategoryItem({ id, name, childCategories }: Props)
         <div className="flex h-full w-[80px] cursor-grab items-center justify-center active:cursor-grabbing">
           <Menu className="text-gray-300" />
         </div>
-        <p className="flex flex-1 items-center">{name}</p>
+        {isEditParent ? (
+          <CategoryChangeForm id={id} name={name} param={param} cancelEdit={editParentHandler} />
+        ) : (
+          <>
+            <p className="flex flex-1 items-center">
+              {name} ({param})
+            </p>
+            {isParentHover && (
+              <div className="flex flex-1 flex-row justify-end gap-2 pr-3">
+                <button
+                  type="submit"
+                  className="border border-gray-300 p-1 pl-4 pr-4 text-[16px] hover:bg-gray-200"
+                  onClick={onAddingChildCategoryHandler}
+                >
+                  추가
+                </button>
+                <button
+                  type="button"
+                  className="border border-gray-300 p-1 pl-4 pr-4 text-[16px] hover:bg-gray-200"
+                  onClick={editParentHandler}
+                >
+                  수정
+                </button>
+                <button
+                  type="submit"
+                  className="border border-gray-300 p-1 pl-4 pr-4 text-[16px] hover:bg-gray-200"
+                  onClick={() => deleteHandler(id)}
+                >
+                  삭제
+                </button>
+              </div>
+            )}
+          </>
+        )}
 
         {/* 카테고리 엘리먼트에 마우스를 올릴때 버튼 UI 렌더링 */}
-        {isParentHover && (
-          <div className="flex flex-1 flex-row justify-end gap-2 pr-3">
-            <button
-              type="submit"
-              className="border border-gray-300 p-1 pl-4 pr-4 text-[16px] hover:bg-gray-200"
-              onClick={onAddingChildCategoryHandler}
-            >
-              추가
-            </button>
-            <button type="button" className="border border-gray-300 p-1 pl-4 pr-4 text-[16px] hover:bg-gray-200">
-              수정
-            </button>
-            <button
-              type="submit"
-              className="border border-gray-300 p-1 pl-4 pr-4 text-[16px] hover:bg-gray-200"
-              onClick={() => deleteHandler(id)}
-            >
-              삭제
-            </button>
-          </div>
-        )}
       </div>
 
       {/* 카테고리 오픈 상태일때 자식 카테고리 렌더링 */}
@@ -104,21 +129,38 @@ export default function ManageCategoryItem({ id, name, childCategories }: Props)
               <div className="flex h-full w-[80px] cursor-grab items-center justify-center active:cursor-grabbing">
                 <Menu className="text-gray-300" />
               </div>
-              <p className="flex flex-1 items-center">{childCategory.name}</p>
 
-              {childHoverStates[childCategory.id] && (
-                <div className="flex flex-1 flex-row justify-end gap-2 pr-3">
-                  <button type="button" className="border border-gray-300 p-1 pl-4 pr-4 text-[16px] hover:bg-gray-200">
-                    수정
-                  </button>
-                  <button
-                    type="submit"
-                    className="border border-gray-300 p-1 pl-4 pr-4 text-[16px] hover:bg-gray-200"
-                    onClick={() => deleteHandler(childCategory.id)}
-                  >
-                    삭제
-                  </button>
-                </div>
+              {childEditStates[childCategory.id] ? (
+                <CategoryChangeForm
+                  id={childCategory.id}
+                  name={childCategory.name}
+                  param={childCategory.param}
+                  cancelEdit={() => editChildHandler(childCategory.id)}
+                />
+              ) : (
+                <>
+                  <p className="flex flex-1 items-center">
+                    {childCategory.name} ({childCategory.param})
+                  </p>
+                  {childHoverStates[childCategory.id] && (
+                    <div className="flex flex-1 flex-row justify-end gap-2 pr-3">
+                      <button
+                        type="button"
+                        className="border border-gray-300 p-1 pl-4 pr-4 text-[16px] hover:bg-gray-200"
+                        onClick={() => editChildHandler(childCategory.id)}
+                      >
+                        수정
+                      </button>
+                      <button
+                        type="submit"
+                        className="border border-gray-300 p-1 pl-4 pr-4 text-[16px] hover:bg-gray-200"
+                        onClick={() => deleteHandler(childCategory.id)}
+                      >
+                        삭제
+                      </button>
+                    </div>
+                  )}
+                </>
               )}
             </li>
           ))}

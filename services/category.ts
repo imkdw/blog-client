@@ -1,4 +1,9 @@
-import { GetCategoriesResponse, PostCreateCategoryBody, PostCreateCategoryResponse } from '../types/api/category';
+import {
+  GetCategoriesResponse,
+  PatchUpdateCategoryBody,
+  PostCreateCategoryBody,
+  PostCreateCategoryResponse,
+} from '../types/api/category';
 import { HttpMethod } from '../types/api/common';
 import { callApi } from './api';
 
@@ -18,4 +23,10 @@ export const postCreateCategory = async (body: PostCreateCategoryBody): Promise<
 export const deleteCategory = async (categoryId: number): Promise<void> => {
   const url = `/v1/categories/${categoryId}`;
   return callApi<void>(url, HttpMethod.DELETE);
+};
+
+// 카테고리 수정
+export const patchUpdateCategory = async (categoryId: number, body: PatchUpdateCategoryBody): Promise<void> => {
+  const url = `/v1/categories/${categoryId}`;
+  return callApi<void>(url, HttpMethod.PATCH, body);
 };

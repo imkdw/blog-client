@@ -33,6 +33,7 @@ export default function ManangeCategories() {
             key={category.id}
             id={category.id}
             name={category.name}
+            param={category.param}
             childCategories={category.children}
           />
         ))}

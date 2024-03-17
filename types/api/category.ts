@@ -1,16 +1,19 @@
 import { ICategory } from '../category';
 
-export interface GetCategoriesResponse {
-  categories: ICategory[];
-}
-
-export interface PostCreateCategoryBody {
-  name: string;
-  param: string;
-  parentId?: number;
-}
-export interface PostCreateCategoryResponse {
+interface BaseCategory {
   id: number;
   name: string;
   param: string;
 }
+
+export interface GetCategoriesResponse {
+  categories: ICategory[];
+}
+
+export interface PostCreateCategoryBody extends Pick<BaseCategory, 'name' | 'param'> {
+  parentId?: number;
+}
+
+export interface PostCreateCategoryResponse extends BaseCategory {}
+
+export interface PatchUpdateCategoryBody extends Partial<Pick<BaseCategory, 'name' | 'param'>> {}
