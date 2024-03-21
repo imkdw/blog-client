@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { ICategory } from '../features/category/types/category';
+import { ICategory } from '../types/category';
 
 interface CategoryStore {
   allParent: ICategory[];
