@@ -24,7 +24,10 @@ export interface GetArticleDetailResponse {
   thumbnail: string;
   createdAt: string;
   viewCount: number;
-  likeCount: number;
+  like: {
+    isLiked: boolean;
+    likeCount: number;
+  };
   commentCount: number;
 }
 
@@ -34,4 +37,9 @@ export interface GetArticleTagsResponse {
 
 export interface GetArticlesRespoonse {
   articles: IArticleListItem[];
+}
+
+export interface PatchToggleArticleLikeResponse {
+  isLiked: boolean;
+  likeCount: number;
 }

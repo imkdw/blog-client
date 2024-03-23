@@ -1,17 +1,24 @@
 'use client';
 
+import { useState } from 'react';
 import { Favorite, FavoriteBorder, ModeComment, Share } from '@mui/icons-material';
+import { patchToggleArticleLike } from '../../../services/article';
 
 interface Props {
-  likeCount: number;
+  articleId: string;
+  _likeCount: number;
   commentCount: number;
-  isLike: boolean;
+  _isLike: boolean;
 }
 
-export default function ArticleButtons({ likeCount, commentCount, isLike }: Props) {
-  const likeHanlder = () => {
-    // eslint-disable-next-line no-alert
-    window.alert('준비중인 기능입니다.');
+export default function ArticleButtons({ articleId, _likeCount, commentCount, _isLike }: Props) {
+  const [isLike, setIsLike] = useState(_isLike);
+  const [likeCount, setLikeCount] = useState(_likeCount);
+
+  const likeHanlder = async () => {
+    const response = await patchToggleArticleLike(articleId);
+    setIsLike(response.isLiked);
+    setLikeCount(response.likeCount);
   };
 
   return (

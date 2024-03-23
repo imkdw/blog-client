@@ -2,6 +2,7 @@ import {
   GetArticleDetailResponse,
   GetArticlesRespoonse,
   GetArticleTagsResponse,
+  PatchToggleArticleLikeResponse,
   PostCreateArticleBody,
   PostCreateArticleResponse,
 } from '../types/api/article';
@@ -26,4 +27,9 @@ export const getArticleTags = (articleId: string): Promise<GetArticleTagsRespons
 export const getArticlesByCategory = (parent: string, child: string): Promise<GetArticlesRespoonse> => {
   const url = `/v1/articles?parent=${parent ?? ''}&child=${child ?? ''}`;
   return callApi<GetArticlesRespoonse>(url, HttpMethod.GET);
+};
+
+export const patchToggleArticleLike = (articleId: string): Promise<PatchToggleArticleLikeResponse> => {
+  const url = `/v1/articles/${articleId}/like`;
+  return callApi<PatchToggleArticleLikeResponse>(url, HttpMethod.PATCH);
 };
