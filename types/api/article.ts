@@ -1,3 +1,4 @@
+import { IArticleListItem } from '../article';
 import { ITag } from '../tag';
 
 export interface PostCreateArticleBody {
@@ -29,4 +30,8 @@ export interface GetArticleDetailResponse {
 
 export interface GetArticleTagsResponse {
   tags: ITag[];
+}
+
+export interface GetArticlesRespoonse {
+  articles: IArticleListItem[];
 }
