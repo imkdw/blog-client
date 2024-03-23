@@ -4,8 +4,7 @@ interface Props {
   content: string;
 }
 
-export default function ArticleDetailContent({ title, summary, content }: Props) {
-  // . 을 기준으로 줄바꿈 처리
+export default function ArticleContent({ title, summary, content }: Props) {
   const summaryArr = summary.split('.');
 
   return (

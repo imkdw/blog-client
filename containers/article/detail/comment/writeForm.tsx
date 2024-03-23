@@ -1,15 +1,14 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 'use client';
 
 import { ChangeEvent, FormEvent, useState } from 'react';
 import useUser from '../../../../store/use-user';
+import { postCreateComment } from '../../../../services/comment';
 
 interface Props {
   articleId: string;
 }
 
-export default function ArticleCommentForm({ articleId }: Props) {
+export default function CommentWriteForm({ articleId }: Props) {
   const [comment, setComment] = useState('');
   const { isLoggedIn } = useUser((state) => state);
 
@@ -20,10 +19,12 @@ export default function ArticleCommentForm({ articleId }: Props) {
   const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!isLoggedIn) {
-      // TODO: 모달로 변경
       // eslint-disable-next-line no-alert
       window.alert('로그인이 필요한 서비스입니다');
     }
+
+    await postCreateComment(articleId, { content: comment });
+    window.location.reload();
   };
 
   return (

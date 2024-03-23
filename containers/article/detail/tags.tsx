@@ -1,6 +1,8 @@
+import { ITag } from '../../../types/tag';
+
 interface Props {
   createAt: string;
-  tags: any[];
+  tags: ITag[];
 }
 
 export default function ArticleTags({ createAt, tags }: Props) {

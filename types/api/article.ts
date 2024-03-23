@@ -1,3 +1,5 @@
+import { ITag } from '../tag';
+
 export interface PostCreateArticleBody {
   parentCategoryId: number;
   childCategoryId: number;
@@ -11,4 +13,20 @@ export interface PostCreateArticleBody {
 
 export interface PostCreateArticleResponse {
   articleId: string;
+}
+
+export interface GetArticleDetailResponse {
+  articleId: string;
+  title: string;
+  content: string;
+  summary: string;
+  thumbnail: string;
+  createdAt: string;
+  viewCount: number;
+  likeCount: number;
+  commentCount: number;
+}
+
+export interface GetArticleTagsResponse {
+  tags: ITag[];
 }
