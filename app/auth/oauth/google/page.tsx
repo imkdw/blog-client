@@ -21,6 +21,7 @@ export default function GoogleOAuthPage() {
         role: response.role,
       });
       setIsLoggedIn(true);
+      localStorage.setItem('accessToken', response.accessToken);
       router.push('/');
     },
     [router, setIsLoggedIn, setLoggedInUser],

@@ -1,15 +1,17 @@
+/* eslint-disable react/no-danger */
+import 'react-quill/dist/quill.snow.css';
+
 interface Props {
   title: string;
   summary: string;
   content: string;
 }
 
-export default function ArticleDetailContent({ title, summary, content }: Props) {
-  // . 을 기준으로 줄바꿈 처리
+export default function ArticleContent({ title, summary, content }: Props) {
   const summaryArr = summary.split('.');
 
   return (
-    <div className="flex flex-col gap-[20px]">
+    <div className="flex flex-col gap-10">
       <h2 className="text-center text-[32px] font-bold">{title}</h2>
       <div className="flex flex-col">
         {summaryArr.map((data) => (
@@ -18,7 +20,7 @@ export default function ArticleDetailContent({ title, summary, content }: Props)
           </p>
         ))}
       </div>
-      <p>{content}</p>
+      <div dangerouslySetInnerHTML={{ __html: content }} className="list-decimal" />
     </div>
   );
 }

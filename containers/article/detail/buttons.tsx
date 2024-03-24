@@ -1,17 +1,24 @@
 'use client';
 
+import { useState } from 'react';
 import { Favorite, FavoriteBorder, ModeComment, Share } from '@mui/icons-material';
+import { patchToggleArticleLike } from '../../../services/article';
 
 interface Props {
-  likeCount: number;
+  articleId: string;
+  _likeCount: number;
   commentCount: number;
-  isLike: boolean;
+  _isLike: boolean;
 }
 
-export default function ArticleButtons({ likeCount, commentCount, isLike }: Props) {
-  const likeHanlder = () => {
-    // eslint-disable-next-line no-alert
-    window.alert('준비중인 기능입니다.');
+export default function ArticleButtons({ articleId, _likeCount, commentCount, _isLike }: Props) {
+  const [isLike, setIsLike] = useState(_isLike);
+  const [likeCount, setLikeCount] = useState(_likeCount);
+
+  const likeHandler = async () => {
+    const response = await patchToggleArticleLike(articleId);
+    setIsLike(response.isLiked);
+    setLikeCount(response.likeCount);
   };
 
   return (
@@ -19,7 +26,7 @@ export default function ArticleButtons({ likeCount, commentCount, isLike }: Prop
       <button
         type="button"
         className="flex w-1/3 flex-row items-center justify-center gap-[20px]"
-        onClick={likeHanlder}
+        onClick={likeHandler}
       >
         <div>{isLike ? <Favorite /> : <FavoriteBorder />}</div>
         <p className="text-[18px] text-gray-500">좋아요 · {likeCount}개</p>

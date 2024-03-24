@@ -1,3 +1,6 @@
+import { IArticleListItem } from '../article';
+import { ITag } from '../tag';
+
 export interface PostCreateArticleBody {
   parentCategoryId: number;
   childCategoryId: number;
@@ -11,4 +14,32 @@ export interface PostCreateArticleBody {
 
 export interface PostCreateArticleResponse {
   articleId: string;
+}
+
+export interface GetArticleDetailResponse {
+  articleId: string;
+  title: string;
+  content: string;
+  summary: string;
+  thumbnail: string;
+  createdAt: string;
+  viewCount: number;
+  like: {
+    isLiked: boolean;
+    likeCount: number;
+  };
+  commentCount: number;
+}
+
+export interface GetArticleTagsResponse {
+  tags: ITag[];
+}
+
+export interface GetArticlesResponse {
+  articles: IArticleListItem[];
+}
+
+export interface PatchToggleArticleLikeResponse {
+  isLiked: boolean;
+  likeCount: number;
 }
