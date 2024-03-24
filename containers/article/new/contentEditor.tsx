@@ -15,8 +15,7 @@ export default function ArticleContentEditor({ content, changeHandler }: Props) 
   return (
     <MDEditor
       value={content}
-      height="500px"
-      enableScroll
+      height={500}
       onChange={(changedContent) => changeContentHandler(changedContent)}
       highlightEnable={false}
     />

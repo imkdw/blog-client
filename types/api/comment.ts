@@ -11,3 +11,7 @@ export interface PostCreateCommentResponse {
 export interface GetCommentsResponse {
   comments: IComment[];
 }
+
+export interface PatchUpdateCommentBody {
+  content: string;
+}

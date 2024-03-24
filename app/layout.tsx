@@ -39,7 +39,7 @@ export default function RootLayout({ children }: Props) {
     <html lang="ko" className={(notoSans.className, notoSansKr.className)}>
       <body className={clsx('flex w-full flex-col items-center lg:w-full')}>
         <Header />
-        <main className="relative flex h-auto w-full max-w-[1200px] flex-col">
+        <main className="relative flex h-auto w-full max-w-[1000px] flex-col">
           {children}
           <SideUtils />
           <Footer />

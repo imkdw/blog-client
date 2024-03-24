@@ -21,11 +21,11 @@ const createArticleListHeader = (type: Props['type']) => {
 
 export default function ArticleList({ type, articles }: Props) {
   return (
-    <section className="flex flex-col">
+    <section className="flex w-full flex-col">
       {type !== 'all' && (
-        <h2 className="flex h-[60px] items-center text-[24px] font-bold">{createArticleListHeader(type)}</h2>
+        <h2 className="flex h-[60px] w-full items-center text-[24px] font-bold">{createArticleListHeader(type)}</h2>
       )}
-      <ul className="flex flex-row flex-wrap">
+      <ul className="flex w-full flex-row">
         {articles && articles.length ? (
           articles.map((article) => <ArticleItem key={article.articleId} article={article} />)
         ) : (

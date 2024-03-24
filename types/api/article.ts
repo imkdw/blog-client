@@ -35,7 +35,7 @@ export interface GetArticleTagsResponse {
   tags: ITag[];
 }
 
-export interface GetArticlesRespoonse {
+export interface GetArticlesResponse {
   articles: IArticleListItem[];
 }
 

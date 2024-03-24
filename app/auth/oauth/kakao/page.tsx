@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 
 import { postKakaoOAuth, postOAuthSignIn, postOAuthSignUp } from '../../../../services/auth';
 import { OAuthProviders } from '../../../../types/enum/auth';
-import { PostOAuthSignInResponse } from '../../../../types/api/auth';
+import { PostOAuthSignInResponse, PostOAuthSignUpResponse } from '../../../../types/api/auth';
 import useUser from '../../../../store/use-user';
 
 export default function KakaoOAuthPage() {
@@ -16,7 +16,7 @@ export default function KakaoOAuthPage() {
   const router = useRouter();
 
   const updateUserAndLogin = useCallback(
-    (response: PostOAuthSignInResponse | PostOAuthSignInResponse) => {
+    (response: PostOAuthSignInResponse | PostOAuthSignUpResponse) => {
       setLoggedInUser({
         email: response.email,
         nickname: response.nickname,
@@ -24,6 +24,7 @@ export default function KakaoOAuthPage() {
         role: response.role,
       });
       setIsLoggedIn(true);
+      localStorage.setItem('accessToken', response.accessToken);
       router.push('/');
     },
     [router, setIsLoggedIn, setLoggedInUser],

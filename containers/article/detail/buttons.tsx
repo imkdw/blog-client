@@ -15,7 +15,7 @@ export default function ArticleButtons({ articleId, _likeCount, commentCount, _i
   const [isLike, setIsLike] = useState(_isLike);
   const [likeCount, setLikeCount] = useState(_likeCount);
 
-  const likeHanlder = async () => {
+  const likeHandler = async () => {
     const response = await patchToggleArticleLike(articleId);
     setIsLike(response.isLiked);
     setLikeCount(response.likeCount);
@@ -26,7 +26,7 @@ export default function ArticleButtons({ articleId, _likeCount, commentCount, _i
       <button
         type="button"
         className="flex w-1/3 flex-row items-center justify-center gap-[20px]"
-        onClick={likeHanlder}
+        onClick={likeHandler}
       >
         <div>{isLike ? <Favorite /> : <FavoriteBorder />}</div>
         <p className="text-[18px] text-gray-500">좋아요 · {likeCount}개</p>

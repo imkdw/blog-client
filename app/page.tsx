@@ -1,28 +1,39 @@
+'use client';
+
 import Link from 'next/link';
-import ArticleList from '../components/Articles/articleList';
+import { useEffect, useState } from 'react';
+
 import LastArticles from '../components/Articles/lastArticles';
-import { IArticle } from '../@types/article/Article';
-import { getArticleDetail } from '../actions/article';
+import { getPopularArticles, getRecentArticles } from '../services/article';
+import { IArticleListItem } from '../types/article';
+import ArticleList from '../containers/article/list/articleList';
 
 export default function Home() {
-  const popularArticles = Array(3)
-    .fill(0)
-    .map((_, i) => ({
-      ...getArticleDetail(i.toString()),
-    }));
+  const POPULAR_ARTICLE_COUNT = 3;
+  const RECENT_ARTICLE_COUNT = 3;
 
-  const recentArticles = Array(3)
-    .fill(0)
-    .map(
-      (_, i): IArticle => ({
-        ...getArticleDetail(i.toString()),
-      }),
-    );
+  const [popularArticles, setPopularArticles] = useState<IArticleListItem[]>([]);
+  const [recentArticles, setRecentArticles] = useState<IArticleListItem[]>([]);
+
+  useEffect(() => {
+    const fetchPopularArticles = async () => {
+      const response = await getPopularArticles(POPULAR_ARTICLE_COUNT);
+      setPopularArticles(response.articles);
+    };
+
+    const fetchRecentArticles = async () => {
+      const response = await getRecentArticles(RECENT_ARTICLE_COUNT);
+      setRecentArticles(response.articles);
+    };
+
+    fetchPopularArticles();
+    fetchRecentArticles();
+  }, []);
 
   return (
     <div className="flex h-auto w-full flex-col items-center gap-[30px]">
       <LastArticles />
-      <div className="flex flex-col gap-[50px]">
+      <div className="flex w-full flex-col gap-[50px]">
         <ArticleList type="popular" articles={popularArticles} />
         <ArticleList type="recent" articles={recentArticles} />
       </div>
