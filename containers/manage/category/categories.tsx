@@ -27,7 +27,7 @@ export default function ManangeCategories() {
 
   return (
     <>
-      <ul className="border border-gray-300">
+      <ul className="list-none border border-gray-300">
         {categories.map((category) => (
           <ManageCategoryItem
             key={category.id}

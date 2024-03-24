@@ -33,7 +33,7 @@ export default function Home() {
   return (
     <div className="flex h-auto w-full flex-col items-center gap-[30px]">
       <LastArticles />
-      <div className="flex w-full flex-col gap-[50px]">
+      <div className="flex w-full flex-col gap-2">
         <ArticleList type="popular" articles={popularArticles} />
         <ArticleList type="recent" articles={recentArticles} />
       </div>

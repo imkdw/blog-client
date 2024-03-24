@@ -1,3 +1,5 @@
+import clsx from 'clsx';
+
 import ArticleItem from './articleItem';
 import { IArticleListItem } from '../../../types/article';
 
@@ -21,15 +23,15 @@ const createArticleListHeader = (type: Props['type']) => {
 
 export default function ArticleList({ type, articles }: Props) {
   return (
-    <section className="flex w-full flex-col">
+    <section className="flex h-auto w-full flex-col">
       {type !== 'all' && (
         <h2 className="flex h-[60px] w-full items-center text-[24px] font-bold">{createArticleListHeader(type)}</h2>
       )}
-      <ul className="flex w-full flex-row">
+      <ul className={clsx('flex h-[350px] w-full flex-row', !articles.length && 'items-center')}>
         {articles && articles.length ? (
           articles.map((article) => <ArticleItem key={article.articleId} article={article} />)
         ) : (
-          <div>게시글이 없습니다.</div>
+          <div className="w-full text-center text-gray-400">게시글이 없습니다..</div>
         )}
       </ul>
     </section>

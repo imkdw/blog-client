@@ -57,24 +57,16 @@ export default function ArticleDetailPage({ params: { slug } }: Props) {
           <ArticleThumbnail image={articleDetail.thumbnail} />
           <ArticleContent title={articleDetail.title} summary={articleDetail.summary} content={articleDetail.content} />
           <ArticleTags createAt={articleDetail.createdAt} tags={articleTags} />
-          {/* TODO: isLike 처리하기 */}
           <ArticleButtons
             commentCount={articleDetail.commentCount}
             _likeCount={articleDetail.like.likeCount}
             _isLike={articleDetail.like.isLiked}
             articleId={articleId}
           />
+          <Comments articleId={articleId} />
+          <CommentWriteForm articleId={articleId} />
         </>
       )}
-      <Comments articleId={articleId} />
-      <CommentWriteForm articleId={articleId} />
-      {/* {articleDetail && articleTags && articleComments && (
-        <>
-          <ArticleComments comments={articleComments} />
-          <ArticleCommentForm articleId={articleId} />
-          <ArticleList articles={[]} type="recommend" />
-        </>
-      )} */}
     </main>
   );
 }

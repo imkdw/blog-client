@@ -1,5 +1,5 @@
-@tailwind base;
 @tailwind components;
+@tailwind base;
 @tailwind utilities;
 
 * {
@@ -9,8 +9,16 @@
   box-sizing: border-box;
 }
 
-.w-md-editor-text {
-  height: 100%;
+ul {
+  list-style: disc;
+}
+
+ol {
+  list-style: decimal;
+}
+
+.ql-container {
+  height: 500px !important;
 }
 
 html,
@@ -18,17 +26,9 @@ body {
   min-height: 100%;
 }
 
-ul,
-li {
-  list-style: none;
-}
-
-input {
-  outline: none;
-}
-
-button {
-  outline: none;
+a {
+  text-decoration: none;
+  color: black;
 }
 
 /* 메인페이지 최근게시글 텍스트 쉐도우 */
@@ -40,7 +40,7 @@ button {
 }
 
 /* 스크롤바 디자인 */
-/* body::-webkit-scrollbar {
+body::-webkit-scrollbar {
   width: 10px;
 }
 
@@ -51,4 +51,4 @@ body::-webkit-scrollbar-thumb {
 
 body::-webkit-scrollbar-track {
   background: darkgray;
-} */
+}

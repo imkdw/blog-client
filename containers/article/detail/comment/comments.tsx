@@ -20,7 +20,7 @@ export default function Comments({ articleId }: Props) {
   }, [articleId]);
 
   return (
-    <ul className="flex w-full flex-col gap-6">
+    <ul className="flex w-full flex-col items-center gap-6">
       {!comments.length && <div className="text-gray-400">댓글이 없습니다.. 댓글을 남겨주세요!</div>}
       {comments.map((comment) => (
         <CommentItem comment={comment} key={comment.id} articleId={articleId} />

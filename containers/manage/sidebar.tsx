@@ -59,7 +59,7 @@ export default function ManageSidebar() {
               {item.icon}
               <span className="text-[22px]">{item.text}</span>
             </h3>
-            <ul>
+            <ul className="list-none">
               {item.children.map((child) => (
                 <li key={child.id} className="p-2 hover:bg-gray-200">
                   <Link
