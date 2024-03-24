@@ -1,5 +1,5 @@
-@tailwind base;
 @tailwind components;
+@tailwind base;
 @tailwind utilities;
 
 * {
@@ -7,7 +7,14 @@
   padding: 0;
   font-size: 20px;
   box-sizing: border-box;
-  user-select: none;
+}
+
+ul {
+  list-style: disc;
+}
+
+ol {
+  list-style: decimal;
 }
 
 html,
@@ -15,17 +22,9 @@ body {
   min-height: 100%;
 }
 
-ul,
-li {
-  list-style: none;
-}
-
-input {
-  outline: none;
-}
-
-button {
-  outline: none;
+a {
+  text-decoration: none;
+  color: black;
 }
 
 /* 메인페이지 최근게시글 텍스트 쉐도우 */

@@ -23,6 +23,7 @@ export default function GithubOAuthPage() {
         role: response.role,
       });
       setIsLoggedIn(true);
+      localStorage.setItem('accessToken', response.accessToken);
       router.push('/');
     },
     [router, setIsLoggedIn, setLoggedInUser],

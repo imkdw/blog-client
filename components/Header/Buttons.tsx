@@ -42,7 +42,7 @@ export default function HeaderButtons() {
   };
 
   return (
-    <ul className="flow-row flex h-[40px] w-[20%] items-center justify-between">
+    <ul className="flow-row flex h-[40px] w-[20%] list-none items-center justify-between">
       <li>
         {/* TODO: 설정된 테마 모드에 따라서 아이콘 분기처리 */}
         <button aria-label="다크/화이트 모드 변경" onClick={themeChangeHandler} type="button">
