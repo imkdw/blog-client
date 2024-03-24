@@ -17,10 +17,6 @@ ol {
   list-style: decimal;
 }
 
-.ql-container {
-  height: 500px !important;
-}
-
 html,
 body {
   min-height: 100%;
