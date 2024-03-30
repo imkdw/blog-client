@@ -1,13 +1,13 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 
 interface Props {
   image: string;
+  title: string;
 }
-export default function ArticleThumbnail({ image }: Props) {
+export default function ArticleThumbnail({ image, title }: Props) {
   return (
-    <div className="flex h-[450px] w-full items-center justify-center">
-      <Image src={image} alt="thumbnail" width={800} height={450} className="rounded-[10px]" />
+    <div className="relative flex h-[500px] w-[80%] justify-center">
+      {image && <Image src={image} alt={`${title}'s thumbnail`} fill className="rounded-xl shadow-lg" />}
     </div>
   );
 }

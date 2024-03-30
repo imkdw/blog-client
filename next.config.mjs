@@ -7,6 +7,10 @@ const nextConfig = {
         hostname: 'static.imkdw.dev',
       },
       {
+        protocol: 'https',
+        hostname: 'local-static.imkdw.dev',
+      },
+      {
         protocol: 'http',
         hostname: 'via.placeholder.com',
       },

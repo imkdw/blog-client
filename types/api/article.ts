@@ -8,8 +8,8 @@ export interface PostCreateArticleBody {
   summary: string;
   title: string;
   content: string;
-  thumbnail: string;
   tags: string[];
+  images: string[];
 }
 
 export interface PostCreateArticleResponse {
@@ -42,4 +42,8 @@ export interface GetArticlesResponse {
 export interface PatchToggleArticleLikeResponse {
   isLiked: boolean;
   likeCount: number;
+}
+
+export interface PatchIncreaseViewCountResponse {
+  viewCount: number;
 }

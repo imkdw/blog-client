@@ -23,17 +23,14 @@ const createArticleListHeader = (type: Props['type']) => {
 
 export default function ArticleList({ type, articles }: Props) {
   return (
-    <section className="flex h-auto w-full flex-col">
+    <div className={clsx('flex h-full w-full flex-1 flex-col', !articles.length && 'items-center justify-center')}>
       {type !== 'all' && (
         <h2 className="flex h-[60px] w-full items-center text-[24px] font-bold">{createArticleListHeader(type)}</h2>
       )}
-      <ul className={clsx('flex h-[350px] w-full flex-row', !articles.length && 'items-center')}>
-        {articles && articles.length ? (
-          articles.map((article) => <ArticleItem key={article.articleId} article={article} />)
-        ) : (
-          <div className="w-full text-center text-gray-400">게시글이 없습니다..</div>
-        )}
+      <ul className="grid grid-cols-3 gap-5">
+        {articles.length ? articles.map((article) => <ArticleItem key={article.articleId} article={article} />) : null}
       </ul>
-    </section>
+      {!articles.length ? <div className="w-full text-center text-gray-400">게시글이 없습니다..</div> : null}
+    </div>
   );
 }

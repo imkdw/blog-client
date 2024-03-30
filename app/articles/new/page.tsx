@@ -2,6 +2,8 @@
 
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { marked } from 'marked';
+
 import { useArticle } from '../../../store/use-article';
 import { ICategory } from '../../../types/category';
 import { INewArticle } from '../../../types/article';
@@ -30,10 +32,15 @@ export default function NewArticlePage() {
     summary: '',
     tags: [],
   });
-  const [content, setContent] = useState('');
 
+  const [content, setContent] = useState('');
   const changeContentHandler = (value: string) => {
     setContent(value);
+  };
+
+  const [images, setImages] = useState<string[]>([]);
+  const addImageHandler = (image: string) => {
+    setImages((prev) => [...prev, image]);
   };
 
   useEffect(() => {
@@ -55,16 +62,17 @@ export default function NewArticlePage() {
   const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    const parsedContent = marked.parse(content).toString();
+
     const response = await postCreateArticle({
       articleId: articleData.id,
       title: articleData.title,
       childCategoryId: childCategory?.id ?? 0,
       parentCategoryId: parentCategory?.id ?? 0,
-      content,
+      content: parsedContent,
       summary: articleData.summary,
       tags: articleData.tags.map((tag) => tag.trim()),
-      // TODO: 썸네일 로직 추가
-      thumbnail: '',
+      images,
     });
 
     setIsWriting(false);
@@ -107,7 +115,7 @@ export default function NewArticlePage() {
         <ArticleIdEditor articleId={articleData.id} changeHandler={changeHandler} />
         <ArticleTitleEditor title={articleData.title} changeHandler={changeHandler} />
         <ArticleSummaryEditor summary={articleData.summary} changeHandler={changeHandler} />
-        <ArticleContentEditor content={content} changeHandler={changeContentHandler} />
+        <ArticleContentEditor content={content} changeHandler={changeContentHandler} setImage={addImageHandler} />
         <ArticleTagEditor tags={articleData.tags} changeHandler={changeTagsHandler} deleteHandler={deleteTagHandler} />
         <ArticleNewButtons />
       </form>

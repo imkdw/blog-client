@@ -10,6 +10,7 @@ export interface IArticleListItem {
   thumbnail: string;
   title: string;
   summary: string;
+  viewCount: number;
   commentCount: number;
   likeCount: number;
   createdAt: string;

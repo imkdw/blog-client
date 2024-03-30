@@ -21,7 +21,7 @@ export default function SignInLinks() {
         </Link>
       </li>
       <li className="flex w-[30%] items-center justify-center text-[#505454]">
-        <Link href="/auth/sign-up" className="text-[16px]">
+        <Link href="/auth/sign-up" className="text-[16px]" onClick={clickHanlder}>
           회원가입
         </Link>
       </li>
