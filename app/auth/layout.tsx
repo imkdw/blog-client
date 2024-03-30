@@ -31,9 +31,11 @@ export const metadata: Metadata = {
 
 export default function AuthLayout({ children }: Props) {
   return (
-    <div className="flex h-auto w-full flex-col gap-[50px] pb-10 pt-10">
+    <div className="flex h-full w-full flex-1 flex-col justify-center pb-20">
       <AuthLogo />
-      <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+      <div className="w-full pt-10">
+        <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+      </div>
     </div>
   );
 }

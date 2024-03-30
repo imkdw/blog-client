@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useArticle } from '../../../store/use-article';
 import { GetArticleDetailResponse } from '../../../types/api/article';
-import { getArticleDetail, getArticleTags } from '../../../services/article';
+import { getArticleDetail, getArticleTags, patchIncreaseViewCount } from '../../../services/article';
 import ArticleThumbnail from '../../../containers/article/detail/thumbnail';
 import ArticleContent from '../../../containers/article/detail/content';
 import ArticleTags from '../../../containers/article/detail/tags';
@@ -38,11 +38,16 @@ export default function ArticleDetailPage({ params: { slug } }: Props) {
       setArticleTags(response.tags);
     };
 
+    const fetchIncreaseViewCount = async () => {
+      await patchIncreaseViewCount(articleId);
+    };
+
     window.scrollTo(0, 0);
     setCurrentArticleId(articleId);
 
     fetchArticleDetail();
     fetchArticleTags();
+    fetchIncreaseViewCount();
 
     return () => {
       // 페이지를 이탈할때 null로 초기화
@@ -51,10 +56,10 @@ export default function ArticleDetailPage({ params: { slug } }: Props) {
   }, [articleId, setCurrentArticleId]);
 
   return (
-    <main className="flex flex-col gap-10 pt-10">
+    <div className="flex h-auto w-full flex-col items-center gap-10">
       {articleDetail && articleTags && (
         <>
-          <ArticleThumbnail image={articleDetail.thumbnail} />
+          <ArticleThumbnail image={articleDetail.thumbnail} title={articleDetail.title} />
           <ArticleContent title={articleDetail.title} summary={articleDetail.summary} content={articleDetail.content} />
           <ArticleTags createAt={articleDetail.createdAt} tags={articleTags} />
           <ArticleButtons
@@ -67,6 +72,6 @@ export default function ArticleDetailPage({ params: { slug } }: Props) {
           <CommentWriteForm articleId={articleId} />
         </>
       )}
-    </main>
+    </div>
   );
 }

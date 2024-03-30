@@ -1,41 +1,49 @@
 'use client';
 
+import { Josefin_Sans } from 'next/font/google';
+import clsx from 'clsx';
+
 import Link from 'next/link';
-import { MouseEvent } from 'react';
+import MenuItem from './menuItem';
+
+const josefinSans = Josefin_Sans({ subsets: ['latin'] });
 
 export default function HeaderMenu() {
-  const aboutMeHandler = (event: MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
-    // eslint-disable-next-line no-alert
-    window.alert('준비중인 기능입니다');
-  };
+  const LinkData = [
+    {
+      id: 1,
+      text: 'ARTICLES',
+      link: '/articles',
+      target: '_self',
+    },
+    {
+      id: 3,
+      text: 'ABOUT ME',
+      link: '/about',
+      target: '_self',
+    },
+    {
+      id: 4,
+      text: 'MANAGE',
+      link: '/manage',
+      target: '_self',
+    },
+  ];
 
   return (
     <nav className="w-full">
       <ul className="flex justify-center">
-        <li className="flex h-[40px] min-w-[200px] justify-center">
-          <Link href="/articles" className="flex h-full items-center text-[24px]  hover:font-bold">
-            Articles
-          </Link>
-        </li>
-        <li className="flex h-[40px] min-w-[200px] cursor-pointer justify-center">
-          <Link
-            href="https://github.com/imkdw/blog"
-            target="_blank"
-            className="flex h-full items-center text-[24px]  hover:font-bold"
-          >
-            Github
-          </Link>
-        </li>
-        <li className="flex h-[40px] min-w-[200px] cursor-pointer justify-center">
-          <Link
-            href="/about"
-            className="flex h-full items-center text-[24px]  hover:font-bold"
-            onClick={aboutMeHandler}
-          >
-            About me
-          </Link>
-        </li>
+        {LinkData.map((item) => (
+          <MenuItem key={item.id}>
+            <Link
+              href={item.link}
+              target={item.target}
+              className={clsx(josefinSans.className, 'flex h-full items-center text-[24px]  hover:font-bold')}
+            >
+              {item.text}
+            </Link>
+          </MenuItem>
+        ))}
       </ul>
     </nav>
   );

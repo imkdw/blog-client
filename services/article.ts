@@ -2,6 +2,7 @@ import {
   GetArticleDetailResponse,
   GetArticlesResponse,
   GetArticleTagsResponse,
+  PatchIncreaseViewCountResponse,
   PatchToggleArticleLikeResponse,
   PostCreateArticleBody,
   PostCreateArticleResponse,
@@ -42,4 +43,9 @@ export const getPopularArticles = (count: number): Promise<GetArticlesResponse> 
 export const getRecentArticles = (count: number): Promise<GetArticlesResponse> => {
   const url = `/v1/articles?type=recent&limit=${count}`;
   return callApi<GetArticlesResponse>(url, HttpMethod.GET);
+};
+
+export const patchIncreaseViewCount = (articleId: string): Promise<PatchIncreaseViewCountResponse> => {
+  const url = `/v1/articles/${articleId}/view`;
+  return callApi<PatchIncreaseViewCountResponse>(url, HttpMethod.PATCH);
 };

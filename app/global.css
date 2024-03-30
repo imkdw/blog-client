@@ -17,14 +17,30 @@ ol {
   list-style: decimal;
 }
 
-html,
-body {
+html {
   min-height: 100%;
 }
 
 a {
   text-decoration: none;
   color: black;
+}
+
+pre {
+  white-space: pre-wrap;
+}
+
+code {
+  width: 100%;
+  overflow-wrap: break-word;
+}
+
+input {
+  outline: none;
+}
+
+.article-item {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 /* 메인페이지 최근게시글 텍스트 쉐도우 */

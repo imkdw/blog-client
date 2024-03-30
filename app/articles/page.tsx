@@ -24,12 +24,12 @@ export default function ArticlesPage() {
   }, [childCategory, parentCategory]);
 
   return (
-    <main className="flex w-full flex-col items-start gap-4 pt-[30px]">
+    <div className="flex h-full w-full flex-1 flex-col gap-5">
       <h2 className="text-[28px] font-bold">카테고리</h2>
       <Suspense fallback={<div>로딩중...</div>}>
         <ArticleCategorySelector isHaveAll />
         <ArticleList type="all" articles={articles} />
       </Suspense>
-    </main>
+    </div>
   );
 }

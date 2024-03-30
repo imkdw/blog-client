@@ -8,7 +8,7 @@ interface Props {
 
 export default function ArticleTags({ createAt, tags }: Props) {
   return (
-    <div className="flex flex-col gap-[10px]">
+    <div className="flex w-full flex-col gap-[10px]">
       <p className="text-[18px] text-gray-500">작성일 : {convertDate(createAt)}</p>
       <ul className="flex list-none flex-row gap-[10px]">
         {tags.map((tag) => (

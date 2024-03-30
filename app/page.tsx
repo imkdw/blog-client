@@ -31,9 +31,9 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex h-auto w-full flex-col items-center gap-[30px]">
-      <LastArticles />
-      <div className="flex w-full flex-col gap-2">
+    <div className="flex w-full flex-col items-center gap-10">
+      <LastArticles articles={recentArticles} />
+      <div className="flex w-full flex-col gap-10">
         <ArticleList type="popular" articles={popularArticles} />
         <ArticleList type="recent" articles={recentArticles} />
       </div>

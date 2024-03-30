@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import { Noto_Sans, Noto_Sans_KR } from 'next/font/google';
-import './global.css';
-import clsx from 'clsx';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import SideUtils from '../components/Common/sideUtils';
+
+import './global.css';
 
 const notoSans = Noto_Sans({ subsets: ['latin'] });
 const notoSansKr = Noto_Sans_KR({ subsets: ['latin'] });
@@ -37,13 +37,11 @@ interface Props {
 export default function RootLayout({ children }: Props) {
   return (
     <html lang="ko" className={(notoSans.className, notoSansKr.className)}>
-      <body className={clsx('flex w-full flex-col items-center lg:w-full')}>
+      <body className="flex min-h-screen flex-col items-center">
+        <SideUtils />
         <Header />
-        <main className="relative flex h-auto w-full max-w-[1000px] flex-col">
-          {children}
-          <SideUtils />
-          <Footer />
-        </main>
+        <main className="mb-10 mt-5 flex w-full max-w-[1100px] flex-1 flex-col">{children}</main>
+        <Footer />
       </body>
     </html>
   );

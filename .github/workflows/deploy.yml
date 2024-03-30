@@ -55,6 +55,7 @@ jobs:
           --build-arg NEXT_PUBLIC_KAKAO_OAUTH_REDIRECT_URI=${{ secrets.NEXT_PUBLIC_KAKAO_OAUTH_REDIRECT_URI }} \
           --build-arg NEXT_PUBLIC_GITHUB_OAUTH_CLIENT_ID=${{ secrets.NEXT_PUBLIC_GITHUB_OAUTH_CLIENT_ID }} \
           --build-arg NEXT_PUBLIC_GITHUB_OAUTH_REDIRECT_URI=${{ secrets.NEXT_PUBLIC_GITHUB_OAUTH_REDIRECT_URI }} \
+          --build-arg NEXT_PUBLIC_PREGISNED_URL=${{ secrets.NEXT_PUBLIC_PREGISNED_URL }} \
           . -t ${{ secrets.AWS_ECR_URI }}:latest --no-cache
           docker push ${{ secrets.AWS_ECR_URI }}:latest
 
