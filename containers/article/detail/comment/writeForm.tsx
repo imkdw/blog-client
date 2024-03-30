@@ -28,7 +28,7 @@ export default function CommentWriteForm({ articleId }: Props) {
   };
 
   return (
-    <form className="flex flex-col gap-4" onSubmit={submitHandler}>
+    <form className="flex w-full flex-col gap-4" onSubmit={submitHandler}>
       <h2 className="text-[24px] font-bold">댓글 작성</h2>
       <div className="h-[120px] w-full rounded bg-gray-200">
         <textarea
