@@ -10,12 +10,7 @@ import { postSignIn } from '../../../services/auth';
 export default function SignInForm() {
   const { setIsLoggedIn, setLoggedInUser } = useUser((state) => state);
 
-  // TOOD: 기본값 제거
-  const [account, setAccount] = useState({
-    email: 'test@test.com',
-    password: 'Test121212!@',
-  });
-
+  const [account, setAccount] = useState({ email: '', password: '' });
   const { email, password } = account;
   const router = useRouter();
 
