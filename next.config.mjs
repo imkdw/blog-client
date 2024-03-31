@@ -11,6 +11,10 @@ const nextConfig = {
         hostname: 'local-static.imkdw.dev',
       },
       {
+        protocol: 'https',
+        hostname: 'presigned.imkdw.dev',
+      },
+      {
         protocol: 'http',
         hostname: 'via.placeholder.com',
       },

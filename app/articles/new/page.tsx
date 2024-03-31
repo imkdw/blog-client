@@ -2,7 +2,6 @@
 
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { marked } from 'marked';
 
 import { useArticle } from '../../../store/use-article';
 import { ICategory } from '../../../types/category';
@@ -15,6 +14,7 @@ import ArticleContentEditor from '../../../containers/article/new/contentEditor'
 import ArticleTagEditor from '../../../containers/article/new/tagEditor';
 import ArticleNewButtons from '../../../containers/article/new/buttons';
 import { postCreateArticle } from '../../../services/article';
+import ArticleThumbnailSelector from '../../../containers/article/new/thumbnailSelector';
 
 export default function NewArticlePage() {
   const router = useRouter();
@@ -31,6 +31,7 @@ export default function NewArticlePage() {
     title: '',
     summary: '',
     tags: [],
+    thumbnail: '',
   });
 
   const [content, setContent] = useState('');
@@ -62,15 +63,14 @@ export default function NewArticlePage() {
   const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const parsedContent = marked.parse(content).toString();
-
     const response = await postCreateArticle({
       articleId: articleData.id,
       title: articleData.title,
       childCategoryId: childCategory?.id ?? 0,
       parentCategoryId: parentCategory?.id ?? 0,
-      content: parsedContent,
+      content,
       summary: articleData.summary,
+      thumbnail: articleData.thumbnail,
       tags: articleData.tags.map((tag) => tag.trim()),
       images,
     });
@@ -86,6 +86,13 @@ export default function NewArticlePage() {
     setArticleData((prev) => ({
       ...prev,
       [event.target.name]: event.target.value,
+    }));
+  };
+
+  const changeThumbnailHandler = (thumbnail: string) => {
+    setArticleData((prev) => ({
+      ...prev,
+      thumbnail,
     }));
   };
 
@@ -112,6 +119,7 @@ export default function NewArticlePage() {
           setChild={changeChildCategory}
           setParent={changeParentCategory}
         />
+        <ArticleThumbnailSelector changeHandler={changeThumbnailHandler} />
         <ArticleIdEditor articleId={articleData.id} changeHandler={changeHandler} />
         <ArticleTitleEditor title={articleData.title} changeHandler={changeHandler} />
         <ArticleSummaryEditor summary={articleData.summary} changeHandler={changeHandler} />

@@ -1,15 +1,21 @@
 /* eslint-disable react/no-danger */
 import 'react-quill/dist/quill.snow.css';
 import MarkdownViewer from '../../../components/markdown/viewer/viewer';
+import ArticleManageButtons from './manageButtons';
+import useUser from '../../../store/use-user';
+import { UserRoles } from '../../../types/enum/user';
 
 interface Props {
+  articleId: string;
   title: string;
   summary: string;
   content: string;
 }
 
-export default function ArticleContent({ title, summary, content }: Props) {
+export default function ArticleContent({ title, summary, content, articleId }: Props) {
   const summaryArr = summary.split('.');
+
+  const { loggedInUser } = useUser((state) => state);
 
   return (
     <div className="flex w-full flex-col gap-5">
@@ -21,6 +27,7 @@ export default function ArticleContent({ title, summary, content }: Props) {
           </p>
         ))}
       </div>
+      {loggedInUser.role === UserRoles.ADMIN && <ArticleManageButtons articleId={articleId} />}
       <MarkdownViewer content={content} />
     </div>
   );
