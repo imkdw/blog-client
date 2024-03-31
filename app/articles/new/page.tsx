@@ -2,7 +2,6 @@
 
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { marked } from 'marked';
 
 import { useArticle } from '../../../store/use-article';
 import { ICategory } from '../../../types/category';
@@ -64,14 +63,12 @@ export default function NewArticlePage() {
   const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const parsedContent = marked.parse(content).toString();
-
     const response = await postCreateArticle({
       articleId: articleData.id,
       title: articleData.title,
       childCategoryId: childCategory?.id ?? 0,
       parentCategoryId: parentCategory?.id ?? 0,
-      content: parsedContent,
+      content,
       summary: articleData.summary,
       thumbnail: articleData.thumbnail,
       tags: articleData.tags.map((tag) => tag.trim()),

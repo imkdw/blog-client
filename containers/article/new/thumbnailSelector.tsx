@@ -4,11 +4,13 @@ import { generateUUID } from '../../../components/markdown/utils/uuid.util';
 import { getPresignedUrl } from '../../../services/s3.service';
 
 interface Props {
+  thumbnail?: string;
   changeHandler: (thumbnail: string) => void;
 }
 
-export default function ArticleThumbnailSelector({ changeHandler }: Props) {
+export default function ArticleThumbnailSelector({ thumbnail, changeHandler }: Props) {
   const [image, setImage] = useState<string>('');
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   const clickHandler = () => {
@@ -41,13 +43,13 @@ export default function ArticleThumbnailSelector({ changeHandler }: Props) {
 
   return (
     <div className="relative h-[200px] w-full">
-      {image.length ? (
+      {image.length || (thumbnail && thumbnail.length) ? (
         <button
           className="relative h-full w-[30%] border border-gray-300 text-gray-400"
           type="button"
           onClick={clickHandler}
         >
-          <Image src={image} alt="thumbnail" fill />
+          <Image src={image || thumbnail} alt="thumbnail" fill />
         </button>
       ) : (
         <button className="h-full w-[30%] border border-gray-300 text-gray-400" type="button" onClick={clickHandler}>

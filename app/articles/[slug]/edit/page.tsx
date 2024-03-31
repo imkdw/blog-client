@@ -8,6 +8,7 @@ import ArticleTitleEditor from '../../../../containers/article/new/titleEditor';
 import ArticleSummaryEditor from '../../../../containers/article/new/summaryEditor';
 import ArticleContentEditor from '../../../../containers/article/new/contentEditor';
 import ArticleNewButtons from '../../../../containers/article/new/buttons';
+import ArticleThumbnailSelector from '../../../../containers/article/new/thumbnailSelector';
 
 interface Props {
   params: {
@@ -19,14 +20,18 @@ export default function EditArticlePage({ params: { slug } }: Props) {
   const articleId = slug;
   const router = useRouter();
 
-  const [articleData, setArticleData] = useState<IEditArticle>({
+  const [articleDetail, setArticleDetail] = useState<IEditArticle>({
     title: '',
     summary: '',
+    thumbnail: '',
   });
 
+  const [articleEditData, setArticleEditData] = useState<IEditArticle>(articleDetail);
+
   const [content, setContent] = useState('');
+  const [editContent, setEditContent] = useState(content);
   const changeContentHandler = (value: string) => {
-    setContent(value);
+    setEditContent(value);
   };
 
   const [images, setImages] = useState<string[]>([]);
@@ -34,16 +39,32 @@ export default function EditArticlePage({ params: { slug } }: Props) {
     setImages((prev) => [...prev, image]);
   };
 
+  const changeThumbnailHandler = (thumbnail: string) => {
+    setArticleEditData((prev) => ({
+      ...prev,
+      thumbnail,
+    }));
+  };
+
   useEffect(() => {
     const fetchArticleDetail = async () => {
       const response = await getArticleDetail(articleId);
-      setArticleData((prev) => ({
+      setArticleDetail((prev) => ({
         ...prev,
-        id: response.articleId,
         title: response.title,
         summary: response.summary,
+        thumbnail: response.thumbnail,
       }));
       setContent(response.content);
+
+      setArticleEditData((prev) => ({
+        ...prev,
+        title: response.title,
+        summary: response.summary,
+        thumbnail: response.thumbnail,
+      }));
+
+      setEditContent(response.content);
     };
 
     fetchArticleDetail();
@@ -52,19 +73,31 @@ export default function EditArticlePage({ params: { slug } }: Props) {
   const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // TODO: 기존 데이터랑 수정된 부분만 body로 보내기
+    const editedArticleData: Partial<IEditArticle> = {};
+
+    if (articleEditData.title !== articleDetail.title) {
+      editedArticleData.title = articleEditData.title;
+    }
+
+    if (articleEditData.summary !== articleDetail.summary) {
+      editedArticleData.summary = articleEditData.summary;
+    }
+
+    if (articleDetail.thumbnail !== articleEditData.thumbnail) {
+      editedArticleData.thumbnail = articleEditData.thumbnail;
+    }
+
     await PatchUpdateArticle(articleId, {
-      title: articleData.title,
-      summary: articleData.summary,
-      content,
-      newImages: images,
+      ...editedArticleData,
+      ...(content !== editContent && { content: editContent }),
+      ...(images.length && { newImages: images }),
     });
 
     router.push(`/articles/${articleId}`);
   };
 
   const changeHandler = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setArticleData((prev) => ({
+    setArticleEditData((prev) => ({
       ...prev,
       [event.target.name]: event.target.value,
     }));
@@ -73,9 +106,10 @@ export default function EditArticlePage({ params: { slug } }: Props) {
   return (
     <main>
       <form onSubmit={submitHandler} className="flex h-full w-full flex-col gap-10 pt-10">
-        <ArticleTitleEditor title={articleData.title} changeHandler={changeHandler} />
-        <ArticleSummaryEditor summary={articleData.summary} changeHandler={changeHandler} />
-        <ArticleContentEditor content={content} changeHandler={changeContentHandler} setImage={addImageHandler} />
+        <ArticleThumbnailSelector changeHandler={changeThumbnailHandler} thumbnail={articleEditData.thumbnail} />
+        <ArticleTitleEditor title={articleEditData.title} changeHandler={changeHandler} />
+        <ArticleSummaryEditor summary={articleEditData.summary} changeHandler={changeHandler} />
+        <ArticleContentEditor content={editContent} changeHandler={changeContentHandler} setImage={addImageHandler} />
         <ArticleNewButtons />
       </form>
     </main>

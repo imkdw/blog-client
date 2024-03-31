@@ -56,7 +56,7 @@ export const deleteArticle = (articleId: string): Promise<void> => {
   return callApi<void>(url, HttpMethod.DELETE);
 };
 
-export const PatchUpdateArticle = (articleId: string, body: PatchUpdateArticleBody): Promise<void> => {
+export const PatchUpdateArticle = (articleId: string, body: Partial<PatchUpdateArticleBody>): Promise<void> => {
   const url = `/v1/articles/${articleId}`;
   return callApi<void>(url, HttpMethod.PATCH, body);
 };

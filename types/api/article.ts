@@ -50,8 +50,9 @@ export interface PatchIncreaseViewCountResponse {
 }
 
 export interface PatchUpdateArticleBody {
-  title?: string;
-  summary?: string;
-  content?: string;
-  newImages?: string[];
+  title: string;
+  summary: string;
+  content: string;
+  thunmbnail: string;
+  newImages: string[];
 }
