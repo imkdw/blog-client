@@ -2,10 +2,10 @@ import type { Metadata } from 'next';
 import { Noto_Sans, Noto_Sans_KR } from 'next/font/google';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
-import SideUtils from '../components/common/sideUtils';
 
 import './global.css';
 import generateMetadata from '../utils/metadata';
+import SideUtils from '../components/commons/sideUtils';
 
 const notoSans = Noto_Sans({ subsets: ['latin'] });
 const notoSansKr = Noto_Sans_KR({ subsets: ['latin'] });
