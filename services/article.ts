@@ -4,6 +4,7 @@ import {
   GetArticleTagsResponse,
   PatchIncreaseViewCountResponse,
   PatchToggleArticleLikeResponse,
+  PatchUpdateArticleBody,
   PostCreateArticleBody,
   PostCreateArticleResponse,
 } from '../types/api/article';
@@ -48,4 +49,14 @@ export const getRecentArticles = (count: number): Promise<GetArticlesResponse> =
 export const patchIncreaseViewCount = (articleId: string): Promise<PatchIncreaseViewCountResponse> => {
   const url = `/v1/articles/${articleId}/view`;
   return callApi<PatchIncreaseViewCountResponse>(url, HttpMethod.PATCH);
+};
+
+export const deleteArticle = (articleId: string): Promise<void> => {
+  const url = `/v1/articles/${articleId}`;
+  return callApi<void>(url, HttpMethod.DELETE);
+};
+
+export const PatchUpdateArticle = (articleId: string, body: PatchUpdateArticleBody): Promise<void> => {
+  const url = `/v1/articles/${articleId}`;
+  return callApi<void>(url, HttpMethod.PATCH, body);
 };

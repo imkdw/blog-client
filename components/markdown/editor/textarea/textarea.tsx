@@ -1,5 +1,5 @@
 import { ChangeEvent, ClipboardEvent, ForwardedRef, forwardRef } from 'react';
-import { getPresignedUrl } from '../../services/s3.service';
+import { getPresignedUrl } from '../../../../services/s3.service';
 import { generateUUID } from '../../utils/uuid.util';
 
 interface Props {
@@ -33,7 +33,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(
 
       try {
         const getPresignedUrlResponse = await getPresignedUrl(fileName, extension || '');
-        await fetch(getPresignedUrlResponse.data.presignedUrl, {
+        await fetch(getPresignedUrlResponse.presignedUrl, {
           method: 'PUT',
           body: file,
         });

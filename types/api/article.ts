@@ -8,6 +8,7 @@ export interface PostCreateArticleBody {
   summary: string;
   title: string;
   content: string;
+  thumbnail: string;
   tags: string[];
   images: string[];
 }
@@ -46,4 +47,11 @@ export interface PatchToggleArticleLikeResponse {
 
 export interface PatchIncreaseViewCountResponse {
   viewCount: number;
+}
+
+export interface PatchUpdateArticleBody {
+  title?: string;
+  summary?: string;
+  content?: string;
+  newImages?: string[];
 }

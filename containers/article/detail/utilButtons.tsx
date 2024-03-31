@@ -11,7 +11,7 @@ interface Props {
   _isLike: boolean;
 }
 
-export default function ArticleButtons({ articleId, _likeCount, commentCount, _isLike }: Props) {
+export default function ArticleUtilButtons({ articleId, _likeCount, commentCount, _isLike }: Props) {
   const [isLike, setIsLike] = useState(_isLike);
   const [likeCount, setLikeCount] = useState(_likeCount);
 

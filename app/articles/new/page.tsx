@@ -15,6 +15,7 @@ import ArticleContentEditor from '../../../containers/article/new/contentEditor'
 import ArticleTagEditor from '../../../containers/article/new/tagEditor';
 import ArticleNewButtons from '../../../containers/article/new/buttons';
 import { postCreateArticle } from '../../../services/article';
+import ArticleThumbnailSelector from '../../../containers/article/new/thumbnailSelector';
 
 export default function NewArticlePage() {
   const router = useRouter();
@@ -31,6 +32,7 @@ export default function NewArticlePage() {
     title: '',
     summary: '',
     tags: [],
+    thumbnail: '',
   });
 
   const [content, setContent] = useState('');
@@ -71,6 +73,7 @@ export default function NewArticlePage() {
       parentCategoryId: parentCategory?.id ?? 0,
       content: parsedContent,
       summary: articleData.summary,
+      thumbnail: articleData.thumbnail,
       tags: articleData.tags.map((tag) => tag.trim()),
       images,
     });
@@ -86,6 +89,13 @@ export default function NewArticlePage() {
     setArticleData((prev) => ({
       ...prev,
       [event.target.name]: event.target.value,
+    }));
+  };
+
+  const changeThumbnailHandler = (thumbnail: string) => {
+    setArticleData((prev) => ({
+      ...prev,
+      thumbnail,
     }));
   };
 
@@ -112,6 +122,7 @@ export default function NewArticlePage() {
           setChild={changeChildCategory}
           setParent={changeParentCategory}
         />
+        <ArticleThumbnailSelector changeHandler={changeThumbnailHandler} />
         <ArticleIdEditor articleId={articleData.id} changeHandler={changeHandler} />
         <ArticleTitleEditor title={articleData.title} changeHandler={changeHandler} />
         <ArticleSummaryEditor summary={articleData.summary} changeHandler={changeHandler} />

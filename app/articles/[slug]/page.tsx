@@ -8,7 +8,7 @@ import ArticleThumbnail from '../../../containers/article/detail/thumbnail';
 import ArticleContent from '../../../containers/article/detail/content';
 import ArticleTags from '../../../containers/article/detail/tags';
 import { ITag } from '../../../types/tag';
-import ArticleButtons from '../../../containers/article/detail/buttons';
+import ArticleUtilButtons from '../../../containers/article/detail/utilButtons';
 import CommentWriteForm from '../../../containers/article/detail/comment/writeForm';
 import Comments from '../../../containers/article/detail/comment/comments';
 
@@ -60,9 +60,14 @@ export default function ArticleDetailPage({ params: { slug } }: Props) {
       {articleDetail && articleTags && (
         <>
           <ArticleThumbnail image={articleDetail.thumbnail} title={articleDetail.title} />
-          <ArticleContent title={articleDetail.title} summary={articleDetail.summary} content={articleDetail.content} />
+          <ArticleContent
+            title={articleDetail.title}
+            summary={articleDetail.summary}
+            content={articleDetail.content}
+            articleId={articleId}
+          />
           <ArticleTags createAt={articleDetail.createdAt} tags={articleTags} />
-          <ArticleButtons
+          <ArticleUtilButtons
             commentCount={articleDetail.commentCount}
             _likeCount={articleDetail.like.likeCount}
             _isLike={articleDetail.like.isLiked}

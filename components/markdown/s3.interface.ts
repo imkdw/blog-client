@@ -1,5 +1,3 @@
 export interface GetPresignedUrlResponse {
-  data: {
-    presignedUrl: string;
-  };
+  presignedUrl: string;
 }
