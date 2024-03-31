@@ -2,32 +2,21 @@ import type { Metadata } from 'next';
 import { Noto_Sans, Noto_Sans_KR } from 'next/font/google';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
-import SideUtils from '../components/Common/sideUtils';
+import SideUtils from '../components/common/sideUtils';
 
 import './global.css';
+import generateMetadata from '../utils/metadata';
 
 const notoSans = Noto_Sans({ subsets: ['latin'] });
 const notoSansKr = Noto_Sans_KR({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://imkdw.dev'),
-  title: 'IMKDW Dev - Tech Blog',
-  description: '오픈소스로 운영되는 IMKDW의 기술블로그입니다',
-  openGraph: {
-    title: 'IMKDW Dev - Tech Blog',
-    description: '오픈소스로 운영되는 IMKDW의 기술블로그입니다',
-    url: 'https://imkdw.dev',
-    siteName: 'IMKDW_DEV',
-    images: [
-      {
-        url: 'https://static.imkdw.dev/images/open-graph.png',
-        width: 800,
-        height: 600,
-      },
-    ],
-    locale: 'ko_KR',
-    type: 'website',
-  },
+  ...generateMetadata({
+    title: 'IMKDW DEV',
+    description:
+      '오픈소스로 운영되는 기술블로그 IMKDW DEV 입니다. 삽질하고 깨달은 내용에 대해서 기록합니다. 다양한 기술에 대한 내용을 다룹니다.',
+    link: 'https://imkdw.dev',
+  }),
 };
 
 interface Props {

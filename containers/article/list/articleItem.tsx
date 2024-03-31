@@ -14,7 +14,14 @@ export default function ArticleItem({ article }: Props) {
     <li className="article-item flex hover:bg-gray-100">
       <Link href={`/articles/${article.articleId}`} className="flex w-full flex-col">
         <div className="relative h-[200px] w-full">
-          {article.thumbnail && <Image src={article.thumbnail} alt={`${article.title}'s thumbnail`} fill />}
+          {article.thumbnail && (
+            <Image
+              src={article.thumbnail}
+              alt={`Article of ${article.title}'s thumbnail`}
+              title={`Article of ${article.title}'s thumbnail`}
+              fill
+            />
+          )}
         </div>
         <div className="flex h-auto flex-col border-t border-gray-300 p-3">
           <p className="truncate font-bold">{article.title}</p>

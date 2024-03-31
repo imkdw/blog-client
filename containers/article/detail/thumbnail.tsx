@@ -7,7 +7,15 @@ interface Props {
 export default function ArticleThumbnail({ image, title }: Props) {
   return (
     <div className="relative flex h-[500px] w-[80%] justify-center">
-      {image && <Image src={image} alt={`${title}'s thumbnail`} fill className="rounded-xl shadow-lg" />}
+      {image && (
+        <Image
+          src={image}
+          alt={`Article of ${title}'s thumbnail`}
+          title={`Article of ${title}'s thumbnail`}
+          fill
+          className="rounded-xl shadow-lg"
+        />
+      )}
     </div>
   );
 }
