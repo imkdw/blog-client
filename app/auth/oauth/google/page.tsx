@@ -49,11 +49,10 @@ export default function GoogleOAuthPage() {
 
     const params = new URLSearchParams(window.location.hash.slice(1));
     const token = params.get('access_token');
-
     if (token) {
       verifyToken(token);
     }
   }, [setIsLoggedIn, updateUserAndLogin]);
 
-  return null;
+  return <div className="flex items-center justify-center text-[32px] text-gray-400">구글 로그인 진행중...</div>;
 }

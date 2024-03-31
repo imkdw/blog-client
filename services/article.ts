@@ -9,7 +9,7 @@ import {
   PostCreateArticleResponse,
 } from '../types/api/article';
 import { HttpMethod } from '../types/api/common';
-import { callApi } from './api';
+import { callApi, callApiV2 } from './api';
 
 export const postCreateArticle = (body: PostCreateArticleBody): Promise<PostCreateArticleResponse> => {
   const url = '/v1/articles';
@@ -38,12 +38,12 @@ export const patchToggleArticleLike = (articleId: string): Promise<PatchToggleAr
 
 export const getPopularArticles = (count: number): Promise<GetArticlesResponse> => {
   const url = `/v1/articles?type=popular&limit=${count}`;
-  return callApi<GetArticlesResponse>(url, HttpMethod.GET);
+  return callApiV2<GetArticlesResponse>({ url, method: HttpMethod.GET });
 };
 
 export const getRecentArticles = (count: number): Promise<GetArticlesResponse> => {
   const url = `/v1/articles?type=recent&limit=${count}`;
-  return callApi<GetArticlesResponse>(url, HttpMethod.GET);
+  return callApiV2<GetArticlesResponse>({ url, method: HttpMethod.GET });
 };
 
 export const patchIncreaseViewCount = (articleId: string): Promise<PatchIncreaseViewCountResponse> => {

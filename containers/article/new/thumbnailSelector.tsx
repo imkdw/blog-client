@@ -49,7 +49,7 @@ export default function ArticleThumbnailSelector({ thumbnail, changeHandler }: P
           type="button"
           onClick={clickHandler}
         >
-          <Image src={image || thumbnail!} alt="thumbnail" fill />
+          <Image src={image || thumbnail!} alt="Article Thumbnail Image" title="Article Thumbnail Image" fill />
         </button>
       ) : (
         <button className="h-full w-[30%] border border-gray-300 text-gray-400" type="button" onClick={clickHandler}>

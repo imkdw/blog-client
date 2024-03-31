@@ -59,5 +59,5 @@ export default function KakaoOAuthPage() {
     }
   }, [setIsLoggedIn, updateUserAndLogin, code]);
 
-  return null;
+  return <div className="flex items-center justify-center text-[32px] text-gray-400">카카오 로그인 진행중...</div>;
 }

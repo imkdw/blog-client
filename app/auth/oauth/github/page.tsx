@@ -58,5 +58,5 @@ export default function GithubOAuthPage() {
     }
   }, [setIsLoggedIn, updateUserAndLogin, code]);
 
-  return <div>Github</div>;
+  return <div className="flex items-center justify-center text-[32px] text-gray-400">깃허브 로그인 진행중...</div>;
 }

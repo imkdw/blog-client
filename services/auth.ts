@@ -21,7 +21,7 @@ import {
   PostVerifyEmailVerificationCodeResponse,
 } from '../types/api/auth';
 import { HttpMethod } from '../types/api/common';
-import { callApi } from './api';
+import api, { callApi } from './api';
 
 // 로그인
 export const postSignIn = async (body: PostSignInBody): Promise<PostSignInResponse> => {
@@ -65,11 +65,8 @@ export const postOAuthSignUp = async (body: PostOAuthSignUpBody): Promise<PostOA
 
 export const getGoogleOAuth = async (accessToken: string): Promise<OAuthResponse> => {
   const url = '/v1/auth/oauth/google';
-  return callApi<GetGoogleOAuthResponse>(url, HttpMethod.GET, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
+  const response = await api.get(url, { headers: { Authorization: `Bearer ${accessToken}` } });
+  return response.data.data;
 };
 
 // 카카오 OAuth
