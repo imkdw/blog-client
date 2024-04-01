@@ -1,8 +1,8 @@
 const fs = require('fs');
 
 async function generateSitemap() {
-  const api = process.env.NEXT_PUBLIC_SERVER_URL ?? 'http://localhost:4000/v1/articles/ids';
-  const response = await fetch(api);
+  const api = process.env.NEXT_PUBLIC_SERVER_URL ?? 'http://localhost:4000';
+  const response = await fetch(`${api}/v1/articles/ids`);
   const json = await response.json();
   const { articleIds } = json.data;
 

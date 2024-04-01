@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
+Allow: /articles
+Allow: /manage
+Allow: /auth/sign-in
 
 Sitemap: https://imkdw.dev/sitemap.xml
 
