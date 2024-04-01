@@ -2,9 +2,10 @@ interface Params {
   title: string;
   description: string;
   link: string;
+  image?: string;
 }
 
-const generateMetadata = ({ title, description, link }: Params) => ({
+const generateCustomMetadata = ({ title, description, link, image }: Params) => ({
   metadataBase: new URL('https://imkdw.dev'),
   title: `IMKDW DEV | ${title}`,
   description: `${description}`,
@@ -38,7 +39,7 @@ const generateMetadata = ({ title, description, link }: Params) => ({
     siteName: 'IMKDW_DEV',
     images: [
       {
-        url: 'https://static.imkdw.dev/images/open-graph.png',
+        url: image ?? 'https://static.imkdw.dev/images/open-graph.png',
         width: 1200,
         height: 630,
       },
@@ -48,4 +49,4 @@ const generateMetadata = ({ title, description, link }: Params) => ({
   },
 });
 
-export default generateMetadata;
+export default generateCustomMetadata;

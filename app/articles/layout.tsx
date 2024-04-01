@@ -1,8 +1,18 @@
+import { Metadata } from 'next';
 import { Suspense } from 'react';
+import generateCustomMetadata from '../../utils/metadata';
 
 interface Props {
   children: React.ReactNode;
 }
+
+export const metadata: Metadata = {
+  ...generateCustomMetadata({
+    title: '게시글 목록',
+    description: 'IMKDW Dev 오픈소스 기술 블로그 게시글 목록 페이지 입니다.',
+    link: 'https://imkdw.dev/articles',
+  }),
+};
 
 export default function ArticlesLayout({ children }: Props) {
   return (

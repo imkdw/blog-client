@@ -4,17 +4,17 @@ import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 
 import './global.css';
-import generateMetadata from '../utils/metadata';
 import SideUtils from '../components/commons/sideUtils';
+import generateCustomMetadata from '../utils/metadata';
 
 const notoSans = Noto_Sans({ subsets: ['latin'] });
 const notoSansKr = Noto_Sans_KR({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  ...generateMetadata({
-    title: 'IMKDW DEV',
+  ...generateCustomMetadata({
+    title: 'Tech Blog',
     description:
-      '오픈소스로 운영되는 기술블로그 IMKDW DEV 입니다. 삽질하고 깨달은 내용에 대해서 기록합니다. 다양한 기술에 대한 내용을 다룹니다.',
+      '오픈소스로 운영되는 기 술블로그 IMKDW DEV 입니다. 삽질하고 깨달은 내용에 대해서 기록합니다. 다양한 기술에 대한 내용을 다룹니다.',
     link: 'https://imkdw.dev',
   }),
 };

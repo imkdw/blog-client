@@ -18,17 +18,17 @@ export const postCreateArticle = (body: PostCreateArticleBody): Promise<PostCrea
 
 export const getArticleDetail = (articleId: string): Promise<GetArticleDetailResponse> => {
   const url = `/v1/articles/${articleId}`;
-  return callApi<GetArticleDetailResponse>(url, HttpMethod.GET);
+  return callApiV2<GetArticleDetailResponse>({ url, method: HttpMethod.GET });
 };
 
 export const getArticleTags = (articleId: string): Promise<GetArticleTagsResponse> => {
   const url = `/v1/articles/${articleId}/tags`;
-  return callApi<GetArticleTagsResponse>(url, HttpMethod.GET);
+  return callApiV2<GetArticleTagsResponse>({ url, method: HttpMethod.GET });
 };
 
 export const getArticlesByCategory = (parent: string, child: string): Promise<GetArticlesResponse> => {
   const url = `/v1/articles?type=category&parent=${parent ?? ''}&child=${child ?? ''}`;
-  return callApi<GetArticlesResponse>(url, HttpMethod.GET);
+  return callApiV2<GetArticlesResponse>({ url, method: HttpMethod.GET });
 };
 
 export const patchToggleArticleLike = (articleId: string): Promise<PatchToggleArticleLikeResponse> => {
