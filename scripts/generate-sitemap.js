@@ -1,7 +1,4 @@
 const fs = require('fs');
-const dotenv = require('dotenv');
-
-dotenv.config({ path: '../.env.local' });
 
 async function generateSitemap() {
   const api = process.env.NEXT_PUBLIC_SERVER_URL ?? 'http://localhost:4000/v1/articles/ids';
