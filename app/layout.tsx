@@ -30,7 +30,7 @@ export default function RootLayout({ children }: Props) {
       <body className="flex min-h-screen flex-col items-center">
         <SideUtils />
         <Header />
-        <main className="mb-10 mt-5 flex w-full max-w-[1100px] flex-1 flex-col">{children}</main>
+        <main className="mb-10 mt-5 flex w-full max-w-[1000px] flex-1 flex-col">{children}</main>
         <Footer />
       </body>
       <GoogleAnalytics gaId="G-DXRR1KZDDN" />

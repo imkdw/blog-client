@@ -3,8 +3,8 @@
 import { marked } from 'marked';
 import hljs from 'highlight.js';
 
-import 'highlight.js/styles/github-dark.css';
 import '../editor/editor.css';
+import './github-dark.min.css';
 import { useEffect } from 'react';
 
 interface Props {
