@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import { Noto_Sans, Noto_Sans_KR } from 'next/font/google';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: Props) {
         <main className="mb-10 mt-5 flex w-full max-w-[1100px] flex-1 flex-col">{children}</main>
         <Footer />
       </body>
+      <GoogleAnalytics gaId="G-DXRR1KZDDN" />
     </html>
   );
 }
