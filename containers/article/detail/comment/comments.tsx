@@ -1,28 +1,17 @@
-import { useEffect, useState } from 'react';
 import { getComments } from '../../../../services/comment';
-import { IComment } from '../../../../types/comment';
 import CommentItem from './commentItem';
 
 interface Props {
   articleId: string;
 }
 
-export default function Comments({ articleId }: Props) {
-  const [comments, setComments] = useState<IComment[]>([]);
-
-  useEffect(() => {
-    const fetchComments = async () => {
-      const response = await getComments(articleId);
-      setComments(response.comments);
-    };
-
-    fetchComments();
-  }, [articleId]);
+export default async function Comments({ articleId }: Props) {
+  const response = await getComments(articleId);
 
   return (
     <ul className="flex w-full flex-col items-center gap-6">
-      {!comments.length && <div className="text-gray-400">댓글이 없습니다.. 댓글을 남겨주세요!</div>}
-      {comments.map((comment) => (
+      {!response.comments.length && <div className="text-gray-400">댓글이 없습니다.. 댓글을 남겨주세요!</div>}
+      {response.comments.map((comment) => (
         <CommentItem comment={comment} key={comment.id} articleId={articleId} />
       ))}
     </ul>

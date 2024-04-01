@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 import AuthLogo from './_components/logo';
+import generateCustomMetadata from '../../utils/metadata';
 
 interface Props {
   readonly children: React.ReactNode;
@@ -9,24 +10,11 @@ interface Props {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://imkdw.dev'),
-  title: 'IMKDW Dev | 인증',
-  description: '로그인, 회원가입 등 인증 페이지입니다',
-  openGraph: {
-    title: 'IMKDW Dev | 인증',
-    description: '로그인, 회원가입 등 인증 페이지입니다',
-    url: 'https://imkdw.dev/auth',
-    siteName: 'IMKDW_DEV',
-    images: [
-      {
-        url: 'https://static.imkdw.dev/images/open-graph.png',
-        width: 800,
-        height: 600,
-      },
-    ],
-    locale: 'ko_KR',
-    type: 'website',
-  },
+  ...generateCustomMetadata({
+    title: '인증',
+    description: 'IMKDW Dev 블로그의 인증 페이지입니다.',
+    link: 'https://imkdw.dev/auth/sign-in',
+  }),
 };
 
 export default function AuthLayout({ children }: Props) {

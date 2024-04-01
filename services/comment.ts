@@ -5,7 +5,7 @@ import {
   PostCreateCommentResponse,
 } from '../types/api/comment';
 import { HttpMethod } from '../types/api/common';
-import { callApi } from './api';
+import { callApi, callApiV2 } from './api';
 
 // eslint-disable-next-line import/prefer-default-export
 export const postCreateComment = (
@@ -18,7 +18,7 @@ export const postCreateComment = (
 
 export const getComments = (articleId: string): Promise<GetCommentsResponse> => {
   const url = `/v1/articles/${articleId}/comments`;
-  return callApi<GetCommentsResponse>(url, HttpMethod.GET);
+  return callApiV2<GetCommentsResponse>({ url, method: HttpMethod.GET });
 };
 
 export const deleteComment = (articleId: string, commentId: number): Promise<void> => {

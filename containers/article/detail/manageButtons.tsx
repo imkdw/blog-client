@@ -1,13 +1,19 @@
+'use client';
+
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 import { deleteArticle } from '../../../services/article';
+import useUser from '../../../store/use-user';
+import { UserRoles } from '../../../types/enum/user';
 
 interface Props {
   articleId: string;
 }
 
 export default function ArticleManageButtons({ articleId }: Props) {
+  const { loggedInUser } = useUser((state) => state);
+
   const router = useRouter();
 
   const deleteHandler = async () => {
@@ -19,7 +25,7 @@ export default function ArticleManageButtons({ articleId }: Props) {
     router.push('/articles');
   };
 
-  return (
+  return loggedInUser.role === UserRoles.ADMIN ? (
     <div className="flex flex-row justify-end gap-2">
       <button type="button" onClick={deleteHandler} className="text-red-500">
         삭제
@@ -28,5 +34,5 @@ export default function ArticleManageButtons({ articleId }: Props) {
         수정
       </Link>
     </div>
-  );
+  ) : null;
 }
