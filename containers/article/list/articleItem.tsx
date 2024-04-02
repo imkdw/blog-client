@@ -1,17 +1,22 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { EditCalendar, Visibility } from '@mui/icons-material';
+import { headers } from 'next/headers';
+import clsx from 'clsx';
 
 import { IArticleListItem } from '../../../types/article';
 import { convertDate } from '../../../utils/date';
+import { isMobile } from '../../../utils/is-mobile';
 
 interface Props {
   article: IArticleListItem;
 }
 
 export default function ArticleItem({ article }: Props) {
+  const isMobileView = isMobile(headers());
+
   return (
-    <li className="article-item flex hover:bg-gray-100">
+    <li className={clsx('article-item flex w-[30%] rounded-xl hover:bg-gray-100', isMobileView && 'w-[90%]')}>
       <Link href={`/articles/${article.articleId}`} className="flex w-full flex-col">
         <div className="relative h-[200px] w-full">
           {article.thumbnail && (
@@ -20,6 +25,7 @@ export default function ArticleItem({ article }: Props) {
               alt={`Article of ${article.title}'s thumbnail`}
               title={`Article of ${article.title}'s thumbnail`}
               fill
+              objectFit="cover"
             />
           )}
         </div>
