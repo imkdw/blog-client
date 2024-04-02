@@ -89,21 +89,21 @@ export default function ManageCategoryItem({ id, name, param, childCategories }:
               <div className="flex flex-1 flex-row justify-end gap-2 pr-3">
                 <button
                   type="submit"
-                  className="border border-gray-300 p-1 pl-4 pr-4 text-[16px] hover:bg-gray-200"
+                  className="border border-gray-300 p-1 pl-4 pr-4 text-sm hover:bg-gray-200"
                   onClick={onAddingChildCategoryHandler}
                 >
                   추가
                 </button>
                 <button
                   type="button"
-                  className="border border-gray-300 p-1 pl-4 pr-4 text-[16px] hover:bg-gray-200"
+                  className="border border-gray-300 p-1 pl-4 pr-4 text-sm hover:bg-gray-200"
                   onClick={editParentHandler}
                 >
                   수정
                 </button>
                 <button
                   type="submit"
-                  className="border border-gray-300 p-1 pl-4 pr-4 text-[16px] hover:bg-gray-200"
+                  className="border border-gray-300 p-1 pl-4 pr-4 text-sm hover:bg-gray-200"
                   onClick={() => deleteHandler(id)}
                 >
                   삭제
@@ -146,14 +146,14 @@ export default function ManageCategoryItem({ id, name, param, childCategories }:
                     <div className="flex flex-1 flex-row justify-end gap-2 pr-3">
                       <button
                         type="button"
-                        className="border border-gray-300 p-1 pl-4 pr-4 text-[16px] hover:bg-gray-200"
+                        className="border border-gray-300 p-1 pl-4 pr-4 text-sm hover:bg-gray-200"
                         onClick={() => editChildHandler(childCategory.id)}
                       >
                         수정
                       </button>
                       <button
                         type="submit"
-                        className="border border-gray-300 p-1 pl-4 pr-4 text-[16px] hover:bg-gray-200"
+                        className="border border-gray-300 p-1 pl-4 pr-4 text-sm hover:bg-gray-200"
                         onClick={() => deleteHandler(childCategory.id)}
                       >
                         삭제

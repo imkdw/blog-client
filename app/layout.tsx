@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { Noto_Sans, Noto_Sans_KR } from 'next/font/google';
-import Header from '../components/Header/Header';
+import Header from '../components/header/header';
 import Footer from '../components/Footer/Footer';
 
 import './global.css';

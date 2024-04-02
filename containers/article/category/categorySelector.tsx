@@ -40,7 +40,7 @@ export default function ArticleCategorySelector({ isHaveAll = false }: Props) {
               !parentCategory && 'bg-gray-200',
             )}
           >
-            <Link href="/articles" className="text-[16px]">
+            <Link href="/articles" className="text-sm">
               전체
             </Link>
           </li>
@@ -54,7 +54,7 @@ export default function ArticleCategorySelector({ isHaveAll = false }: Props) {
               parentCategory === category.param && 'bg-gray-200',
             )}
           >
-            <Link href={`/articles?parent=${category.param}`} className="text-[16px]">
+            <Link href={`/articles?parent=${category.param}`} className="text-sm">
               {category.name}
             </Link>
           </li>
@@ -67,7 +67,7 @@ export default function ArticleCategorySelector({ isHaveAll = false }: Props) {
             !childCategory && 'bg-gray-200',
           )}
         >
-          <Link href={`/articles?parent=${parentCategory}`} className="text-[16px]">
+          <Link href={`/articles?parent=${parentCategory}`} className="text-sm">
             전체
           </Link>
         </li>
@@ -80,7 +80,7 @@ export default function ArticleCategorySelector({ isHaveAll = false }: Props) {
               childCategory === category.param && 'bg-gray-200',
             )}
           >
-            <Link href={`/articles?parent=${parentCategory}&child=${category.param}`} className="text-[16px]">
+            <Link href={`/articles?parent=${parentCategory}&child=${category.param}`} className="text-sm">
               {category.name}
             </Link>
           </li>

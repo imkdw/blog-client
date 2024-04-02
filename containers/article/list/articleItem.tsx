@@ -33,12 +33,12 @@ export default function ArticleItem({ article }: Props) {
           댓글 {article.commentCount}개 · 좋아요 {article.likeCount}개
         </div>
         <div className="flex justify-between p-3">
-          <p className="flex items-center gap-1 text-[16px] text-gray-400">
+          <p className="flex items-center gap-1 text-sm text-gray-400">
             <EditCalendar fontSize="small" />
             {convertDate(article.createdAt)}
           </p>
 
-          <p className="flex gap-1 text-[16px] text-gray-400">
+          <p className="flex gap-1 text-sm text-gray-400">
             <Visibility fontSize="small" />
             {article.viewCount}
           </p>

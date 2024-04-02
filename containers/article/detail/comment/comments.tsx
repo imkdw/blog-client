@@ -36,7 +36,7 @@ export default async function Comments({ articleId }: Props) {
                         </div>
                         <div className="flex flex-col">
                           <p>{reply.user.nickname}</p>
-                          <p className="text-[16px] text-gray-500">{comment.createdAt}</p>
+                          <p className="text-sm text-gray-500">{comment.createdAt}</p>
                         </div>
                       </div>
                       <div>

@@ -8,7 +8,7 @@ import MenuItem from './menuItem';
 
 const josefinSans = Josefin_Sans({ subsets: ['latin'] });
 
-export default function HeaderMenu() {
+export default function HeaderNav() {
   const LinkData = [
     {
       id: 1,
