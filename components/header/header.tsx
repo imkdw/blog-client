@@ -1,7 +1,7 @@
 import { headers } from 'next/headers';
 import clsx from 'clsx';
 
-import HeaderButtons from './Buttons';
+import HeaderButtons from './buttons';
 import HeaderLogo from './Logo';
 import { isMobile } from '../../utils/is-mobile';
 import HeaderNav from './headerNav';
