@@ -8,7 +8,6 @@ export default function HeaderMenu() {
   const { setIsOpen, isOpen } = useSidemenu((state) => state);
 
   const sidemenuHandler = () => {
-    console.log('header menu clicked');
     setIsOpen(true);
   };
 
