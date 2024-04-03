@@ -1,12 +1,14 @@
 import type { Metadata } from 'next';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { Noto_Sans, Noto_Sans_KR } from 'next/font/google';
-import Header from '../components/Header/Header';
-import Footer from '../components/Footer/Footer';
+import Script from 'next/script';
 
-import './global.css';
+import Header from '../components/header/header';
+import Footer from '../components/Footer/Footer';
 import SideUtils from '../components/commons/sideUtils';
 import generateCustomMetadata from '../utils/metadata';
+
+import './global.css';
 
 const notoSans = Noto_Sans({ subsets: ['latin'] });
 const notoSansKr = Noto_Sans_KR({ subsets: ['latin'] });
@@ -34,6 +36,7 @@ export default function RootLayout({ children }: Props) {
         <Footer />
       </body>
       <GoogleAnalytics gaId="G-DXRR1KZDDN" />
+      <Script src="https://developers.kakao.com/sdk/js/kakao.js" strategy="afterInteractive" />
     </html>
   );
 }

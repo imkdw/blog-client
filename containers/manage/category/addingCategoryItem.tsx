@@ -38,7 +38,7 @@ export default function AddingCategoryItem({ cancelAddingCategory, type, parentI
       <div className="flex h-full w-[40px] items-center justify-center text-gray-300">·</div>
       <input
         type="text"
-        className="h-8 border border-gray-300 pl-2 text-[16px]"
+        className="h-8 border border-gray-300 pl-2 text-sm"
         onChange={changeHandler}
         placeholder="카테고리 이름"
         value={categoryData.name}
@@ -46,19 +46,19 @@ export default function AddingCategoryItem({ cancelAddingCategory, type, parentI
       />
       <input
         type="text"
-        className="h-8 border border-gray-300 pl-2 text-[16px]"
+        className="h-8 border border-gray-300 pl-2 text-sm"
         onChange={changeHandler}
         placeholder="카테고리 파라미터"
         value={categoryData.param}
         name="param"
       />
       <div className="flex flex-1 flex-row justify-end gap-2 pr-3">
-        <button type="submit" className="border border-gray-300 p-1 pl-4 pr-4 text-[16px] hover:bg-gray-200">
+        <button type="submit" className="border border-gray-300 p-1 pl-4 pr-4 text-sm hover:bg-gray-200">
           저장
         </button>
         <button
           type="button"
-          className="border border-gray-300 p-1 pl-4 pr-4 text-[16px] hover:bg-gray-200"
+          className="border border-gray-300 p-1 pl-4 pr-4 text-sm hover:bg-gray-200"
           onClick={cancelAddingCategory}
         >
           취소

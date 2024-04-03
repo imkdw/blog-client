@@ -42,12 +42,12 @@ export default function CommentEditForm({ articleId, commentId, existContent, ca
         />
       </div>
       <div className="flex flex-row gap-2">
-        <button type="submit" className="rounded bg-[#111926] p-1  pl-2 pr-2 text-[16px] text-white">
+        <button type="submit" className="rounded bg-[#111926] p-1  pl-2 pr-2 text-sm text-white">
           저장
         </button>
         <button
           type="button"
-          className="rounded bg-[#111926] p-1  pl-2  pr-2 text-[16px] text-white"
+          className="rounded bg-[#111926] p-1  pl-2  pr-2 text-sm text-white"
           onClick={() => cancelUpdate(commentId)}
         >
           취소

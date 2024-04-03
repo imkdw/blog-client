@@ -13,11 +13,11 @@ export default function ArticleContent({ title, summary, content, articleId }: P
   const summaryArr = summary.split('.');
 
   return (
-    <div className="flex w-full flex-col gap-5">
-      <h2 className="break-words text-center text-[32px] font-bold">{title}</h2>
+    <div className="flex w-full flex-col items-center gap-5">
+      <h2 className="break-words text-center text-4xl font-bold">{title}</h2>
       <div className="flex flex-col">
         {summaryArr.map((data) => (
-          <p className="break-words text-center text-[24px] font-medium text-gray-400" key={data}>
+          <p className="break-words text-center text-2xl font-medium text-gray-400" key={data}>
             {data}
           </p>
         ))}
