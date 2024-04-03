@@ -2,6 +2,8 @@
 
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import clsx from 'clsx';
 
 import { deleteArticle } from '../../../services/article';
 import useUser from '../../../store/use-user';
@@ -12,6 +14,13 @@ interface Props {
 }
 
 export default function ArticleManageButtons({ articleId }: Props) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const match = window.matchMedia('(max-width: 768px)').matches;
+    setIsMobile(match);
+  }, []);
+
   const { loggedInUser } = useUser((state) => state);
 
   const router = useRouter();
@@ -26,11 +35,11 @@ export default function ArticleManageButtons({ articleId }: Props) {
   };
 
   return loggedInUser.role === UserRoles.ADMIN ? (
-    <div className="flex flex-row justify-end gap-2">
-      <button type="button" onClick={deleteHandler} className="text-red-500">
+    <div className={clsx('flex flex-row justify-end gap-2', isMobile && 'w-[90%]')}>
+      <button type="button" onClick={deleteHandler} className="text-lg text-red-500">
         삭제
       </button>
-      <Link href={`/articles/${articleId}/edit`} className="text-blue-600">
+      <Link href={`/articles/${articleId}/edit`} className="text-lg text-blue-600">
         수정
       </Link>
     </div>

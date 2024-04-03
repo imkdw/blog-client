@@ -1,22 +1,27 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { EditCalendar, Visibility } from '@mui/icons-material';
-import { headers } from 'next/headers';
+import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 
 import { IArticleListItem } from '../../../types/article';
 import { convertDate } from '../../../utils/date';
-import { isMobile } from '../../../utils/is-mobile';
+import { MOBILE_WIDTH } from '../../../constants/mobile.constant';
 
 interface Props {
   article: IArticleListItem;
 }
 
 export default function ArticleItem({ article }: Props) {
-  const isMobileView = isMobile(headers());
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const match = window.matchMedia(`(max-width: ${MOBILE_WIDTH}px)`).matches;
+    setIsMobile(match);
+  }, []);
 
   return (
-    <li className={clsx('article-item flex w-[30%] rounded-xl hover:bg-gray-100', isMobileView && 'w-[90%]')}>
+    <li className={clsx('article-item mt-5 flex w-[32%] rounded-xl hover:bg-gray-100', isMobile && 'w-[90%]')}>
       <Link href={`/articles/${article.articleId}`} className="flex w-full flex-col">
         <div className="relative h-[200px] w-full">
           {article.thumbnail && (
@@ -25,7 +30,6 @@ export default function ArticleItem({ article }: Props) {
               alt={`Article of ${article.title}'s thumbnail`}
               title={`Article of ${article.title}'s thumbnail`}
               fill
-              objectFit="cover"
             />
           )}
         </div>

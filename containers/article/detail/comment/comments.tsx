@@ -1,4 +1,8 @@
+import { headers } from 'next/headers';
+import clsx from 'clsx';
+
 import { getComments } from '../../../../services/comment';
+import { isMobile } from '../../../../utils/is-mobile';
 import CommentItem from './commentItem';
 
 interface Props {
@@ -6,11 +10,13 @@ interface Props {
 }
 
 export default async function Comments({ articleId }: Props) {
+  const isMobileView = isMobile(headers());
+
   const response = await getComments(articleId);
 
   return (
-    <ul className="flex w-full flex-col items-center gap-6">
-      {!response.comments.length && <div className="text-gray-400">댓글이 없습니다.. 댓글을 남겨주세요!</div>}
+    <ul className={clsx('flex flex-col items-center gap-6', isMobileView ? 'w-[95%]' : 'w-full')}>
+      {!response.comments.length && <div className="text-xl text-gray-400">댓글이 없습니다.. 댓글을 남겨주세요!</div>}
       {response.comments.map((comment) => (
         <CommentItem comment={comment} key={comment.id} articleId={articleId} />
       ))}

@@ -54,7 +54,7 @@ export default function CommentItem({ comment, articleId }: Props) {
         <>
           <p className="w-full p-1 pb-3">{comment.content}</p>
           <div className="flex w-full justify-start">
-            <button type="button" className="text-sm font-bold" onClick={replyHandler}>
+            <button type="button" className="text-[16px] font-bold" onClick={replyHandler}>
               답글
             </button>
           </div>

@@ -7,13 +7,20 @@ import clsx from 'clsx';
 
 import { ICategory } from '../../../types/category';
 import { getCategories } from '../../../services/category';
+import { MOBILE_WIDTH } from '../../../constants/mobile.constant';
 
 interface Props {
   isHaveAll: boolean;
 }
 
 export default function ArticleCategorySelector({ isHaveAll = false }: Props) {
+  const [isMobile, setIsMobile] = useState(false);
   const [categories, setCategories] = useState<ICategory[]>([]);
+
+  useEffect(() => {
+    const match = window.matchMedia(`(max-width: ${MOBILE_WIDTH}px)`).matches;
+    setIsMobile(match);
+  }, []);
 
   const searchParams = useSearchParams();
   const parentCategory = searchParams.get('parent');
@@ -31,7 +38,7 @@ export default function ArticleCategorySelector({ isHaveAll = false }: Props) {
   }, []);
 
   return (
-    <div className="flex w-full flex-col gap-2">
+    <div className={clsx('flex flex-col gap-2', isMobile ? 'w-[90%]' : 'w-full')}>
       <ul className="flex w-full flex-row gap-2 border-b border-gray-300 pb-2">
         {isHaveAll && (
           <li
