@@ -53,6 +53,9 @@ export default async function ArticleDetailPage({ params: { slug } }: Props) {
             _likeCount={articleDetail.like.likeCount}
             _isLike={articleDetail.like.isLiked}
             articleId={articleId}
+            summary={articleDetail.summary}
+            thumbnail={articleDetail.thumbnail}
+            title={articleDetail.title}
           />
           <Comments articleId={articleId} />
           <CommentWriteForm articleId={articleId} />

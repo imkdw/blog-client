@@ -36,7 +36,7 @@ export default function RootLayout({ children }: Props) {
         <Footer />
       </body>
       <GoogleAnalytics gaId="G-DXRR1KZDDN" />
-      <Script src="https://developers.kakao.com/sdk/js/kakao.js" />
+      <Script src="https://developers.kakao.com/sdk/js/kakao.js" strategy="afterInteractive" />
     </html>
   );
 }
