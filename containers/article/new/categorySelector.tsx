@@ -34,7 +34,7 @@ export default function ArticleCategorySelector({ parent, setParent, child, setC
           <li
             key={category.id}
             className={clsx(
-              'flex w-auto cursor-pointer items-center justify-center rounded-xl border border-gray-300 pb-1 pl-2 pr-2 pt-1 text-[16px] hover:bg-gray-200',
+              'flex w-auto cursor-pointer items-center justify-center rounded-xl border border-gray-300 pb-1 pl-2 pr-2 pt-1 text-sm hover:bg-gray-200',
               parent?.param === category.param && 'bg-gray-200',
             )}
           >
@@ -49,7 +49,7 @@ export default function ArticleCategorySelector({ parent, setParent, child, setC
           <li
             key={category.id}
             className={clsx(
-              'flex w-auto cursor-pointer items-center justify-center rounded-xl border border-gray-300 pb-1 pl-2 pr-2 pt-1 text-[16px] hover:bg-gray-200',
+              'flex w-auto cursor-pointer items-center justify-center rounded-xl border border-gray-300 pb-1 pl-2 pr-2 pt-1 text-sm hover:bg-gray-200',
               child?.param === category.param && 'bg-gray-200',
             )}
           >

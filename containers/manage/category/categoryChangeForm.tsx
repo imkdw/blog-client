@@ -39,7 +39,7 @@ export default function CategoryChangeForm({ id, name, param, cancelEdit }: Prop
       <div className="flex flex-row gap-2">
         <input
           type="text"
-          className="h-8 border border-gray-300 pl-2 text-[16px]"
+          className="h-8 border border-gray-300 pl-2 text-sm"
           placeholder="카테고리 이름"
           name="name"
           value={category.name}
@@ -47,7 +47,7 @@ export default function CategoryChangeForm({ id, name, param, cancelEdit }: Prop
         />
         <input
           type="text"
-          className="h-8 border border-gray-300 pl-2 text-[16px]"
+          className="h-8 border border-gray-300 pl-2 text-sm"
           placeholder="카테고리 파라미터"
           name="param"
           value={category.param}
@@ -55,12 +55,12 @@ export default function CategoryChangeForm({ id, name, param, cancelEdit }: Prop
         />
       </div>
       <form className="flex flex-1 flex-row justify-end gap-2 pr-3" onSubmit={submitHandler}>
-        <button type="submit" className="border border-gray-300 p-1 pl-4 pr-4 text-[16px] hover:bg-gray-200">
+        <button type="submit" className="border border-gray-300 p-1 pl-4 pr-4 text-sm hover:bg-gray-200">
           확인
         </button>
         <button
           type="button"
-          className="border border-gray-300 p-1 pl-4 pr-4 text-[16px] hover:bg-gray-200"
+          className="border border-gray-300 p-1 pl-4 pr-4 text-sm hover:bg-gray-200"
           onClick={cancelEdit}
         >
           취소

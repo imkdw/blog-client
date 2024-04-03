@@ -83,7 +83,7 @@ export default function ArticleTagEditor({ tags, changeHandler, deleteHandler }:
         {searchedTags?.length ? (
           <ul className="absolute top-[120%] flex flex-col border border-gray-300 bg-white">
             {searchedTags.map((searchedTag) => (
-              <li key={searchedTag.id} className="cursor-pointer p-1 pl-2 pr-2 text-[16px] hover:bg-gray-200">
+              <li key={searchedTag.id} className="cursor-pointer p-1 pl-2 pr-2 text-sm hover:bg-gray-200">
                 <button onClick={() => tagClickHandler(searchedTag)} type="button">
                   {searchedTag.name}
                 </button>

@@ -6,20 +6,31 @@ import { Autoplay, Navigation } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/effect-fade';
+import { useEffect, useState } from 'react';
+import clsx from 'clsx';
+
 import SwiperButton from '../../app/_components/Swiper/swiper-button';
 import { IArticleListItem } from '../../types/article';
+import { MOBILE_WIDTH } from '../../constants/mobile.constant';
 
 interface Props {
   articles: IArticleListItem[];
 }
 export default function LastArticles({ articles }: Props) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const match = window.matchMedia(`(max-width: ${MOBILE_WIDTH}px)`).matches;
+    setIsMobile(match);
+  }, []);
+
   SwiperCore.use([Navigation]);
 
   return (
     <Swiper
       spaceBetween={50}
       slidesPerView={1}
-      className="article-item relative mt-[20px] h-[450px] w-full rounded-[10px]"
+      className={clsx('article-item relative rounded-[10px] pt-5', isMobile ? 'h-[250px] w-[90%]' : 'h-[450px] w-full')}
       effect="fade"
       loop
       autoplay={{
@@ -28,10 +39,12 @@ export default function LastArticles({ articles }: Props) {
       modules={[Autoplay]}
     >
       {/* 중앙 스와이퍼 아이콘 */}
-      <div className="absolute bottom-[50%] top-[50%] z-10 flex h-[50px] w-full -translate-y-[50%] flex-row justify-between">
-        <SwiperButton type="prev" />
-        <SwiperButton type="forward" />
-      </div>
+      {!isMobile ? (
+        <div className="absolute bottom-[50%] top-[50%] z-10 flex h-[50px] w-full -translate-y-[50%] flex-row justify-between">
+          <SwiperButton type="prev" />
+          <SwiperButton type="forward" />
+        </div>
+      ) : null}
 
       {articles.map((article) => (
         <SwiperSlide

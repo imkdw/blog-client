@@ -103,7 +103,7 @@ export default function SignUpForm() {
 
   return (
     <form onSubmit={submitHandler} className="flex w-full flex-col items-center justify-center gap-[30px]">
-      <div className="border-grey-300 flex h-[60px] w-[50%] items-center justify-between rounded-[10px] border pl-[15px] text-[16px]">
+      <div className="border-grey-300 flex h-[60px] w-[50%] items-center justify-between rounded-[10px] border pl-[15px] text-sm">
         <input
           type="text"
           placeholder="이메일"
@@ -121,7 +121,7 @@ export default function SignUpForm() {
         </button>
       </div>
       {isSendVerifyCode && (
-        <div className="border-grey-300 flex h-[60px] w-[50%] items-center rounded-[10px] border pl-[15px] text-[16px]">
+        <div className="border-grey-300 flex h-[60px] w-[50%] items-center rounded-[10px] border pl-[15px] text-sm">
           <input
             type="text"
             placeholder="인증코드"
@@ -138,7 +138,7 @@ export default function SignUpForm() {
           </button>
         </div>
       )}
-      <div className="border-grey-300 flex h-[60px] w-[50%] items-center rounded-[10px] border pl-[15px] text-[16px]">
+      <div className="border-grey-300 flex h-[60px] w-[50%] items-center rounded-[10px] border pl-[15px] text-sm">
         <input
           type="password"
           placeholder="비밀번호"
@@ -148,7 +148,7 @@ export default function SignUpForm() {
           value={password}
         />
       </div>
-      <div className="border-grey-300 flex h-[60px] w-[50%] items-center rounded-[10px] border pl-[15px] text-[16px]">
+      <div className="border-grey-300 flex h-[60px] w-[50%] items-center rounded-[10px] border pl-[15px] text-sm">
         <input
           type="password"
           placeholder="비밀번호 확인"
@@ -158,7 +158,7 @@ export default function SignUpForm() {
           value={rePassword}
         />
       </div>
-      <div className="border-grey-300 flex h-[60px] w-[50%] items-center justify-between rounded-[10px] border pl-[15px] text-[16px]">
+      <div className="border-grey-300 flex h-[60px] w-[50%] items-center justify-between rounded-[10px] border pl-[15px] text-sm">
         <input
           type="text"
           placeholder="닉네임"
@@ -177,7 +177,7 @@ export default function SignUpForm() {
       </div>
       <button
         type="submit"
-        className={clsx('h-[50px] w-[50%] rounded-[10px] bg-[#28262b] text-[16px] font-bold text-[#e8ebed]')}
+        className={clsx('h-[50px] w-[50%] rounded-[10px] bg-[#28262b] text-sm font-bold text-[#e8ebed]')}
       >
         가입하기
       </button>

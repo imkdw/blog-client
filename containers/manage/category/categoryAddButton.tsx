@@ -13,7 +13,7 @@ export default function ManageCategoryAddButton({ onClick }: Props) {
       type="button"
     >
       <Add className="flex h-full items-start pl-2 text-gray-400" />
-      <p className="flex h-full items-center text-[16px] text-gray-400">카테고리 추가</p>
+      <p className="flex h-full items-center text-sm text-gray-400">카테고리 추가</p>
     </button>
   );
 }

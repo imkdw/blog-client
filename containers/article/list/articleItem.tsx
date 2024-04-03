@@ -1,17 +1,27 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { EditCalendar, Visibility } from '@mui/icons-material';
+import { useEffect, useState } from 'react';
+import clsx from 'clsx';
 
 import { IArticleListItem } from '../../../types/article';
 import { convertDate } from '../../../utils/date';
+import { MOBILE_WIDTH } from '../../../constants/mobile.constant';
 
 interface Props {
   article: IArticleListItem;
 }
 
 export default function ArticleItem({ article }: Props) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const match = window.matchMedia(`(max-width: ${MOBILE_WIDTH}px)`).matches;
+    setIsMobile(match);
+  }, []);
+
   return (
-    <li className="article-item flex hover:bg-gray-100">
+    <li className={clsx('article-item mt-5 flex w-[32%] rounded-xl hover:bg-gray-100', isMobile && 'w-[90%]')}>
       <Link href={`/articles/${article.articleId}`} className="flex w-full flex-col">
         <div className="relative h-[200px] w-full">
           {article.thumbnail && (
@@ -33,12 +43,12 @@ export default function ArticleItem({ article }: Props) {
           댓글 {article.commentCount}개 · 좋아요 {article.likeCount}개
         </div>
         <div className="flex justify-between p-3">
-          <p className="flex items-center gap-1 text-[16px] text-gray-400">
+          <p className="flex items-center gap-1 text-sm text-gray-400">
             <EditCalendar fontSize="small" />
             {convertDate(article.createdAt)}
           </p>
 
-          <p className="flex gap-1 text-[16px] text-gray-400">
+          <p className="flex gap-1 text-sm text-gray-400">
             <Visibility fontSize="small" />
             {article.viewCount}
           </p>

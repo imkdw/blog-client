@@ -16,7 +16,7 @@ export default function ArticleSearch() {
         type="text"
         name=""
         placeholder="검색어를 입력해주세요"
-        className="w-[90%] bg-inherit pl-[15px] text-[16px] outline-none"
+        className="w-[90%] bg-inherit pl-[15px] text-sm outline-none"
         value={searchData}
         onChange={changeHandler}
       />

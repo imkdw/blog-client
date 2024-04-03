@@ -1,12 +1,18 @@
 import Image from 'next/image';
+import { headers } from 'next/headers';
+import clsx from 'clsx';
+
+import { isMobile } from '../../../utils/is-mobile';
 
 interface Props {
   image: string;
   title: string;
 }
 export default function ArticleThumbnail({ image, title }: Props) {
+  const isMobileView = isMobile(headers());
+
   return (
-    <div className="relative flex h-[500px] w-[80%] justify-center">
+    <div className={clsx('relative flex w-[80%] justify-center', isMobileView ? 'h-[200px]' : 'h-[500px]')}>
       {image && (
         <Image
           src={image}

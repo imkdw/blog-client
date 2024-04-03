@@ -19,7 +19,7 @@ export default function CommentUser({ nickname, profile, createdAt }: Props) {
       />
       <div className="flex h-full flex-col">
         <p className="h-1/2">{nickname}</p>
-        <p className="h-1/2 text-[16px] text-gray-500">{convertDate(createdAt)}</p>
+        <p className="h-1/2 text-sm text-gray-500">{convertDate(createdAt)}</p>
       </div>
     </div>
   );
