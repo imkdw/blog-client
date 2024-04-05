@@ -3,6 +3,8 @@ Allow: /
 Allow: /articles
 Allow: /manage
 Allow: /auth/sign-in
+Disallow: /auth/sign-up
+Disallow: /static.imkdw.dev/
 
 Sitemap: https://imkdw.dev/sitemap.xml
 
