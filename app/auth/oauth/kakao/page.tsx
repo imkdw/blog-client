@@ -24,7 +24,6 @@ export default function KakaoOAuthPage() {
         role: response.role,
       });
       setIsLoggedIn(true);
-      localStorage.setItem('accessToken', response.accessToken);
       router.push('/');
     },
     [router, setIsLoggedIn, setLoggedInUser],

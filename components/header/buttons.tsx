@@ -46,23 +46,23 @@ export default function HeaderButtons() {
       <li>
         {/* TODO: 설정된 테마 모드에 따라서 아이콘 분기처리 */}
         <button aria-label="다크/화이트 모드 변경" onClick={themeChangeHandler} type="button">
-          {themeMode === 'LIGHT' ? <LightMode /> : <DarkMode />}
+          {themeMode === 'LIGHT' ? <LightMode fontSize="medium" /> : <DarkMode fontSize="medium" />}
         </button>
       </li>
       <li>
         <button aria-label="언어 변경" type="button" onClick={languageChangeHandler}>
-          <Language />
+          <Language fontSize="medium" />
         </button>
       </li>
       <li>
         {/* TODO: 로그인 여부에 따라서 마이페이지 또는 로그인 페이지로 이동 분기처리 */}
         {isLoggedIn ? (
           <button onClick={logoutHandler} aria-label="logout button" type="button">
-            <Logout />
+            <Logout fontSize="medium" />
           </button>
         ) : (
           <Link href="/auth/sign-in">
-            <AccountCircle />
+            <AccountCircle fontSize="medium" />
           </Link>
         )}
       </li>

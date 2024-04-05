@@ -34,7 +34,6 @@ export default function SignInForm() {
       role: response.role,
     });
 
-    localStorage.setItem('accessToken', response.accessToken);
     router.back();
   };
   const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {

@@ -38,7 +38,7 @@ export default function ArticleList({ type, articles }: Props) {
       {type !== 'all' && (
         <h2 className="flex h-[60px] w-full items-center text-[24px] font-bold">{createArticleListHeader(type)}</h2>
       )}
-      <ul className={clsx('flex flex-row flex-wrap justify-between', isMobile && 'flex-col items-center gap-5')}>
+      <ul className={clsx('flex flex-row flex-wrap', isMobile && 'flex-col items-center gap-5')}>
         {articles.length ? articles.map((article) => <ArticleItem key={article.articleId} article={article} />) : null}
       </ul>
       {!articles.length ? <div className="w-full text-center text-gray-400">게시글이 없습니다..</div> : null}

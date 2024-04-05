@@ -49,6 +49,7 @@ export default function NewArticlePage() {
      * 작성 페이지에 들어오면 전역 상태로 글쓰기를 활성화
      */
     setIsWriting(true);
+    document.cookie = 'user=John; path=/; expires=Tue, 19 Jan 2038 03:14:07 GMT';
 
     return () => {
       /**

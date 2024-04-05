@@ -10,5 +10,5 @@ export const getCheckDuplicate = async (
   value: string,
 ): Promise<GetCheckDuplicateResponse> => {
   const url = `/v1/users/duplicate?type=${type}&value=${value}`;
-  return callApi<GetCheckDuplicateResponse>(url, HttpMethod.GET);
+  return callApi<GetCheckDuplicateResponse>({ url, method: HttpMethod.GET });
 };

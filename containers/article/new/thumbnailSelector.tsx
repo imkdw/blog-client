@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { ChangeEvent, useRef, useState } from 'react';
 import { generateUUID } from '../../../components/markdown/utils/uuid.util';
-import { getPresignedUrl } from '../../../services/s3.service';
+import { getPresignedUrl } from '../../../services/s3';
 
 interface Props {
   thumbnail?: string;
