@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { cookies } from 'next/headers';
 
 import { getArticleDetail, getArticleTags } from '../../../services/article';
 import ArticleThumbnail from '../../../containers/article/detail/thumbnail';
@@ -11,7 +12,6 @@ import generateCustomMetadata from '../../../utils/metadata';
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = params;
-
   const articleDetail = await getArticleDetail(slug);
 
   return {
@@ -33,7 +33,10 @@ interface Props {
 export default async function ArticleDetailPage({ params: { slug } }: Props) {
   const articleId = slug;
 
-  const articleDetail = await getArticleDetail(articleId);
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get('accessToken')?.value || '';
+
+  const articleDetail = await getArticleDetail(articleId, accessToken);
   const articleTags = await getArticleTags(articleId);
 
   return (

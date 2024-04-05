@@ -39,7 +39,6 @@ export default function SignUpForm() {
         role: response.role,
       });
       setIsLoggedIn(true);
-      localStorage.setItem('accessToken', response.accessToken);
       router.back();
     }
   };
