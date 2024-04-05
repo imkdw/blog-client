@@ -5,7 +5,7 @@ import {
   PostCreateCommentResponse,
 } from '../types/api/comment';
 import { HttpMethod } from '../types/api/common';
-import { callApi, callApiV2 } from './api';
+import { callApi } from './api';
 
 // eslint-disable-next-line import/prefer-default-export
 export const postCreateComment = (
@@ -13,17 +13,17 @@ export const postCreateComment = (
   body: PostCreateCommentBody,
 ): Promise<PostCreateCommentResponse> => {
   const url = `/v1/articles/${articleId}/comments`;
-  return callApi<PostCreateCommentResponse>(url, HttpMethod.POST, body);
+  return callApi<PostCreateCommentResponse>({ url, method: HttpMethod.POST, body });
 };
 
 export const getComments = (articleId: string): Promise<GetCommentsResponse> => {
   const url = `/v1/articles/${articleId}/comments`;
-  return callApiV2<GetCommentsResponse>({ url, method: HttpMethod.GET });
+  return callApi<GetCommentsResponse>({ url, method: HttpMethod.GET });
 };
 
 export const deleteComment = (articleId: string, commentId: number): Promise<void> => {
   const url = `/v1/articles/${articleId}/comments/${commentId}`;
-  return callApi<void>(url, HttpMethod.DELETE);
+  return callApi<void>({ url, method: HttpMethod.DELETE });
 };
 
 export const patchUpdateComment = (
@@ -32,5 +32,5 @@ export const patchUpdateComment = (
   body: PatchUpdateCommentBody,
 ): Promise<void> => {
   const url = `/v1/articles/${articleId}/comments/${commentId}`;
-  return callApi<void>(url, HttpMethod.PATCH, body);
+  return callApi<void>({ url, method: HttpMethod.PATCH, body });
 };

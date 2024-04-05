@@ -1,5 +1,5 @@
 import { ChangeEvent, ClipboardEvent, ForwardedRef, forwardRef } from 'react';
-import { getPresignedUrl } from '../../../../services/s3.service';
+import { getPresignedUrl } from '../../../../services/s3';
 import { generateUUID } from '../../utils/uuid.util';
 
 interface Props {
