@@ -24,6 +24,7 @@
     "@uiw/react-md-editor": "^4.0.3",
     "autoprefixer": "^10.4.17",
     "clsx": "^2.1.0",
+    "cookies-next": "^4.1.1",
     "eslint-config-prettier": "^9.1.0",
     "highlight.js": "^11.9.0",
     "marked": "^12.0.1",
