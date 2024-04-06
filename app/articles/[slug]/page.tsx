@@ -1,5 +1,5 @@
-import { Metadata } from 'next';
 import { cookies } from 'next/headers';
+import { notFound } from 'next/navigation';
 
 import { getArticleDetail, getArticleTags } from '../../../services/article';
 import ArticleThumbnail from '../../../containers/article/detail/thumbnail';
@@ -10,18 +10,27 @@ import CommentWriteForm from '../../../containers/article/detail/comment/writeFo
 import Comments from '../../../containers/article/detail/comment/comments';
 import generateCustomMetadata from '../../../utils/metadata';
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props) {
   const { slug } = params;
-  const articleDetail = await getArticleDetail(slug);
 
-  return {
-    ...generateCustomMetadata({
-      title: articleDetail.title,
-      description: articleDetail.summary,
-      link: `/articles/${slug}`,
-      image: articleDetail.thumbnail,
-    }),
-  };
+  try {
+    const articleDetail = await getArticleDetail(slug);
+
+    return {
+      ...generateCustomMetadata({
+        title: articleDetail.title,
+        description: articleDetail.summary,
+        link: `/articles/${slug}`,
+        image: articleDetail.thumbnail,
+      }),
+    };
+  } catch (error: any) {
+    if (error.message?.includes('404')) {
+      return notFound();
+    }
+  }
+
+  return null;
 }
 
 interface Props {

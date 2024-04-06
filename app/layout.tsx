@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { Noto_Sans, Noto_Sans_KR } from 'next/font/google';
 import Script from 'next/script';
+import { ToastContainer } from 'react-toastify';
 
 import Header from '../components/header/header';
 import Footer from '../components/Footer/Footer';
@@ -9,6 +10,7 @@ import SideUtils from '../components/commons/sideUtils';
 import generateCustomMetadata from '../utils/metadata';
 
 import './global.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 const notoSans = Noto_Sans({ subsets: ['latin'] });
 const notoSansKr = Noto_Sans_KR({ subsets: ['latin'] });
@@ -34,6 +36,7 @@ export default function RootLayout({ children }: Props) {
         <Header />
         <main className="mb-10 mt-5 flex w-full max-w-[1000px] flex-1 flex-col">{children}</main>
         <Footer />
+        <ToastContainer position="top-center" autoClose={2000} closeOnClick theme="dark" />
       </body>
       <GoogleAnalytics gaId="G-DXRR1KZDDN" />
       <Script src="https://developers.kakao.com/sdk/js/kakao.js" strategy="afterInteractive" />
