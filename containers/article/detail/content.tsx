@@ -1,4 +1,3 @@
-import 'react-quill/dist/quill.snow.css';
 import { headers } from 'next/headers';
 import clsx from 'clsx';
 
