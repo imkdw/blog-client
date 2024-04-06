@@ -1,8 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { getCookie, setCookie } from 'cookies-next';
+
 import { Favorite, FavoriteBorder, Comment, Share } from '@mui/icons-material';
-import { patchToggleArticleLike } from '../../../services/article';
+import { patchIncreaseViewCount, patchToggleArticleLike } from '../../../services/article';
 
 interface Props {
   articleId: string;
@@ -28,16 +30,35 @@ export default function ArticleUtilButtons({
   const [kakao, setKakao] = useState<any>(null);
 
   useEffect(() => {
-    const KAKAO_JS_KEY = '0f838e18a0431482dd4373159ff37c8e';
+    const kakaoInitializer = () => {
+      const KAKAO_JS_KEY = '0f838e18a0431482dd4373159ff37c8e';
 
-    if (typeof window !== 'undefined') {
-      const { Kakao } = window as any;
-      setKakao(Kakao);
+      if (typeof window !== 'undefined') {
+        const { Kakao } = window as any;
+        setKakao(Kakao);
 
-      if (!Kakao.isInitialized()) {
-        Kakao.init(KAKAO_JS_KEY);
+        if (!Kakao.isInitialized()) {
+          Kakao.init(KAKAO_JS_KEY);
+        }
       }
-    }
+    };
+
+    const increaseViewCount = async () => {
+      const VIEW_CHECK_COOKIE_NAME = `view_${articleId}`;
+      const viewCheckCookie = getCookie(VIEW_CHECK_COOKIE_NAME);
+      if (!viewCheckCookie) {
+        await patchIncreaseViewCount(articleId);
+        setCookie(VIEW_CHECK_COOKIE_NAME, true, {
+          path: '/',
+          maxAge: 60 * 60 * 24,
+        });
+      }
+    };
+
+    kakaoInitializer();
+    increaseViewCount();
+
+    return () => {};
   }, []);
 
   const kakaoShareHandler = () => {

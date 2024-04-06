@@ -17,7 +17,7 @@ export default function MarkdownViewer({ content }: Props) {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    hljs.initHighlighting();
+    hljs.highlightAll();
 
     const match = window.matchMedia(`(max-width: ${MOBILE_WIDTH}px)`).matches;
     setIsMobile(match);

@@ -104,3 +104,7 @@ export interface OAuthResponse {
   provider: IOAuthProviders;
   token: string;
 }
+
+export interface PostRefreshTokenResponse {
+  isSuccess: boolean;
+}
