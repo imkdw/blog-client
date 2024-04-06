@@ -11,6 +11,7 @@ import {
   PostOAuthSignInResponse,
   PostOAuthSignUpBody,
   PostOAuthSignUpResponse,
+  PostRefreshTokenResponse,
   PostSendEmailVerifyCodeBody,
   PostSendEmailVerifyCodeResponse,
   PostSignInBody,
