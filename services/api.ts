@@ -29,7 +29,9 @@ export const callApi = async <T>(params: CallApiParams): Promise<T> => {
     body: JSON.stringify(params.body),
   });
 
-  if (response.status === 401) {
+  const json = await response.json();
+
+  if (response.status === 401 && json.error.errorCode === 'Unauthorized') {
     const url = '/v1/auth/refresh';
     const refreshResponse = await callApi<PostRefreshTokenResponse>({ url, method: HttpMethod.POST });
 
@@ -38,7 +40,6 @@ export const callApi = async <T>(params: CallApiParams): Promise<T> => {
     }
   }
 
-  const json = await response.json();
   if (json?.error?.errorCode) {
     toastErrorMessage(json.error.errorCode);
 
