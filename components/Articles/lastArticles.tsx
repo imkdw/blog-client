@@ -9,6 +9,7 @@ import 'swiper/css/effect-fade';
 import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 
+import Link from 'next/link';
 import SwiperButton from '../../app/_components/Swiper/swiper-button';
 import { IArticleListItem } from '../../types/article';
 import { MOBILE_WIDTH } from '../../constants/mobile.constant';
@@ -58,7 +59,10 @@ export default function LastArticles({ articles }: Props) {
           key={article.articleId}
         >
           {/* 사진 텍스트 */}
-          <div className="flex h-full flex-col justify-end gap-[20px] pb-[20px] pl-[20px]">
+          <Link
+            className="flex h-full flex-col justify-end gap-[20px] pb-[20px] pl-[20px]"
+            href={`/articles/${article.articleId}`}
+          >
             <h2 className="text-shadow text-[40px] font-bold text-[#e4e9f2]">{article.title}</h2>
             <div>
               <p className="text-shadow font-bold text-[#e4e9f2]">{article.summary}</p>
@@ -71,7 +75,7 @@ export default function LastArticles({ articles }: Props) {
                 </p> */}
               </div>
             </div>
-          </div>
+          </Link>
         </SwiperSlide>
       ))}
     </Swiper>
