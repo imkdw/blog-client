@@ -1,4 +1,4 @@
-import { headers } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import clsx from 'clsx';
 
 import { getComments } from '../../../../services/comment';
@@ -11,8 +11,10 @@ interface Props {
 
 export default async function Comments({ articleId }: Props) {
   const isMobileView = isMobile(headers());
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get('accessToken')?.value || '';
 
-  const response = await getComments(articleId);
+  const response = await getComments(articleId, accessToken);
 
   return (
     <ul className={clsx('flex flex-col items-center gap-6', isMobileView ? 'w-[95%]' : 'w-full')}>
