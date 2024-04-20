@@ -33,9 +33,9 @@ export default function ArticleItem({ article }: Props) {
             />
           )}
         </div>
-        <div className="flex h-auto flex-col border-t border-gray-300 p-3">
-          <p className="truncate font-bold">{article.title}</p>
-          <p className="line-clamp-3 h-[80px] w-full overflow-hidden break-words text-[18px] text-gray-500">
+        <div className="flex h-auto flex-col gap-1 border-t border-gray-300 p-3">
+          <p className="truncate text-2xl font-bold">{article.title}</p>
+          <p className="line-clamp-3 h-[80px] w-full overflow-hidden break-words text-lg text-gray-500">
             {article.summary}
           </p>
         </div>

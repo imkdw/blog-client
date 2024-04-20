@@ -16,9 +16,9 @@ export const postCreateComment = (
   return callApi<PostCreateCommentResponse>({ url, method: HttpMethod.POST, body });
 };
 
-export const getComments = (articleId: string): Promise<GetCommentsResponse> => {
+export const getComments = (articleId: string, accessToken: string): Promise<GetCommentsResponse> => {
   const url = `/v1/articles/${articleId}/comments`;
-  return callApi<GetCommentsResponse>({ url, method: HttpMethod.GET });
+  return callApi<GetCommentsResponse>({ url, method: HttpMethod.GET, accessToken });
 };
 
 export const deleteComment = (articleId: string, commentId: number): Promise<void> => {
