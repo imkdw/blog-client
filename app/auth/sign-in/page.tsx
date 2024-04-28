@@ -1,15 +1,11 @@
 'use client';
 
-import SignInForm from '../../../containers/auth/signin/signInForm';
-import SignInLinks from '../../../containers/auth/signin/signInLinks';
-import SnsSignIn from '../../../containers/auth/signin/snsSignIn';
+import SocialLogin from '../../../containers/auth/socialLogin';
 
 export default function SignInPage() {
   return (
-    <div className="flex w-full flex-col items-center justify-center gap-5">
-      <SignInForm />
-      <SignInLinks />
-      <SnsSignIn />
+    <div className="flex w-full flex-col items-center justify-center">
+      <SocialLogin />
     </div>
   );
 }
