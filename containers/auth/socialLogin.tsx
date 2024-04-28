@@ -1,11 +1,10 @@
 'use client';
 
-import { GitHub } from '@mui/icons-material';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
-export default function SnsSignIn() {
+export default function SocialLogin() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -42,38 +41,34 @@ export default function SnsSignIn() {
   };
 
   return (
-    <ul
-      className={clsx(
-        'relative flex h-[90px] flex-row items-end justify-center gap-[30px] border-t border-gray-300',
-        isMobile ? 'w-[80%]' : 'w-[50%]',
-      )}
-    >
-      <p
-        className={clsx(
-          'absolute top-[-13px] bg-white text-center text-sm text-gray-400',
-          isMobile ? 'w-[50%]' : 'w-[40%]',
-        )}
-      >
-        SNS 계정으로 로그인
-      </p>
-      <li className="flex h-[50px] w-[50px] items-center justify-center rounded-[10px] border border-gray-300">
-        <button onClick={googleHandler} type="button" aria-label="google login button">
+    <ul className={clsx('40%] relative flex flex-col items-center gap-5', isMobile ? 'w-[40%]' : 'w-[30%]')}>
+      <li className="flex w-full rounded-[10px] bg-black p-2">
+        <button onClick={githubHandler} type="button" aria-label="Github Login Button" className="flex w-full">
           <Image
-            src="/images/icon/google.png"
+            src="/images/icon/github-mark-white.png"
             alt="Google Logo Image"
             title="Google Logo Image"
             width="35"
             height="35"
           />
+          <p className="flex h-full flex-1 items-center justify-center font-bold text-white">Login With Github</p>
         </button>
       </li>
-      <li className="flex h-[50px] w-[50px] items-center justify-center rounded-[10px] border border-gray-300">
-        <button onClick={githubHandler} type="button" aria-label="google login button">
-          <GitHub sx={{ width: '35px', height: '35px' }} />
+      <li className="flex w-full rounded-[10px] bg-[#DC604F] p-2">
+        <button onClick={googleHandler} type="button" aria-label="Google Login Button" className="flex w-full">
+          <Image
+            src="/images/icon/google.svg"
+            alt="Google Logo Image"
+            title="Google Logo Image"
+            width="35"
+            height="35"
+          />
+          <p className="flex h-full flex-1 items-center justify-center font-bold text-white">Login With Google</p>
         </button>
       </li>
-      <li className="flex h-[50px] w-[50px] items-center justify-center rounded-[10px] border border-gray-300">
-        <button onClick={kakaoHandler} type="button" aria-label="google login button">
+
+      <li className="flex w-full rounded-[10px] bg-yellow-300 p-2">
+        <button onClick={kakaoHandler} type="button" aria-label="Kakao Login Button" className="flex w-full">
           <Image
             src="/images/icon/kakaotalk.png"
             alt="Kakao Logo Image"
@@ -82,6 +77,7 @@ export default function SnsSignIn() {
             height="35"
             style={{ borderRadius: '5px' }}
           />
+          <p className="flex h-full flex-1 items-center justify-center font-bold">Login With Kakao</p>
         </button>
       </li>
     </ul>
