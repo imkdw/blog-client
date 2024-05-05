@@ -13,7 +13,7 @@ export default function Header() {
   return (
     <header
       className={clsx(
-        'z-10 flex w-full max-w-[1400px] items-center bg-white',
+        'z-10 flex w-full max-w-[1000px] items-center bg-white',
         isMobileView ? 'relative h-[80px] border-b border-gray-300' : 'h-[120px]',
       )}
     >
