@@ -2,6 +2,7 @@ import {
   GetArticleDetailResponse,
   GetArticlesResponse,
   GetArticleTagsResponse,
+  GetArticleViewTrendsResponse,
   PatchIncreaseViewCountResponse,
   PatchToggleArticleLikeResponse,
   PatchUpdateArticleBody,
@@ -56,7 +57,12 @@ export const deleteArticle = (articleId: string): Promise<void> => {
   return callApi<void>({ url, method: HttpMethod.DELETE });
 };
 
-export const PatchUpdateArticle = (articleId: string, body: Partial<PatchUpdateArticleBody>): Promise<void> => {
+export const patchUpdateArticle = (articleId: string, body: Partial<PatchUpdateArticleBody>): Promise<void> => {
   const url = `/v1/articles/${articleId}`;
   return callApi<void>({ url, method: HttpMethod.PATCH, body });
+};
+
+export const getArticleViewTrends = async (duration: number): Promise<GetArticleViewTrendsResponse> => {
+  const url = `/v1/articles/trends/view?duration=${duration}`;
+  return callApi<GetArticleViewTrendsResponse>({ url, method: HttpMethod.GET });
 };

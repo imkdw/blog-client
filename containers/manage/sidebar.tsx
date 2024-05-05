@@ -1,6 +1,6 @@
 'use client';
 
-import { Equalizer, Inbox } from '@mui/icons-material';
+import { Inbox } from '@mui/icons-material';
 import Link from 'next/link';
 
 export default function ManageSidebar() {
@@ -15,31 +15,6 @@ export default function ManageSidebar() {
           text: '카테고리 관리',
           href: '/manage/content/category',
           isReady: true,
-        },
-        {
-          id: 'tag',
-          text: '태그 관리',
-          href: '/manage/content/tag',
-          isReady: false,
-        },
-      ],
-    },
-    {
-      id: 'statistics',
-      text: '통계',
-      icon: <Equalizer />,
-      children: [
-        {
-          id: 'visited',
-          text: '방문 통계',
-          href: '/manage/statistics/visited',
-          isReady: false,
-        },
-        {
-          id: 'inflow',
-          text: '유입 경로',
-          href: '/manage/statistics/inflow',
-          isReady: false,
         },
       ],
     },
