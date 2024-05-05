@@ -3,7 +3,7 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { IEditArticle } from '../../../../types/article';
-import { getArticleDetail, PatchUpdateArticle } from '../../../../services/article';
+import { getArticleDetail, patchUpdateArticle } from '../../../../services/article';
 import ArticleTitleEditor from '../../../../containers/article/new/titleEditor';
 import ArticleSummaryEditor from '../../../../containers/article/new/summaryEditor';
 import ArticleContentEditor from '../../../../containers/article/new/contentEditor';
@@ -87,7 +87,7 @@ export default function EditArticlePage({ params: { slug } }: Props) {
       editedArticleData.thumbnail = articleEditData.thumbnail;
     }
 
-    await PatchUpdateArticle(articleId, {
+    await patchUpdateArticle(articleId, {
       ...editedArticleData,
       ...(content !== editContent && { content: editContent }),
       ...(images.length && { newImages: images }),

@@ -56,3 +56,12 @@ export interface PatchUpdateArticleBody {
   thunmbnail: string;
   newImages: string[];
 }
+
+export interface ArticleViewTrendsItem {
+  id: number;
+  date: Date;
+  viewCount: number;
+}
+export interface GetArticleViewTrendsResponse {
+  viewTrends: ArticleViewTrendsItem[];
+}

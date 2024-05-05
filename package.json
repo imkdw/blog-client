@@ -23,6 +23,7 @@
     "@types/uuid": "^9.0.8",
     "@uiw/react-md-editor": "^4.0.3",
     "autoprefixer": "^10.4.17",
+    "chart.js": "^4.4.2",
     "clsx": "^2.1.0",
     "cookies-next": "^4.1.1",
     "eslint-config-prettier": "^9.1.0",
